@@ -1,36 +1,96 @@
 
+import sys
 import pygame
-from main import aguardar, digitar_lento, desenhar_textos, TELA, BACKGROUND_JOGO, FONTE, LARGURA, opcoes_logicas_busca, FASE_ATUAL, VERDE
-from fases.fase1 import primeira_fase_iniciar
+import main
+from config.variables import *
+from fases import fases_menu
+from menu import config
 
-def inicar_menu(COR_TEXTO, opcao_atual):
-    TELA.fill(BACKGROUND_JOGO)
-    # pygame.display.update()
-    # desenhar_textos(["Teste, tela para o menu, após a escolha"])
-    texto = "Teste, tela para o menu, após a escolha"
-    titulo = FONTE.render(texto, True, COR_TEXTO)
-    width = LARGURA // 2 - titulo.get_width() // 2
-    TELA.blit(titulo, (width, 100))
+primeira_opcao = "Iniciar" if not ISCONTINUACAO else "Continuar"
+opcoes_menu = {
+    1: primeira_opcao,
+    2: "Config?", # (audio? texto? personalização?)
+    3: "Fases",
+    4: "Fechar"
+}
+opcao_atual = 1
 
-    digitar_lento(opcoes_logicas_busca.get(opcao_atual + 1), [], 0, 0, VERDE)
-    aguardar(largura=width + len(texto) * 10 + 20,altura=100)
-
-    iniciar_fase(FASE_ATUAL, opcoes_logicas_busca.get(opcao_atual))
+def inicar_menu():
+    selecao_menu()
 
     pygame.display.update()
     
+
+def selecao_menu():
+    TELA.fill(BACKGROUND_JOGO)
+    global opcao_atual
     
-# Chama a fase atual do personagem
-def iniciar_fase(fase, logica_busca_grafo):
-    match fase:
-        case "fase 1":
-            primeira_fase_iniciar(TELA, LARGURA, opcoes_logicas_busca, logica_busca_grafo)
-        case "fase 2":
-            print("Dois")
-        case "fase 3":
-            print("Três")
-        case "fase 4":
-            print("Outro número")   
+    rodando = True
     
-    pygame.quit()
-    # os.system("python jogo.py")  # ou "python3 jogo.py"
+    desenhar_selecao_menu(50)
+    
+    while rodando:
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                main.fechar_jogo()
+            elif evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_UP:
+                    if (opcao_atual - 1) > 0 :
+                        opcao_atual -= 1
+                    else:
+                        opcao_atual = 1
+                elif evento.key == pygame.K_DOWN:
+                    if (opcao_atual + 1) < 5:
+                        opcao_atual += 1
+                    else: 
+                        opcao_atual = 4
+                elif evento.key == pygame.K_RETURN:
+                    switch_to_opcao(opcao_atual)
+        
+        desenhar_selecao_menu()
+        
+
+
+def desenhar_selecao_menu(delay=0):
+    TELA.fill(BACKGROUND_JOGO)
+
+    global opcao_atual
+
+    espacamento_linha = 40
+    linha_posicao = 200
+
+    # render = FONTE.render("Escolha uma das opções: ", True, BRANCO)
+    # TELA.blit(render, (PADDING_LEFT, linha_posicao))
+    # linha_posicao += espacamento_linha
+
+    # ultima_linha = 0
+    
+    for i, texto in opcoes_menu.items():
+        cor = SELECIONADO if i == opcao_atual else CINZA_CLARO
+        render = FONTE.render(texto, True, cor)
+        linha_posicao = 200 + i * espacamento_linha
+        # ultima_linha = linha_posicao
+        TELA.blit(render, (PADDING_LEFT, linha_posicao))
+        pygame.time.delay(delay)
+        
+    # titulo = FONTE.render("O que você deseja fazer?", True, BRANCO)
+    # ultima_linha = ultima_linha + 80
+    # TELA.blit(titulo, (LARGURA // 2 - titulo.get_width() // 2, ultima_linha))
+
+    pygame.display.update()
+    # aguardar_confirmacao(altura=ultima_linha + 60)
+
+
+def switch_to_opcao(opcao):
+    invalido = "opção inválida"
+    
+    match opcoes_menu.get(opcao, invalido):
+        case "Iniciar":
+            fases_menu.iniciar_fase(FASE_ATUAL)
+        case "Config?":
+            config.iniciar_menu()
+        case "Fases":
+            fases_menu.visualizar_fases()
+        case "Fechar":
+            main.fechar_jogo()
+            print("???")

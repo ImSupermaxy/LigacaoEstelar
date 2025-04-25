@@ -1,0 +1,4 @@
+- Adicionar Música para o jogo (pesquisar como fazer isso)
+- Adicionar Sons conforme a história for contada (A baseque o lucas fez ficou irada, só fazer um timing com o rádio já ajuda)
+- Adicionar configurações de áudio / outra coisa?
+- ...

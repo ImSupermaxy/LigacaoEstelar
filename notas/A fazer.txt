@@ -1,0 +1,12 @@
+AGORA:
+- A primeira fase está crashando quando é iniciada...
+
+
+PENDENTE:
+- Alterar ainda o que falta organizar nas variáveis / métodos...
+- Nas variáveis, trocar todos os lugares onde exibir texto com y >= 200, para a variável PADDING_TOP
+- Adicionar funcionalidade ao Menu principal
+- Enfeitar o Menu principal
+- Fazer a primeira fase coesa
+- Adicionar um inicio legal, com transição para o menu?
+- ...

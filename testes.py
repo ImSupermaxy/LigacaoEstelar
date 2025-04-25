@@ -94,3 +94,69 @@
 
 # if __name__ == "__main__":
 #     mostrar_historia()
+
+
+#============================-=-=-===========================-=-=-=-===================================-=-=-=-=============================
+#==========================================================FONTES==========================================================================
+import pygame
+import sys
+
+# Inicializa o Pygame e o módulo de fontes
+pygame.init()
+pygame.font.init()
+
+# Tamanho da janela
+largura, altura = 800, 600
+tela = pygame.display.set_mode((largura, altura))
+pygame.display.set_caption("Visualização de Fontes do Pygame")
+
+# Cores
+BRANCO = (255, 255, 255)
+PRETO = (0, 0, 0)
+
+# Texto de exemplo
+texto_exemplo = "Exemplo de Fonte"
+
+# Obtem a lista de fontes disponíveis
+fontes = pygame.font.get_fonts()
+fontes.sort()  # organiza em ordem alfabética
+
+# Controle de rolagem
+indice_inicial = 0
+fontes_por_tela = 10
+
+# Função para desenhar as fontes na tela
+def desenhar_fontes(inicio):
+    tela.fill(PRETO)
+
+    y = 20
+    for i in range(inicio, min(inicio + fontes_por_tela, len(fontes))):
+        nome_fonte = fontes[i]
+        try:
+            fonte = pygame.font.SysFont(nome_fonte, 28)
+            texto_renderizado = fonte.render(f"{nome_fonte} - {texto_exemplo}", True, BRANCO)
+            tela.blit(texto_renderizado, (20, y))
+            y += 50
+        except:
+            # Se der erro com uma fonte, pula
+            continue
+
+    pygame.display.flip()
+
+# Loop principal
+rodando = True
+print(len(fontes))
+while rodando:
+    desenhar_fontes(indice_inicial)
+
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
+            rodando = False
+        elif evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_DOWN:
+                indice_inicial = min(indice_inicial + fontes_por_tela, len(fontes) - fontes_por_tela)
+            elif evento.key == pygame.K_UP:
+                indice_inicial = max(indice_inicial - fontes_por_tela, 0)
+
+pygame.quit()
+sys.exit()

@@ -1,22 +1,9 @@
 import pygame # type: ignore
 import math
+from config.variables import *
+import main
 
-# pygame.init()
-# WIDTH, HEIGHT = 800, 600
-# screen = pygame.display.set_mode((WIDTH, HEIGHT))
-# pygame.display.set_caption("Ligação Estelar")
-
-def primeira_fase_iniciar(screen, WIDTH, opcoes_logicas_busca, logica_busca_grafo):
-    # Cores
-    WHITE = (255, 255, 255)
-    BLACK = (0, 0, 0)
-    GREEN = (0, 200, 0)
-    RED = (200, 0, 0)
-    BLUE = (50, 100, 255)
-    GRAY = (180, 180, 180)
-
-    font = pygame.font.SysFont(None, 32)
-
+def primeira_fase_iniciar():
     # Nós (posições)
     nodes = {
         0: (100, 300),
@@ -44,26 +31,26 @@ def primeira_fase_iniciar(screen, WIDTH, opcoes_logicas_busca, logica_busca_graf
     NODE_RADIUS = 25
 
     def draw_graph(screen):
-        screen.fill(BLACK)
+        TELA.fill(BACKGROUND_JOGO)
 
         # Desenhar conexões possíveis
         for start, neighbors in graph.items():
             for end in neighbors:
                 if (end, start) not in visited_edges and (start, end) not in visited_edges:
-                    pygame.draw.line(screen, GRAY, nodes[start], nodes[end], 2)
+                    pygame.draw.line(screen, CINZA, nodes[start], nodes[end], 2)
 
         # Desenhar conexões feitas
         for a, b in visited_edges:
-            pygame.draw.line(screen, BLUE, nodes[a], nodes[b], 4)
+            pygame.draw.line(screen, AZUL, nodes[a], nodes[b], 4)
 
         # Desenhar nós
         for node_id, pos in nodes.items():
-            color = GREEN if node_id in visited_nodes else RED
+            color = VERMELHO if node_id in visited_nodes else VERDE
             pygame.draw.circle(screen, color, pos, NODE_RADIUS)
-            pygame.draw.circle(screen, BLACK, pos, NODE_RADIUS, 2)
+            pygame.draw.circle(screen, PRETO, pos, NODE_RADIUS, 2)
 
         # Mostrar nó atual
-        text = font.render(f"Nó atual: {current_node}", True, BLACK)
+        text = FONTE.render(f"Nó atual: {current_node}", True, PRETO)
         screen.blit(text, (10, 10))
 
         pygame.display.flip()
@@ -81,15 +68,16 @@ def primeira_fase_iniciar(screen, WIDTH, opcoes_logicas_busca, logica_busca_graf
     running = True
     
     while running:
-        draw_graph(screen)
+        draw_graph(TELA)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
             if all_nodes_visited():
-                    text = font.render("Todos os nós foram visitados!", True, WHITE)
-                    screen.blit(text, (WIDTH // 2 - 200, 50))
+                    running = False
+                    text = FONTE.render("Todos os nós foram visitados!", True, BRANCO)
+                    TELA.blit(text, (LARGURA // 2 - 200, 50))
                     pygame.display.flip()
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -103,3 +91,5 @@ def primeira_fase_iniciar(screen, WIDTH, opcoes_logicas_busca, logica_busca_graf
                         current_node = clicked_node
                     else:
                         print("Movimento inválido: esse nó não é vizinho do atual.")
+                        
+        main.aguardar("", largura=1)
