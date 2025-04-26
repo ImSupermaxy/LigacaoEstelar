@@ -27,7 +27,7 @@ def selecao_menu():
     
     rodando = True
     
-    desenhar_selecao_menu(50)
+    desenhar_selecao_menu(0)
     
     while rodando:
         for evento in pygame.event.get():
@@ -55,30 +55,15 @@ def desenhar_selecao_menu(delay=0):
     TELA.fill(BACKGROUND_JOGO)
 
     global opcao_atual
-
-    espacamento_linha = 40
-    linha_posicao = 200
-
-    # render = FONTE.render("Escolha uma das opções: ", True, BRANCO)
-    # TELA.blit(render, (PADDING_LEFT, linha_posicao))
-    # linha_posicao += espacamento_linha
-
-    # ultima_linha = 0
     
     for i, texto in opcoes_menu.items():
         cor = SELECIONADO if i == opcao_atual else CINZA_CLARO
-        render = FONTE.render(texto, True, cor)
-        linha_posicao = 200 + i * espacamento_linha
-        # ultima_linha = linha_posicao
+        render = FONTE_MENU.render(texto, True, cor)
+        linha_posicao = PADDING_TOP + i * ESPACAMENTO_LINHA_MENU
         TELA.blit(render, (PADDING_LEFT, linha_posicao))
         pygame.time.delay(delay)
-        
-    # titulo = FONTE.render("O que você deseja fazer?", True, BRANCO)
-    # ultima_linha = ultima_linha + 80
-    # TELA.blit(titulo, (LARGURA // 2 - titulo.get_width() // 2, ultima_linha))
 
     pygame.display.update()
-    # aguardar_confirmacao(altura=ultima_linha + 60)
 
 
 def switch_to_opcao(opcao):

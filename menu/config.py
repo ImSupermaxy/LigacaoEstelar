@@ -5,7 +5,7 @@ from config.variables import *
 
 opcoes_menu = {
     1: "-> Volume: ",
-    2: "-> Algo a mais??",
+    2: "-> Texto: ", #Aparecer a configuração da velocidade dos diálogos / fonte do texto...
 }
 opcao_atual = 1
 

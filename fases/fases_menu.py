@@ -58,23 +58,12 @@ def desenhar_selecao_fases():
     espacamento_linha = 40
     linha_posicao = 200
 
-    # render = FONTE.render("Escolha uma das opções: ", True, BRANCO)
-    # TELA.blit(render, (PADDING_LEFT, linha_posicao))
-    # linha_posicao += espacamento_linha
-
-    # ultima_linha = 0
-    
     for i, texto in enumerate(opcoes_menu):
         cor = SELECIONADO if i == opcao_atual else CINZA_CLARO
         render = FONTE.render(texto, True, cor)
         linha_posicao = 200 + i * espacamento_linha
-        # ultima_linha = linha_posicao
         TELA.blit(render, (PADDING_LEFT, linha_posicao))
         pygame.time.delay(200)
-        
-    # titulo = FONTE.render("O que você deseja fazer?", True, BRANCO)
-    # ultima_linha = ultima_linha + 80
-    # TELA.blit(titulo, (LARGURA // 2 - titulo.get_width() // 2, ultima_linha))
 
     pygame.display.update()
     # aguardar_confirmacao(altura=ultima_linha + 60)

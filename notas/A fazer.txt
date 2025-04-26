@@ -1,12 +1,19 @@
-AGORA:
-- A primeira fase está crashando quando é iniciada...
+FAZENDO:
+- Nas variáveis, trocar todos os lugares onde exibir texto com y >= 200, para a variável PADDING_TOP
+- Adicionar funcionalidade ao Menu principal
+- Enfeitar o Menu principal
 
 
 PENDENTE:
 - Alterar ainda o que falta organizar nas variáveis / métodos...
-- Nas variáveis, trocar todos os lugares onde exibir texto com y >= 200, para a variável PADDING_TOP
-- Adicionar funcionalidade ao Menu principal
-- Enfeitar o Menu principal
+- Obter a variável ISCONTINUACAO de um arquivo json que vai ser alterado com as informações da gameplay do jogador (fase, continuação, etc..)
+- Atualizar algumas configurações das variáveis para um json (que será alterado a partir do menu de configurações)
+- Atualizar as variáveis de PADDING ou relacionadas a tela, para uma % da altura / largura da tela 
+- Transformar as variáveis de história do arquivo "variables" para um json
 - Fazer a primeira fase coesa
 - Adicionar um inicio legal, com transição para o menu?
 - ...
+
+
+FEITO:
+- (FEITO) A primeira fase está crashando quando é iniciada...

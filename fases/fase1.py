@@ -50,7 +50,7 @@ def primeira_fase_iniciar():
             pygame.draw.circle(screen, PRETO, pos, NODE_RADIUS, 2)
 
         # Mostrar nó atual
-        text = FONTE.render(f"Nó atual: {current_node}", True, PRETO)
+        text = FONTE_GRAFO.render(f"Nó atual: {current_node}", True, COR_TEXTO)
         screen.blit(text, (10, 10))
 
         pygame.display.flip()
@@ -76,7 +76,7 @@ def primeira_fase_iniciar():
 
             if all_nodes_visited():
                     running = False
-                    text = FONTE.render("Todos os nós foram visitados!", True, BRANCO)
+                    text = FONTE_GRAFO.render("Todos os nós foram visitados!", True, BRANCO)
                     TELA.blit(text, (LARGURA // 2 - 200, 50))
                     pygame.display.flip()
 
@@ -91,5 +91,6 @@ def primeira_fase_iniciar():
                         current_node = clicked_node
                     else:
                         print("Movimento inválido: esse nó não é vizinho do atual.")
-                        
-        main.aguardar("", largura=1)
+                  
+    texto_final_fase = "Aperte ESPAÇO para pular..."      
+    main.aguardar(texto_final_fase, largura=((LARGURA // 2) - 150), altura=ALTURA-200)
