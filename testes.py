@@ -1,162 +1,193 @@
+# # import pygame
+# # import sys
+
+# # pygame.init()
+
+# # # Tela
+# # LARGURA, ALTURA = 800, 600
+# # TELA = pygame.display.set_mode((LARGURA, ALTURA))
+# # pygame.display.set_caption("História com Scroll")
+
+# # # Cores e fontes
+# # PRETO = (0, 0, 0)
+# # BRANCO = (255, 255, 255)
+# # FONTE = pygame.font.SysFont("arial", 28)
+
+# # # História do jogo
+# # historia = [
+# #     "Em um mundo devastado por sombras...",
+# #     "Um herói solitário surge das cinzas.",
+# #     "Sua missão: restaurar a luz e a esperança.",
+# #     "Mas o caminho será perigoso...",
+# #     "E o tempo está contra você.",
+# #     "Agora, a jornada começa.",
+# #     "Você deve decidir o seu destino.",
+# #     "Cada escolha pode mudar tudo.",
+# #     "Coragem. Esperança. Risco.",
+# #     "Você está pronto para continuar?",
+# #     "ALSKJDALKS",
+# #     "ALSKJDALKS",
+# #     "ALSKJDALKS",
+# #     "ALSKJDALKS",
+# #     "ALSKJDALKS",
+# #     "ALSKJDALKS",
+# #     "ALSKJDALKS"
+# # ]
+
+# # def digitar_lento(texto, linhas_anteriores, delay=0, offset_y=0):
+# #     texto_atual = ""
+# #     for char in texto:
+# #         texto_atual += char
+# #         desenhar_historia(linhas_anteriores + [texto_atual], offset_y)
+# #         pygame.time.delay(delay)
+
+# #         for evento in pygame.event.get():
+# #             if evento.type == pygame.QUIT:
+# #                 pygame.quit()
+# #                 sys.exit()
+# #             elif evento.type == pygame.KEYDOWN and evento.key == pygame.K_SPACE:
+# #                 return True
+# #     return False
+
+# # def desenhar_historia(linhas, offset_y):
+# #     TELA.fill(PRETO)
+# #     y = 100 - offset_y
+# #     for linha in linhas:
+# #         render = FONTE.render(linha, True, BRANCO)
+# #         TELA.blit(render, (50, y))
+# #         y += 40
+# #     pygame.display.update()
+
+# # def mostrar_historia():
+# #     linhas_mostradas = []
+# #     scroll = 0
+
+# #     for i, paragrafo in enumerate(historia):
+# #         # Aumenta scroll conforme o número de parágrafos cresce
+# #         if i * 40 + 100 > ALTURA - 100:
+# #             scroll += 40  # rola para cima quando ultrapassa a tela
+
+# #         pular = digitar_lento(paragrafo, linhas_mostradas, offset_y=scroll)
+# #         linhas_mostradas.append(paragrafo)
+
+# #         if pular:
+# #             break
+# #         pygame.time.delay(500)
+
+# #     esperar_fim()
+
+# # def esperar_fim():
+# #     texto_final = FONTE.render("Pressione ENTER para continuar...", True, BRANCO)
+# #     TELA.blit(texto_final, (LARGURA // 2 - texto_final.get_width() // 2, ALTURA - 60))
+# #     pygame.display.update()
+
+# #     esperando = True
+# #     while esperando:
+# #         for evento in pygame.event.get():
+# #             if evento.type == pygame.QUIT:
+# #                 pygame.quit()
+# #                 sys.exit()
+# #             elif evento.type == pygame.KEYDOWN and evento.key == pygame.K_RETURN:
+# #                 esperando = False
+
+# #     pygame.quit()
+
+# # if __name__ == "__main__":
+# #     mostrar_historia()
+
+
+# #============================-=-=-===========================-=-=-=-===================================-=-=-=-=============================
+# #==========================================================FONTES==========================================================================
 # import pygame
 # import sys
 
+# # Inicializa o Pygame e o módulo de fontes
 # pygame.init()
+# pygame.font.init()
 
-# # Tela
-# LARGURA, ALTURA = 800, 600
-# TELA = pygame.display.set_mode((LARGURA, ALTURA))
-# pygame.display.set_caption("História com Scroll")
+# # Tamanho da janela
+# largura, altura = 800, 600
+# tela = pygame.display.set_mode((largura, altura))
+# pygame.display.set_caption("Visualização de Fontes do Pygame")
 
-# # Cores e fontes
-# PRETO = (0, 0, 0)
+# # Cores
 # BRANCO = (255, 255, 255)
-# FONTE = pygame.font.SysFont("arial", 28)
+# PRETO = (0, 0, 0)
 
-# # História do jogo
-# historia = [
-#     "Em um mundo devastado por sombras...",
-#     "Um herói solitário surge das cinzas.",
-#     "Sua missão: restaurar a luz e a esperança.",
-#     "Mas o caminho será perigoso...",
-#     "E o tempo está contra você.",
-#     "Agora, a jornada começa.",
-#     "Você deve decidir o seu destino.",
-#     "Cada escolha pode mudar tudo.",
-#     "Coragem. Esperança. Risco.",
-#     "Você está pronto para continuar?",
-#     "ALSKJDALKS",
-#     "ALSKJDALKS",
-#     "ALSKJDALKS",
-#     "ALSKJDALKS",
-#     "ALSKJDALKS",
-#     "ALSKJDALKS",
-#     "ALSKJDALKS"
-# ]
+# # Texto de exemplo
+# texto_exemplo = "Exemplo de Fonte"
 
-# def digitar_lento(texto, linhas_anteriores, delay=0, offset_y=0):
-#     texto_atual = ""
-#     for char in texto:
-#         texto_atual += char
-#         desenhar_historia(linhas_anteriores + [texto_atual], offset_y)
-#         pygame.time.delay(delay)
+# # Obtem a lista de fontes disponíveis
+# fontes = pygame.font.get_fonts()
+# fontes.sort()  # organiza em ordem alfabética
 
-#         for evento in pygame.event.get():
-#             if evento.type == pygame.QUIT:
-#                 pygame.quit()
-#                 sys.exit()
-#             elif evento.type == pygame.KEYDOWN and evento.key == pygame.K_SPACE:
-#                 return True
-#     return False
+# # Controle de rolagem
+# indice_inicial = 0
+# fontes_por_tela = 10
 
-# def desenhar_historia(linhas, offset_y):
-#     TELA.fill(PRETO)
-#     y = 100 - offset_y
-#     for linha in linhas:
-#         render = FONTE.render(linha, True, BRANCO)
-#         TELA.blit(render, (50, y))
-#         y += 40
-#     pygame.display.update()
+# # Função para desenhar as fontes na tela
+# def desenhar_fontes(inicio):
+#     tela.fill(PRETO)
 
-# def mostrar_historia():
-#     linhas_mostradas = []
-#     scroll = 0
+#     y = 20
+#     for i in range(inicio, min(inicio + fontes_por_tela, len(fontes))):
+#         nome_fonte = fontes[i]
+#         try:
+#             fonte = pygame.font.SysFont(nome_fonte, 28)
+#             texto_renderizado = fonte.render(f"{nome_fonte} - {texto_exemplo}", True, BRANCO)
+#             tela.blit(texto_renderizado, (20, y))
+#             y += 50
+#         except:
+#             # Se der erro com uma fonte, pula
+#             continue
 
-#     for i, paragrafo in enumerate(historia):
-#         # Aumenta scroll conforme o número de parágrafos cresce
-#         if i * 40 + 100 > ALTURA - 100:
-#             scroll += 40  # rola para cima quando ultrapassa a tela
+#     pygame.display.flip()
 
-#         pular = digitar_lento(paragrafo, linhas_mostradas, offset_y=scroll)
-#         linhas_mostradas.append(paragrafo)
+# # Loop principal
+# rodando = True
+# print(len(fontes))
+# while rodando:
+#     desenhar_fontes(indice_inicial)
 
-#         if pular:
-#             break
-#         pygame.time.delay(500)
+#     for evento in pygame.event.get():
+#         if evento.type == pygame.QUIT:
+#             rodando = False
+#         elif evento.type == pygame.KEYDOWN:
+#             if evento.key == pygame.K_DOWN:
+#                 indice_inicial = min(indice_inicial + fontes_por_tela, len(fontes) - fontes_por_tela)
+#             elif evento.key == pygame.K_UP:
+#                 indice_inicial = max(indice_inicial - fontes_por_tela, 0)
 
-#     esperar_fim()
+# pygame.quit()
+# sys.exit()
 
-# def esperar_fim():
-#     texto_final = FONTE.render("Pressione ENTER para continuar...", True, BRANCO)
-#     TELA.blit(texto_final, (LARGURA // 2 - texto_final.get_width() // 2, ALTURA - 60))
-#     pygame.display.update()
-
-#     esperando = True
-#     while esperando:
-#         for evento in pygame.event.get():
-#             if evento.type == pygame.QUIT:
-#                 pygame.quit()
-#                 sys.exit()
-#             elif evento.type == pygame.KEYDOWN and evento.key == pygame.K_RETURN:
-#                 esperando = False
-
-#     pygame.quit()
-
-# if __name__ == "__main__":
-#     mostrar_historia()
-
-
-#============================-=-=-===========================-=-=-=-===================================-=-=-=-=============================
-#==========================================================FONTES==========================================================================
 import pygame
-import sys
+import os
 
-# Inicializa o Pygame e o módulo de fontes
 pygame.init()
-pygame.font.init()
+pygame.mixer.init()
 
-# Tamanho da janela
-largura, altura = 800, 600
-tela = pygame.display.set_mode((largura, altura))
-pygame.display.set_caption("Visualização de Fontes do Pygame")
+def carregar_sons(pasta):
+    sons = {}
+    for nome_arquivo in os.listdir(pasta):
+        if nome_arquivo.endswith(('.wav', '.ogg', '.mp3')):
+            caminho_completo = os.path.join(pasta, nome_arquivo)
+            nome_som = os.path.splitext(nome_arquivo)[0]
+            sons[nome_som] = pygame.mixer.Sound(caminho_completo)
+    return sons
 
-# Cores
-BRANCO = (255, 255, 255)
-PRETO = (0, 0, 0)
+sons = carregar_sons('assets/musicas')
 
-# Texto de exemplo
-texto_exemplo = "Exemplo de Fonte"
+tela = pygame.display.set_mode((400, 300))
+pygame.display.set_caption("Testando Sons")
 
-# Obtem a lista de fontes disponíveis
-fontes = pygame.font.get_fonts()
-fontes.sort()  # organiza em ordem alfabética
-
-# Controle de rolagem
-indice_inicial = 0
-fontes_por_tela = 10
-
-# Função para desenhar as fontes na tela
-def desenhar_fontes(inicio):
-    tela.fill(PRETO)
-
-    y = 20
-    for i in range(inicio, min(inicio + fontes_por_tela, len(fontes))):
-        nome_fonte = fontes[i]
-        try:
-            fonte = pygame.font.SysFont(nome_fonte, 28)
-            texto_renderizado = fonte.render(f"{nome_fonte} - {texto_exemplo}", True, BRANCO)
-            tela.blit(texto_renderizado, (20, y))
-            y += 50
-        except:
-            # Se der erro com uma fonte, pula
-            continue
-
-    pygame.display.flip()
-
-# Loop principal
 rodando = True
-print(len(fontes))
 while rodando:
-    desenhar_fontes(indice_inicial)
-
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
             rodando = False
-        elif evento.type == pygame.KEYDOWN:
-            if evento.key == pygame.K_DOWN:
-                indice_inicial = min(indice_inicial + fontes_por_tela, len(fontes) - fontes_por_tela)
-            elif evento.key == pygame.K_UP:
-                indice_inicial = max(indice_inicial - fontes_por_tela, 0)
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_SPACE:
+                sons['explosao'].play()  # Toca o som ao apertar espaço
 
 pygame.quit()
-sys.exit()

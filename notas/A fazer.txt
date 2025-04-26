@@ -1,7 +1,7 @@
 FAZENDO:
-- Nas variáveis, trocar todos os lugares onde exibir texto com y >= 200, para a variável PADDING_TOP
-- Adicionar funcionalidade ao Menu principal
 - Enfeitar o Menu principal
+- (Não consegui) Testar como adicionar música ou áudios no jogado
+- Testar como adicionar imagens no jogo
 
 
 PENDENTE:
@@ -17,3 +17,5 @@ PENDENTE:
 
 FEITO:
 - (FEITO) A primeira fase está crashando quando é iniciada...
+- (FEITO) Nas variáveis, trocar todos os lugares onde exibir texto com y >= 200, para a variável PADDING_TOP
+- (FEITO) Adicionar funcionalidade ao Menu principal
