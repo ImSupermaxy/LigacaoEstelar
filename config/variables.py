@@ -5,7 +5,7 @@ import sys
 pygame.font.init()
 
 #--> CONFIG DEV/ BANCO - JOGO <--
-IS_DEV_VAR = False
+IS_DEV_VAR = True
 SKIP_HISTORIA = IS_DEV_VAR
 SKIP_DIALOGOS = IS_DEV_VAR
 ISCONTINUACAO = False #Obter de um arquivo json que vai ser alterado com as informações da gameplay do jogador (fase, continuação, etc..)

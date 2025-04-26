@@ -15,20 +15,25 @@ opcoes_menu = {
 }
 opcao_atual = 1
 
-def inicar_menu():
-    selecao_menu()
+opcoes_menu_not_inicial = {
+    1: opcoes_menu.get(2, ""),
+    2: opcoes_menu.get(3, ""),
+    3: "Voltar ao menu"
+}
+
+def inicar_menu(is_calling_initial=True):
+    selecao_menu(is_calling_initial)
 
     pygame.display.update()
     
 
-def selecao_menu():
+def selecao_menu(is_calling_initial=True):
     TELA.fill(BACKGROUND_JOGO)
     global opcao_atual
     
-    rodando = True
+    desenhar_selecao_menu(is_calling_initial)
     
-    desenhar_selecao_menu(0)
-    
+    rodando = True    
     while rodando:
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
@@ -45,18 +50,24 @@ def selecao_menu():
                     else: 
                         opcao_atual = 4
                 elif evento.key == pygame.K_RETURN:
-                    switch_to_opcao(opcao_atual)
+                    switch_to_opcao(opcao_atual, is_calling_initial)
+                elif not is_calling_initial:
+                    if evento.key == pygame.K_ESCAPE:
+                        rodando = False
         
-        desenhar_selecao_menu()
+        desenhar_selecao_menu(is_calling_initial)
         
 
 
-def desenhar_selecao_menu(delay=0):
+def desenhar_selecao_menu(is_calling_initial, delay=0):
     TELA.fill(BACKGROUND_JOGO)
+    # retangulo = pygame.Rect(300, 0, 300, ALTURA)
+    # TELA.fill(BACKGROUND_JOGO, retangulo)  # Só preenche dentro do retângulo
 
     global opcao_atual
     
-    for i, texto in opcoes_menu.items():
+    opcoes = opcoes_menu if is_calling_initial else opcoes_menu_not_inicial
+    for i, texto in opcoes.items():
         cor = SELECIONADO if i == opcao_atual else CINZA_CLARO
         render = FONTE_MENU.render(texto, True, cor)
         linha_posicao = PADDING_TOP + i * ESPACAMENTO_LINHA_MENU
@@ -66,10 +77,11 @@ def desenhar_selecao_menu(delay=0):
     pygame.display.update()
 
 
-def switch_to_opcao(opcao):
+def switch_to_opcao(opcao, is_calling_initial):
     invalido = "opção inválida"
     
-    match opcoes_menu.get(opcao, invalido):
+    opcoes = opcoes_menu if is_calling_initial else opcoes_menu_not_inicial
+    match opcoes.get(opcao, invalido):
         case "Iniciar":
             fases_menu.iniciar_fase(FASE_ATUAL)
         case "Config?":
@@ -78,4 +90,5 @@ def switch_to_opcao(opcao):
             fases_menu.visualizar_fases()
         case "Fechar":
             main.fechar_jogo()
-            print("???")
+        case "Voltar ao menu":
+            inicar_menu()

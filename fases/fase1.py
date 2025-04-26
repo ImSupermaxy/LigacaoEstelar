@@ -2,6 +2,7 @@ import pygame # type: ignore
 import math
 from config.variables import *
 import main
+from menu import menu
 
 def primeira_fase_iniciar():
     # Nós (posições)
@@ -65,8 +66,8 @@ def primeira_fase_iniciar():
     def all_nodes_visited():
         return len(visited_nodes) == len(nodes)
 
+
     running = True
-    
     while running:
         draw_graph(TELA)
 
@@ -91,6 +92,12 @@ def primeira_fase_iniciar():
                         current_node = clicked_node
                     else:
                         print("Movimento inválido: esse nó não é vizinho do atual.")
-                  
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    menu.inicar_menu(False)
+                
+    
     texto_final_fase = "Aperte ESPAÇO para pular..."      
     main.aguardar(texto_final_fase, largura=((LARGURA // 2) - 150), altura=ALTURA-200)
+    #Mostrar final da primeira fase
+    #Ir para a fase 2
