@@ -32,9 +32,10 @@ def selecao_menu(is_calling_initial=True):
     TELA.fill(BACKGROUND_JOGO)
     global opcao_atual
     
-    carregar_menu(is_calling_initial, True)
+    # carregar_menu(is_calling_initial, True)
+    carregar_menu(is_calling_initial    )
     
-    rodando = True    
+    rodando = True
     while rodando:
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
@@ -57,7 +58,7 @@ def selecao_menu(is_calling_initial=True):
                         rodando = False
         # pygame.time.delay(150)
         # carregar_menu(is_calling_initial, True)
-        carregar_menu(is_calling_initial, False)
+        carregar_menu(is_calling_initial)
         
 
 def carregar_menu(is_calling_initial, draw_estrelas=False):

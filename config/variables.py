@@ -55,12 +55,14 @@ SELECIONADO = AZUL
 
 #--> CONFIGURAÇÕES DE VOLUME <--
 Volume = 100 #em %
-Volume_Efeitos = 100
-Volume_Dialogos = 100
-Volume_Musica = 100
+Volume_Efeitos = 1
+Volume_Dialogos = 1
+Volume_Musica = 1
 
 
 def update_volume(volume, volume_efeitos, volume_dialogos, volume_musica):
+    #Na hora exibir no menu de volume multiplicar por 100 o valor daqui... 
+    #(alterá-lo individualmente, e quando salvar, passar chamar esse método)
     Volume = volume
     Volume_Efeitos = volume_efeitos * (volume / 100)
     Volume_Dialogos = volume_dialogos * (volume / 100)
