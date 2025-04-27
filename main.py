@@ -122,7 +122,7 @@ def aguardar_confirmacao(texto="Pressione ENTER para continuar...",largura=0,alt
                 esperando = False
                 
 
-def aguardar(texto="...",largura=0,altura=0, cor=COR_TEXTO):
+def aguardar(texto="...",largura=0,altura=0, cor=COR_TEXTO, delay=200):
     if altura == 0:
         altura = ALTURA // 2
     if largura == 0:
@@ -140,7 +140,37 @@ def aguardar(texto="...",largura=0,altura=0, cor=COR_TEXTO):
         tmp = cor
         cor = prox_cor
         prox_cor = tmp
-        pygame.time.delay(200)
+        pygame.time.delay(delay)
+
+
+def transicao(delay = 200):
+    TELA.fill(BACKGROUND_JOGO)
+    texto = "..."
+    altura = ALTURA // 2
+    largura = LARGURA // 2
+    
+    cor = COR_TEXTO
+    prox_cor = BACKGROUND_JOGO
+    
+    esperando = True
+    i = 0
+    while esperando:
+        
+        if i == delay * 5:
+            esperando = False
+        texto_atual = ""
+        for char in texto:
+            texto_atual += char
+            linhas_para_mostrar = [] + [texto_atual]
+            desenhar_textos(linhas_para_mostrar, cor, altura=altura, largura=largura)
+            pygame.time.delay(100)
+        pygame.display.update()
+        
+        tmp = cor
+        cor = prox_cor
+        prox_cor = tmp
+        i += delay
+        pygame.time.delay(delay)
 
 
 def fechar_jogo():

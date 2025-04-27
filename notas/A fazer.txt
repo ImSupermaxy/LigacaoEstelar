@@ -1,21 +1,28 @@
 FAZENDO:
-- Enfeitar o Menu principal
-- (Não consegui) Testar como adicionar música ou áudios no jogado
-- Testar como adicionar imagens no jogo
+- Está crashando caso aperte ENTER sem selecionar uma opção no menu
+- Atualizar as variáveis de PADDING ou relacionadas a tela, para uma % da altura / largura da tela 
+- Adicionar a transição do menu para a primeira fase
+- Enfeitar o Menu principal (ta meio complicado...)
+- Adicionar um inicio legal, com transição para o menu
+- Menu de Volume não está alterando os valores quando confirmado o novo valor
 
 
 PENDENTE:
-- Alterar ainda o que falta organizar nas variáveis / métodos...
+- Verificar se falta adicionar / alterar nas variáveis globais...
 - Obter a variável ISCONTINUACAO de um arquivo json que vai ser alterado com as informações da gameplay do jogador (fase, continuação, etc..)
 - Atualizar algumas configurações das variáveis para um json (que será alterado a partir do menu de configurações)
-- Atualizar as variáveis de PADDING ou relacionadas a tela, para uma % da altura / largura da tela 
 - Transformar as variáveis de história do arquivo "variables" para um json
 - Fazer a primeira fase coesa
-- Adicionar um inicio legal, com transição para o menu?
-- ...
+- Adicionar a lógica do ISCONTINUACAO da variável json para salvar / alterar quando ele inicar o jogo pela primeira vez (para mudar o menu iniciar )
+- Adicionar a música do menu (e fazer o loop dela corretamente)
+- Adicionar os sons da hitória no tempo certo em que ela é digitada
+- Adicionar as músicas da primeira fase
 
 
 FEITO:
 - (FEITO) A primeira fase está crashando quando é iniciada...
 - (FEITO) Nas variáveis, trocar todos os lugares onde exibir texto com y >= 200, para a variável PADDING_TOP
 - (FEITO) Adicionar funcionalidade ao Menu principal
+- (FEITO) Testar como adicionar música ou áudios no jogado (da pra colocar)
+- (FEITO) Testar como adicionar imagens no jogo (da pra colocar)
+- (FEITO) Adicionar a funcionalidade do menu de volume

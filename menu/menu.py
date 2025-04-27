@@ -10,7 +10,7 @@ from menu import config
 primeira_opcao = "Iniciar" if not ISCONTINUACAO else "Continuar"
 opcoes_menu = {
     1: primeira_opcao,
-    2: "Config?", # (audio? texto? personalização?)
+    2: "Config",
     3: "Fases",
     4: "Fechar"
 }
@@ -31,7 +31,7 @@ def inicar_menu(is_calling_initial=True):
 def selecao_menu(is_calling_initial=True):
     TELA.fill(BACKGROUND_JOGO)
     global opcao_atual
-    
+    opcao_atual = 1
     # carregar_menu(is_calling_initial, True)
     carregar_menu(is_calling_initial    )
     
@@ -121,7 +121,7 @@ def switch_to_opcao(opcao, is_calling_initial):
     match opcoes.get(opcao, invalido):
         case "Iniciar":
             fases_menu.iniciar_fase(FASE_ATUAL)
-        case "Config?":
+        case "Config":
             config.iniciar_menu()
         case "Fases":
             fases_menu.visualizar_fases()

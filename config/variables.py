@@ -64,9 +64,9 @@ def update_volume(volume, volume_efeitos, volume_dialogos, volume_musica):
     #Na hora exibir no menu de volume multiplicar por 100 o valor daqui... 
     #(alterá-lo individualmente, e quando salvar, passar chamar esse método)
     Volume = volume
-    Volume_Efeitos = volume_efeitos * (volume / 100)
-    Volume_Dialogos = volume_dialogos * (volume / 100)
-    Volume_Musica = volume_musica * (volume / 100)
+    Volume_Efeitos = volume_efeitos
+    Volume_Dialogos = volume_dialogos
+    Volume_Musica = volume_musica
 
 
 #--> CONFIGURAÇÕES DE VELOCIDADE <--

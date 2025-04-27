@@ -4,8 +4,8 @@ import main
 from config.variables import *
 
 opcoes_menu = {
-    1: "Volume",
-    2: "Texto", #Aparecer a configuração da velocidade dos diálogos / fonte do texto...
+    1: "VOLUME",
+    2: "TEXTOS", #Aparecer a configuração da velocidade dos diálogos / fonte do texto...
 }
 opcao_atual = 1
 
@@ -15,7 +15,7 @@ opcoes_volume = {
     3: "Diálogos: ",
     4: "Músicas: "
 }
-opcao_volume_atual = 0
+opcao_volume_atual = 1
 
 def iniciar_menu():
     selecao_menu()
@@ -112,7 +112,7 @@ def alterar_volume():
                 elif evento.key == pygame.K_RETURN:
                     change_volume(valor_to_change, posicoes_y)
                 elif evento.key == pygame.K_ESCAPE:
-                    opcao_volume_atual = 0
+                    opcao_volume_atual = 1
                     rodando_volume = False
         
         desenhar_selecao_menu_volume()
@@ -140,6 +140,8 @@ def desenhar_selecao_menu_volume(delay=0):
 
 
 def change_volume(valor_to_change, alturas):
+    if opcao_volume_atual == 0:
+        return
     altura, texto = alturas[opcao_volume_atual - 1], opcoes_volume.get(opcao_volume_atual)
 
     rodando = True
@@ -157,6 +159,7 @@ def change_volume(valor_to_change, alturas):
                         valor_to_change += 5
                 elif evento.key == pygame.K_RETURN:
                     mudar_volume(valor_to_change)
+                    rodando = False
                 elif evento.key == pygame.K_ESCAPE:
                     exibir_volume_to_change(altura, "", "")
                     rodando = False    
@@ -206,11 +209,13 @@ def mudar_volume(volume_to_change):
         case 1:
             volume_master = volume_to_change
         case 2:
-            volume_dialogos = volume_to_change
+            volume_dialogos = volume_to_change / 100
         case 3:
-            volume_efeitos = volume_to_change
+            volume_efeitos = volume_to_change / 100
         case 4:
-            voluma_musica = volume_to_change
+            voluma_musica = volume_to_change / 100
     
     update_volume(volume_master, volume_dialogos, volume_efeitos, voluma_musica)
-    print(Volume, Volume_Dialogos, Volume_Efeitos, Volume_Musica)
+    # print(Volume, Volume_Dialogos, Volume_Efeitos, Volume_Musica)
+    main.transicao(50)
+        
