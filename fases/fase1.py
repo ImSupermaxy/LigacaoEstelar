@@ -1,8 +1,8 @@
 import pygame # type: ignore
 import math
-from config.variables import *
 import main
 from menu import menu
+import configuracoes.variables as config
 
 def primeira_fase_iniciar():
     # Nós (posições)
@@ -32,26 +32,26 @@ def primeira_fase_iniciar():
     NODE_RADIUS = 25
 
     def draw_graph(screen):
-        TELA.fill(BACKGROUND_JOGO)
+        config.TELA.fill(config.BACKGROUND_JOGO)
 
         # Desenhar conexões possíveis
         for start, neighbors in graph.items():
             for end in neighbors:
                 if (end, start) not in visited_edges and (start, end) not in visited_edges:
-                    pygame.draw.line(screen, CINZA, nodes[start], nodes[end], 2)
+                    pygame.draw.line(screen, config.CINZA, nodes[start], nodes[end], 2)
 
         # Desenhar conexões feitas
         for a, b in visited_edges:
-            pygame.draw.line(screen, AZUL, nodes[a], nodes[b], 4)
+            pygame.draw.line(screen, config.AZUL, nodes[a], nodes[b], 4)
 
         # Desenhar nós
         for node_id, pos in nodes.items():
-            color = VERMELHO if node_id in visited_nodes else VERDE
+            color = config.VERMELHO if node_id in visited_nodes else config.VERDE
             pygame.draw.circle(screen, color, pos, NODE_RADIUS)
-            pygame.draw.circle(screen, PRETO, pos, NODE_RADIUS, 2)
+            pygame.draw.circle(screen, config.PRETO, pos, NODE_RADIUS, 2)
 
         # Mostrar nó atual
-        text = FONTE_GRAFO.render(f"Nó atual: {current_node}", True, COR_TEXTO)
+        text = config.FONTE_GRAFO.render(f"Nó atual: {current_node}", True, config.COR_TEXTO)
         screen.blit(text, (10, 10))
 
         pygame.display.flip()
@@ -69,7 +69,7 @@ def primeira_fase_iniciar():
 
     running = True
     while running:
-        draw_graph(TELA)
+        draw_graph(config.TELA)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -77,8 +77,8 @@ def primeira_fase_iniciar():
 
             if all_nodes_visited():
                     running = False
-                    text = FONTE_GRAFO.render("Todos os nós foram visitados!", True, BRANCO)
-                    TELA.blit(text, (LARGURA // 2 - 200, 50))
+                    text = config.FONTE_GRAFO.render("Todos os nós foram visitados!", True, config.BRANCO)
+                    config.TELA.blit(text, (config.LARGURA // 2 - 200, 50))
                     pygame.display.flip()
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -98,6 +98,6 @@ def primeira_fase_iniciar():
                 
     
     texto_final_fase = "Aperte ESPAÇO para pular..."      
-    main.aguardar(texto_final_fase, largura=((LARGURA // 2) - 150), altura=ALTURA-200)
+    main.aguardar(texto_final_fase, largura=((config.LARGURA // 2) - 150), altura=config.ALTURA-200)
     #Mostrar final da primeira fase
     #Ir para a fase 2

@@ -1,11 +1,12 @@
 import main
-from config.variables import *
 from fases import fase1
+import pygame
+import configuracoes.variables as config
 
 def visualizar_fases():
     iniciar_menu()
     
-primeira_opcao = FASE_ATUAL
+primeira_opcao = config.FASE_ATUAL
 opcoes_menu = {
     1: primeira_opcao,
     2: "config (audio? texto? personalização?)",
@@ -14,10 +15,13 @@ opcoes_menu = {
 }
 opcao_atual = 1
 
+
 # Chama a fase atual do personagem
 def iniciar_fase(fase):
     match fase:
         case "fase 1":
+            config.update_is_continuacao()
+            print(config.IsContinuacao)
             fase1.primeira_fase_iniciar()
         case "fase 2":
             print("Dois")
@@ -26,8 +30,7 @@ def iniciar_fase(fase):
         case "fase 4":
             print("Outro número")
     
-    pygame.quit()
-    # os.system("python jogo.py")  # ou "python3 jogo.py"
+    main.fechar_jogo()
 
 
 def iniciar_menu():
@@ -53,16 +56,16 @@ def selecao_fases():
 
 
 def desenhar_selecao_fases():
-    TELA.fill(BACKGROUND_JOGO)
+    config.TELA.fill(config.BACKGROUND_JOGO)
     
     espacamento_linha = 40
     linha_posicao = 200
 
     for i, texto in enumerate(opcoes_menu):
-        cor = SELECIONADO if i == opcao_atual else CINZA_CLARO
-        render = FONTE.render(texto, True, cor)
+        cor = config.SELECIONADO if i == opcao_atual else config.CINZA_CLARO
+        render = config.FONTE.render(texto, True, cor)
         linha_posicao = 200 + i * espacamento_linha
-        TELA.blit(render, (PADDING_LEFT, linha_posicao))
+        config.TELA.blit(render, (config.PADDING_LEFT, linha_posicao))
         pygame.time.delay(200)
 
     pygame.display.update()

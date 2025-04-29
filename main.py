@@ -1,25 +1,25 @@
 import pygame
 import sys
 from menu import menu
-from config.variables import *
+import configuracoes.variables as config
 
 # Inicializa o pygame
 pygame.init()
 pygame.font.init()
-pygame.display.set_caption(NOME_PROJETO)
+pygame.display.set_caption(config.NOME_PROJETO)
 
 # Renderiza todos os parágrafos atuais
-def desenhar_textos(linhas, cor=COR_TEXTO, altura=PADDING_TOP,largura=PADDING_LEFT):
+def desenhar_textos(linhas, cor=config.COR_TEXTO, altura=config.PADDING_TOP,largura=config.PADDING_LEFT):
     y = altura
     for linha in linhas:
-        render = FONTE.render(linha, False, cor)
-        TELA.blit(render, (largura, y))
-        y += ESPACAMENTO_LINHA  # espaço entre linhas
+        render = config.FONTE.render(linha, False, cor)
+        config.TELA.blit(render, (largura, y))
+        y += config.ESPACAMENTO_LINHA  # espaço entre linhas
     pygame.display.update()
 
 
 # Escreve uma linha com efeito de digitação
-def digitar_lento(linha, linhas_anteriores, delay=50, cor=COR_TEXTO, altura=PADDING_TOP, largura=PADDING_LEFT):
+def digitar_lento(linha, linhas_anteriores, delay=50, cor=config.COR_TEXTO, altura=config.PADDING_TOP, largura=config.PADDING_LEFT):
     texto_atual = ""
     for char in linha:
         texto_atual += char
@@ -33,61 +33,18 @@ def digitar_lento(linha, linhas_anteriores, delay=50, cor=COR_TEXTO, altura=PADD
             elif evento.type == pygame.QUIT:
                 fechar_jogo()
     return False
-    
-# def desenhar_selecao_logica():
-#     TELA.fill(BACKGROUND_JOGO)
-    
-#     espacamento_linha = 40
-#     linha_posicao = 160
-
-#     render = FONTE.render("Escolha uma das opções: ", True, BRANCO)
-#     TELA.blit(render, (PADDING_LEFT, linha_posicao))
-    
-#     linha_posicao += espacamento_linha
-    
-#     ultima_linha = 0
-#     for i, texto in enumerate(opcoes_jogo):
-#         cor = SELECIONADO if i == opcao_atual else CINZA_CLARO
-#         render = FONTE.render(texto, True, cor)
-#         linha_posicao = 200 + i * espacamento_linha
-#         ultima_linha = linha_posicao
-#         TELA.blit(render, (PADDING_LEFT, linha_posicao))
-        
-#     titulo = FONTE.render("O que você deseja fazer?", True, BRANCO)
-#     ultima_linha = ultima_linha + 80
-#     TELA.blit(titulo, (LARGURA // 2 - titulo.get_width() // 2, ultima_linha))
-
-#     pygame.display.update()
-#     # aguardar_confirmacao(altura=ultima_linha + 60)
-
-# def selecao_logica():
-#     global opcao_atual
-#     rodando = True
-#     while rodando:
-#         desenhar_selecao_logica()
-
-#         for evento in pygame.event.get():
-#             if evento.type == pygame.QUIT:
-#                 fechar_jogo()
-#             elif evento.type == pygame.KEYDOWN:
-#                 if evento.key == pygame.K_UP:
-#                     opcao_atual = (opcao_atual - 1) % len(opcoes_jogo)
-#                 elif evento.key == pygame.K_DOWN:
-#                     opcao_atual = (opcao_atual + 1) % len(opcoes_jogo)
-#                 elif evento.key == pygame.K_RETURN:
-#                     rodando = False
  
 
 # Mostra toda a introdução
 def mostrar_historia():
-    TELA.fill(BACKGROUND_JOGO)
+    config.TELA.fill(config.BACKGROUND_JOGO)
     
-    altura_historia = PADDING_TOP_HISTORIA
-    if not SKIP_HISTORIA:
+    altura_historia = config.PADDING_TOP_HISTORIA
+    if not config.SkipHistoria:
         linhas_mostradas = []
         delay_linha = 30
         delay_paragrafo = 500
-        for i, paragrafo in enumerate(HISTORIA):
+        for i, paragrafo in enumerate(config.HISTORIA):
             pular = digitar_lento(paragrafo, linhas_mostradas, delay_linha, altura=altura_historia)
             linhas_mostradas.append(paragrafo)
             if pular:
@@ -96,20 +53,20 @@ def mostrar_historia():
 
             pygame.time.delay(delay_paragrafo)
             
-        aguardar(largura=(PADDING_LEFT + len(HISTORIA[len(HISTORIA) - 1]) * 10 + 5),altura=(altura_historia + (len(HISTORIA) * 40 - 40)), cor=COR_TEXTO)
+        aguardar(largura=(config.PADDING_LEFT + len(config.HISTORIA[len(config.HISTORIA) - 1]) * 10 + 5),altura=(altura_historia + (len(config.HISTORIA) * 40 - 40)), cor=config.COR_TEXTO)
     
     menu.inicar_menu()
 
 
-def aguardar_confirmacao(texto="Pressione ENTER para continuar...",largura=0,altura=0, cor=BRANCO):
+def aguardar_confirmacao(texto="Pressione ENTER para continuar...",largura=0,altura=0, cor=config.BRANCO):
     # TELA.fill(BACKGROUND_JOGO)
     if altura == 0:
-        altura = ALTURA // 2
+        altura = config.ALTURA // 2
     if largura == 0:
-        largura = LARGURA // 2 - texto.get_width() // 2
+        largura = config.LARGURA // 2 - texto.get_width() // 2
 
-    texto = FONTE.render(texto, True, cor)
-    TELA.blit(texto, (largura, altura))
+    texto = config.FONTE.render(texto, True, cor)
+    config.TELA.blit(texto, (largura, altura))
     pygame.display.update()
         
     # Loop para manter a tela ativa
@@ -122,13 +79,13 @@ def aguardar_confirmacao(texto="Pressione ENTER para continuar...",largura=0,alt
                 esperando = False
                 
 
-def aguardar(texto="...",largura=0,altura=0, cor=COR_TEXTO, delay=200):
+def aguardar(texto="...",largura=0,altura=0, cor=config.COR_TEXTO, delay=200):
     if altura == 0:
-        altura = ALTURA // 2
+        altura = config.ALTURA // 2
     if largura == 0:
-        largura = LARGURA // 2 - texto.get_width() // 2
+        largura = config.LARGURA // 2 - texto.get_width() // 2
         
-    prox_cor = BACKGROUND_JOGO
+    prox_cor = config.BACKGROUND_JOGO
     
     esperando = True
     while esperando:
@@ -144,13 +101,13 @@ def aguardar(texto="...",largura=0,altura=0, cor=COR_TEXTO, delay=200):
 
 
 def transicao(delay = 200):
-    TELA.fill(BACKGROUND_JOGO)
+    config.TELA.fill(config.BACKGROUND_JOGO)
     texto = "..."
-    altura = ALTURA // 2
-    largura = LARGURA // 2
+    altura = config.ALTURA // 2
+    largura = config.LARGURA // 2
     
-    cor = COR_TEXTO
-    prox_cor = BACKGROUND_JOGO
+    cor = config.COR_TEXTO
+    prox_cor = config.BACKGROUND_JOGO
     
     esperando = True
     i = 0
@@ -174,13 +131,14 @@ def transicao(delay = 200):
 
 
 def fechar_jogo():
+    config.update_variables_json()
     pygame.quit()
     sys.exit()
 
 
 # Início
 def main():
-    TELA.fill(BACKGROUND_JOGO)
+    config.TELA.fill(config.BACKGROUND_JOGO)
     pygame.display.update()
     mostrar_historia()
 

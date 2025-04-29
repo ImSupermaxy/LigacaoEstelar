@@ -1,15 +1,19 @@
 # Tela
 import pygame
 import sys
+import configuracoes.manipulerjson as mjson
 
 pygame.font.init()
 
-#--> CONFIG DEV/ BANCO - JOGO <--
-IS_DEV_VAR = True
-SKIP_HISTORIA = IS_DEV_VAR
-SKIP_DIALOGOS = IS_DEV_VAR
-ISCONTINUACAO = False #Obter de um arquivo json que vai ser alterado com as informações da gameplay do jogador (fase, continuação, etc..)
-IS_FULL_SCREAM = False
+dados = mjson.get_variables_form_json()
+
+IsDevVar = dados["isDev"]
+# if IsDevVar:
+# else
+SkipHistoria = dados["texto"]["skipHistoria"]
+SkipDialogos = dados["texto"]["skipDialogos"]
+IsContinuacao = dados["isContinuacao"]
+IsFullSream = dados["isFullScream"]
 
 #--> CORES <--
 PRETO = (0, 0, 0)
@@ -25,8 +29,8 @@ CINZA_CLARO = (210, 210, 210)
 
 #--> CONFIGURAÇÕES GERAIS <--
 NOME_PROJETO = "Ligação Estelar"
-LARGURA, ALTURA = 1520, 750 if not IS_FULL_SCREAM else (0,0)
-TELA = pygame.display.set_mode((LARGURA, ALTURA)) if not IS_FULL_SCREAM else pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+LARGURA, ALTURA = dados["video"]["width"], dados["video"]["heigth"] if not IsFullSream else (0,0)
+TELA = pygame.display.set_mode((LARGURA, ALTURA)) if not IsFullSream else pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 FONTE = pygame.font.SysFont("arial", 28)
 PADDING_LEFT = 50
 PADDING_TOP = 200
@@ -35,7 +39,7 @@ BACKGROUND_JOGO = PRETO
 COR_TEXTO = BRANCO
 
 INFO_DISPLAY = pygame.display.Info()
-if IS_FULL_SCREAM:
+if IsFullSream:
     LARGURA = INFO_DISPLAY.current_w
     ALTURA = INFO_DISPLAY.current_h
 
@@ -54,19 +58,11 @@ SELECIONADO = AZUL
 
 
 #--> CONFIGURAÇÕES DE VOLUME <--
-Volume = 100 #em %
-Volume_Efeitos = 1
-Volume_Dialogos = 1
-Volume_Musica = 1
 
-
-def update_volume(volume, volume_efeitos, volume_dialogos, volume_musica):
-    #Na hora exibir no menu de volume multiplicar por 100 o valor daqui... 
-    #(alterá-lo individualmente, e quando salvar, passar chamar esse método)
-    Volume = volume
-    Volume_Efeitos = volume_efeitos
-    Volume_Dialogos = volume_dialogos
-    Volume_Musica = volume_musica
+Volume = dados["volume"]["volumeMaster"]
+Volume_Efeitos = dados["volume"]["volumeEfeitos"]
+Volume_Dialogos = dados["volume"]["volumeDialogos"]
+Volume_Musica = dados["volume"]["volumeMusica"]
 
 
 #--> CONFIGURAÇÕES DE VELOCIDADE <--
@@ -103,6 +99,24 @@ FASES = [
     FASE_FIVE
 ]
 
-FASE_ATUAL = FASE_ONE
+FASE_ATUAL =  FASES[dados["fases"]["atual"] - 1]
 
+def update_variables_json():
+    mjson.update_variables_json(dados)
     
+def update_is_continuacao(value=True):
+    global IsContinuacao
+    IsContinuacao = value
+    dados["isContinuacao"] = value
+    dados["texto"]["skipHistoria"] = value
+    
+def update_all_volumes():
+    global Volume
+    global Volume_Dialogos
+    global Volume_Efeitos
+    global Volume_Musica
+    
+    dados["volume"]["volumeMaster"] = Volume 
+    dados["volume"]["volumeEfeitos"] = Volume_Efeitos
+    dados["volume"]["volumeDialogos"] = Volume_Dialogos
+    dados["volume"]["volumeMusica"] = Volume_Musica
