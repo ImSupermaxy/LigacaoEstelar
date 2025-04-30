@@ -1,18 +1,18 @@
 {
-    "isDev": false,
-    "isContinuacao": false,
+    "isDev": true,
+    "isContinuacao": true,
     "isFullScream": false,
     "video": {
         "width": 1520,
         "heigth": 750
     },
     "texto": {
-        "skipHistoria": false,
+        "skipHistoria": true,
         "skipDialogos": false,
         "velocidade": 100
     },
     "volume": {
-        "volumeMaster": 75,
+        "volumeMaster": 100,
         "volumeEfeitos": 100,
         "volumeDialogos": 100,
         "volumeMusica": 0

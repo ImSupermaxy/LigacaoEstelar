@@ -12,24 +12,40 @@ def primeira_fase_iniciar():
         2: (250, 450),
         3: (500, 150),
         4: (500, 450),
-        5: (300, 300)
+        5: (300, 300),
+        6: (200, 650),
+        7: (450, 600),
+        8: (650, 500),
+        9: (650, 250),
+        10: (600, 350),
+        11: (650, 600),
+        12: (750, 550),
+        13: (750, 500)
     }
 
     # Conexões (grafo não-direcionado)
     graph = {
-        0: [1, 2],
+        0: [1, 2, 6],
         1: [0, 3, 5],
         2: [0, 4, 5],
-        3: [1, 4],
-        4: [2, 3],
-        5: [1, 2]
+        3: [1, 4, 6, 9],
+        4: [2, 3, 6, 8],
+        5: [1, 2, 7, 9, 10],
+        6: [0, 3, 4, 7],
+        7: [5, 6, 8, 10, 12],
+        8: [4, 7, 11],
+        9: [3, 5],
+        10: [5, 7, 10, 12],
+        11: [8, 12],
+        12: [7, 10, 11, 13],
+        13: [12]
     }
 
     # Estado
     current_node = 0
     visited_nodes = set([current_node])
     visited_edges = set()
-    NODE_RADIUS = 25
+    NODE_RADIUS = 14
 
     def draw_graph(screen):
         config.TELA.fill(config.BACKGROUND_JOGO)
@@ -51,8 +67,9 @@ def primeira_fase_iniciar():
             pygame.draw.circle(screen, config.PRETO, pos, NODE_RADIUS, 2)
 
         # Mostrar nó atual
-        text = config.FONTE_GRAFO.render(f"Nó atual: {current_node}", True, config.COR_TEXTO)
-        screen.blit(text, (10, 10))
+        if config.IsDevVar:
+            text = config.FONTE_GRAFO.render(f"Nó atual: {current_node}", True, config.COR_TEXTO)
+            screen.blit(text, (10, 10))
 
         pygame.display.flip()
 
@@ -73,7 +90,7 @@ def primeira_fase_iniciar():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                main.fechar_jogo()
 
             if all_nodes_visited():
                     running = False

@@ -5,14 +5,13 @@ FAZENDO:
 - Atualizar as variáveis de PADDING ou relacionadas a tela, para uma % da altura / largura da tela 
 - Enfeitar o Menu principal (ta meio complicado...)
 - Adicionar um inicio legal, com transição para o menu
+- Verificar se falta adicionar / alterar nas variáveis globais...
 
 
 PENDENTE:
-- (Será?...) Separar as configurações do arquivo variables para cada parte específica... (transformar este arquivo em só uma referência a todos...)
-- Transformar as variáveis de história do arquivo "variables" para um json
+- (precisa?) Transformar as variáveis de história do arquivo "variables" para um json
 - Adicionar a história escrita pelo Lucas na introdução / transição da primeira fase (Adicionar a transição do menu para a primeira fase)
-- Verificar se falta adicionar / alterar nas variáveis globais...
-- Fazer a primeira fase coesa
+- Fazer a primeira fase coesa (com inicio e final) - (tutorial?)
 - Adicionar a música do menu (e fazer o loop dela corretamente)
 - Adicionar os sons da hitória no tempo certo em que ela é digitada
 - Adicionar as músicas da primeira fase

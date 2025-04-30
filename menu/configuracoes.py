@@ -164,14 +164,14 @@ def change_volume(alturas):
 
 def exibir_volume_to_change(altura, texto, valor_to_exibir):
     all_texto = valor_to_exibir + "%"
-    posicao_texto = len(texto) * 16
-    retangulo = pygame.Rect((config.PADDING_LEFT // 2) + posicao_texto, altura, len(all_texto) + 60, 50)
+    posicao_texto = len(texto) * 12
+    retangulo = pygame.Rect(config.PADDING_LEFT + posicao_texto, altura, len(all_texto) + 60, 50)
 
     # Desenhando o retângulo vermelho
     pygame.draw.rect(config.TELA, config.BACKGROUND_JOGO, retangulo)
     
     render = config.FONTE.render(all_texto, True, config.BRANCO)
-    config.TELA.blit(render, ((config.PADDING_LEFT // 2) + posicao_texto, altura))
+    config.TELA.blit(render, (config.PADDING_LEFT + posicao_texto, altura))
     pygame.display.update()   
 
 
