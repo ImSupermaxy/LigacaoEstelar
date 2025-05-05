@@ -1,19 +1,36 @@
 FAZENDO:
+- Fazer a primeira fase coesa (com inicio e final)
+    - Adicionar transição da primeira fase (Adicionar a transição do menu para a primeira fase)
+        - com a história que o Lucas vai fazer
+    - Adicioanr a lógica de peercorrer o grafo após ele chegar ao destino (Djikstra)
+    - Lógica de validar o percuso do usuário ser o ranking dele no final do jogo
+    - Fazer a tela de conclusão de fases
+    - Fazer o modelo da tela de conclusão de fase, (tempo que demorou, ranking? Nível de promossão etc... sla inventa ai)
+
 - Adicionar lógica da variável isDevVar, caso seja true, quando iniciar o programa voltar as configurações padrão do jogo
     Lógico só deixar ativa depois de testar tudo né... KKKKKKKKKKKKKKKK
 
 - Atualizar as variáveis de PADDING ou relacionadas a tela, para uma % da altura / largura da tela 
 - Enfeitar o Menu principal (ta meio complicado...)
-- Adicionar um inicio legal, com transição para o menu
-- Verificar se falta adicionar / alterar nas variáveis globais...
+- (Será que dá?...) Adicionar um inicio legal, com transição para o menu
 
 
 PENDENTE:
-- (precisa?) Transformar as variáveis de história do arquivo "variables" para um json
-- Adicionar a história escrita pelo Lucas na introdução / transição da primeira fase (Adicionar a transição do menu para a primeira fase)
-- Fazer a primeira fase coesa (com inicio e final) - (tutorial?)
+- Adicionar botão de restartar a fase no menu (dentro de uma fase)
+- Salvar o progresso da fase, quando fechado o jogo ou quando sair da fase
+- Adicionar no menu (enquanto estiver em alguma fase) a opção de "sair e salvar"
+- Quando fechar o jogo pela janela, salvar as informações também... (adcionar essa lógica, isso não acontece)
+- Não salvar o grafo quando o jogador só sair, salvar apenas quando clicar em "sair e salvar"
+- Fazer o menu de fases
+- (tutorial?) Fazer o tutorial?...
+- Adicionar um manual para explicar como o jogo funciona, e as lógicas
+    - Todas as fases terão o mesmo gráfico como base
+    - Conforme você for passando por uma aresta (o peso dela diminuirá de uma fase para outra)
+    - Você terá um limite máximo para todo o jogo de "capacidade de lixo"
+    - (Exibir durante as fases a quantidade de "lixos" obtidos durante a fase) - (Exibir o total máximo e a soma por fases também)
+    - (Você pode passar por um caminho mais de uma vez??...)
 - Adicionar a música do menu (e fazer o loop dela corretamente)
-- Adicionar os sons da hitória no tempo certo em que ela é digitada
+- Adicionar os sons da hitória no tempo certo em que ela é digitada (pegar o som do sans ou undertale quando aparece algum texto...)
 - Adicionar as músicas da primeira fase
 
 
@@ -28,3 +45,10 @@ FEITO:
 - (FEITO) Testar como obter e alterar variáveis de um arquivo json
 - (FEITO) Menu de Volume não está alterando os valores quando confirmado o novo valor
 - (FEITO) Adicionar a lógica do ISCONTINUACAO da variável do arquivo "variables" para salvar / alterar quando ele inicar o jogo pela primeira vez (para mudar no menu)
+- (FEITO) Fazer o modelo do menu de fases
+- (FEITO) Adicionar a história escrita pelo Lucas na introdução
+- (FEITO) Verificar se falta adicionar / alterar nas variáveis globais... (vai ser adicionado com o tempo)
+- (FEITO) Não é possível voltar para o vértice inicial...
+- (FEITO) Adicionar grafo da fase um
+- (FEITO) Vertice inicial deve ser pintado com outra cor
+- (FEITO) Fazer a lógica de chegar no destino, (ponto final do grafo) (outra cor tbm)

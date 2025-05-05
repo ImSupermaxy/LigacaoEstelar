@@ -1,5 +1,5 @@
 import main
-from fases import fase1
+from fases import fase1, fase2#, fase3, fase4, fase5
 import pygame
 import configuracoes.variables as config
 
@@ -21,7 +21,6 @@ def iniciar_fase(fase):
     match fase:
         case "fase 1":
             config.update_is_continuacao()
-            print(config.IsContinuacao)
             fase1.primeira_fase_iniciar()
         case "fase 2":
             print("Dois")

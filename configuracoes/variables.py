@@ -2,6 +2,7 @@
 import pygame
 import sys
 import configuracoes.manipulerjson as mjson
+import historia.introducao as introducao
 
 pygame.font.init()
 
@@ -10,6 +11,7 @@ dados = mjson.get_variables_form_json()
 IsDevVar = dados["isDev"]
 # if IsDevVar:
 # else
+skipIntroducao = dados["texto"]["skipIntroducao"]
 SkipHistoria = dados["texto"]["skipHistoria"]
 SkipDialogos = dados["texto"]["skipDialogos"]
 IsContinuacao = dados["isContinuacao"]
@@ -25,7 +27,8 @@ AZUL = (50, 100, 255)
 AZUL_CLARO = (3, 207, 252)
 CINZA = (180, 180, 180)
 CINZA_CLARO = (210, 210, 210)
-
+AMARELO = (255, 255, 0)
+LARANJA = (254, 127, 0)
 
 #--> CONFIGURAÇÕES GERAIS <--
 NOME_PROJETO = "Ligação Estelar"
@@ -50,7 +53,8 @@ ESPACAMENTO_LINHA_MENU = 45
 
 
 #--> CONFIGURAÇÕES DO(S) GRAFO(S) <--
-FONTE_GRAFO = pygame.font.SysFont(None, 32)
+FONTE_GRAFO = pygame.font.SysFont(None, 24)
+FONTE_PESO = pygame.font.SysFont("arial", 36, bold=True)
 
 
 #--> CONFIGURAÇÕES DE INTERAÇÃO <--
@@ -76,12 +80,8 @@ PADDING_TOP_HISTORIA = PADDING_TOP - 150
 
 
 #--> INFO HISTÓRIA <-- (transformar em json e buscar de lá)
-HISTORIA = [
-    "Em um mundo onde existem dezenas de colônias de seres humanos espalhados pela galáxia",
-    "Nosso objetivo é restaurar a única e íntegra memória de nossos antepassados",
-    "Juntando todas essas civilizações que viveram separadas de seus irmãos por tanto tempo",
-    "Você fará isso, mas do seu jeito",
-]
+# HISTORIA = historia.texto
+# INTRODUCAO = introducao.texto
 
 
 #--> CONFIGURAÇÕES DAS FASES <--
@@ -99,7 +99,7 @@ FASES = [
     FASE_FIVE
 ]
 
-FASE_ATUAL =  FASES[dados["fases"]["atual"] - 1]
+FASE_ATUAL = FASES[dados["fases"]["atual"] - 1]
 
 def update_variables_json():
     mjson.update_variables_json(dados)
@@ -108,7 +108,7 @@ def update_is_continuacao(value=True):
     global IsContinuacao
     IsContinuacao = value
     dados["isContinuacao"] = value
-    dados["texto"]["skipHistoria"] = value
+    dados["texto"]["skipIntroducao"] = value
     
 def update_all_volumes():
     global Volume
