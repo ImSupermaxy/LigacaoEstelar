@@ -4,7 +4,7 @@ FAZENDO:
         - com a história que o Lucas vai fazer
     - Adicioanr a lógica de peercorrer o grafo após ele chegar ao destino (Djikstra)
     - Lógica de validar o percuso do usuário ser o ranking dele no final do jogo
-    - Fazer a tela de conclusão de fases
+    - (FEITO) Fazer a tela de conclusão de fases
     - Fazer o modelo da tela de conclusão de fase, (tempo que demorou, ranking? Nível de promossão etc... sla inventa ai)
 
 - Adicionar lógica da variável isDevVar, caso seja true, quando iniciar o programa voltar as configurações padrão do jogo
@@ -21,6 +21,7 @@ PENDENTE:
 - Adicionar no menu (enquanto estiver em alguma fase) a opção de "sair e salvar"
 - Quando fechar o jogo pela janela, salvar as informações também... (adcionar essa lógica, isso não acontece)
 - Não salvar o grafo quando o jogador só sair, salvar apenas quando clicar em "sair e salvar"
+- Ajeitar tela de conclusão de fase
 - Fazer o menu de fases
 - (tutorial?) Fazer o tutorial?...
 - Adicionar um manual para explicar como o jogo funciona, e as lógicas

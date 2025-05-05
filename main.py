@@ -30,8 +30,9 @@ def digitar_lento(linha, linhas_anteriores, delay=50, cor=config.COR_TEXTO, altu
         pygame.time.delay(delay)
 
         for evento in pygame.event.get():
-            if evento.type == pygame.KEYDOWN and evento.key == pygame.K_SPACE:
-                return True
+            if evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_SPACE or evento.key == pygame.K_RETURN:
+                    return True
             elif evento.type == pygame.QUIT:
                 fechar_jogo()
     return False

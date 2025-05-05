@@ -242,7 +242,14 @@ def primeira_fase_iniciar():
                 if event.key == pygame.K_ESCAPE:
                     menu.inicar_menu(False)
     
-    texto_final_fase = "Aperte ESPAÇO para pular..."
+    texto_final_fase = [
+        "Você conclui mais uma missão",
+        "Seu rendimento hoje ajudou significativamente na remoção de todo ",
+        "o lixo nesses arredores, quase como se alguns grãos de areia ",
+        "fossem removidos de uma praia. Você lembra delas? ",
+        "É... acho que não ",
+        "Enfim, descanse por hora em sua nave..."
+    ]
     # main.aguardar(texto_final_fase, cor=config.VERDE_ESCURO, largura=((config.LARGURA // 2) + 300), altura=config.ALTURA-200)
     soma_arestas_cpu = 20
-    desenha_final.desenha_final_missao(soma_arestas, soma_arestas_cpu, [texto_final_fase])
+    desenha_final.desenha_final_missao(soma_arestas, soma_arestas_cpu, texto_final_fase)
