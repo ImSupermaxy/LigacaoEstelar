@@ -112,7 +112,7 @@ def primeira_fase_iniciar():
     }
 
     # Estado
-    inicial_node = "I"
+    inicial_node = "A"
     final_node = "T"
     current_node = inicial_node
     visited_nodes = [current_node]
