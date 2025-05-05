@@ -1,13 +1,13 @@
 {
     "isDev": false,
-    "isContinuacao": true,
+    "isContinuacao": false,
     "isFullScream": false,
     "video": {
         "width": 1520,
         "heigth": 750
     },
     "texto": {
-        "skipIntroducao": true,
+        "skipIntroducao": false,
         "skipHistoria": false,
         "skipDialogos": false,
         "velocidade": 100
