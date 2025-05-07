@@ -31,6 +31,12 @@ AMARELO = (255, 255, 0)
 LARANJA = (254, 127, 0)
 ROXO = (137, 44, 220)
 ROSA = (220, 44, 217)
+AZUL_CLARO2 = (56, 182, 255)
+VERMELHO2 = (255, 49, 49)
+ROSA2 = (255, 102, 196)
+ROXO2 = (140, 82, 255)
+VERDE_INICIAL = (93, 219, 90)
+CINZA_FINAL = (196, 212, 238)
 
 #--> CONFIGURAÇÕES GERAIS <--
 NOME_PROJETO = "Ligação Estelar"
@@ -57,14 +63,13 @@ ESPACAMENTO_LINHA_MENU = 45
 #--> CONFIGURAÇÕES DO(S) GRAFO(S) <--
 FONTE_GRAFO = pygame.font.SysFont(None, 24)
 FONTE_PESO = pygame.font.SysFont("arial", 36, bold=True)
-
+FONTE_FINAL_FASE = pygame.font.SysFont("dejavuserif", 28)
 
 #--> CONFIGURAÇÕES DE INTERAÇÃO <--
 SELECIONADO = AZUL
 
 
 #--> CONFIGURAÇÕES DE VOLUME <--
-
 Volume = dados["volume"]["volumeMaster"]
 Volume_Efeitos = dados["volume"]["volumeEfeitos"]
 Volume_Dialogos = dados["volume"]["volumeDialogos"]

@@ -1,11 +1,11 @@
 FAZENDO:
+- Criar texto de introdução do jogo...
+
 - Fazer a primeira fase coesa (com inicio e final)
     - Adicionar transição da primeira fase (Adicionar a transição do menu para a primeira fase)
         - com a história que o Lucas vai fazer
-    - Adicioanr a lógica de peercorrer o grafo após ele chegar ao destino (Djikstra)
-    - Lógica de validar o percuso do usuário ser o ranking dele no final do jogo
+    - (FEITO) Adicioanr a lógica de peercorrer o grafo após ele chegar ao destino (Djikstra)
     - (FEITO) Fazer a tela de conclusão de fases
-    - Fazer o modelo da tela de conclusão de fase, (tempo que demorou, ranking? Nível de promossão etc... sla inventa ai)
 
 - Adicionar lógica da variável isDevVar, caso seja true, quando iniciar o programa voltar as configurações padrão do jogo
     Lógico só deixar ativa depois de testar tudo né... KKKKKKKKKKKKKKKK

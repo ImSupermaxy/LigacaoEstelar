@@ -20,8 +20,8 @@ opcao_atual = 1
 def iniciar_fase(fase):
     match fase:
         case "fase 1":
-            config.update_is_continuacao()
             fase1.primeira_fase_iniciar()
+            config.update_is_continuacao()
         case "fase 2":
             print("Dois")
         case "fase 3":

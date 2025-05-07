@@ -13,10 +13,10 @@
         "velocidade": 100
     },
     "volume": {
-        "volumeMaster": 55,
-        "volumeEfeitos": 0,
+        "volumeMaster": 100,
+        "volumeEfeitos": 100,
         "volumeDialogos": 100,
-        "volumeMusica": 30
+        "volumeMusica": 100
     },
     "fases": {
         "atual": 1

@@ -1,20 +1,16 @@
 
 import configuracoes.variables as config
 import main
-from menu import menu
 
 TEXTO = [
-    "\"Nave B-12, câmbio... Nave B-12, na escuta?... Vamo trabalhar!?\"",
-    "\"Você acorda na sua nave com o som do seu companheiro no rádio, chamando para uma provável nova expedição.\"",
-    "Na janela da cabine, a mesma visão monótona de sempre: o vasto — e agora incomum — espaço, ",
-    "sem nenhuma estrela visível, apenas uma imensidão de lixo. Restos de naves, satélites abandonados e ",
-    "resíduos expelidos pelas civilizações. ",
-    "",
-    "A humanidade agora está espalhada por diversos planetas em todo o espaço, após os acontecimentos ",
-    "catastróficos no planeta Terra...",
-    "\"Chrr-chrr\" — seus pensamentos são interrompidos pelo rádio e, em seguida, a voz dele de novo:",
-    "\"Precisam de você aqui. Temos que abrir caminho pra mais um ricasso de férias. Câmbio.\"",
-    "Você suspira, liga sua nave, e parte — mais uma vez — para mais um dia de trabalho.",
+    "Após algumas centenas de anos a humanidade vive de forma separada, ",
+    "existem colônias espalhadas pela galáxia...  hierarquia, classe, poder, dinheiro, tudo isso ainda existe; ",
+    "as pessoas com maior \"status social\" vivem em planetas de luxo, com ar fresco, prias, comida, e água potável, ",
+    "enquanto outras, vivem em planetas \"menos desenvolvidos\", sem ordem, separados dassa nova sociedade.",
+    "O maior problema dessa evolução é o lixo, o lixo-espacial, ele está por todo lado aqui, ",
+    "e para se locomover entre um planeta e outro, é necessário fazer uma varredura pela rota decidida.",
+    "Sua missão é limpar esses caminhos para o destino dessas pessoas, ",
+    "sendo elas burguesas ou só apenas um jovem casal viajando pelo espaço."
 ]
 
 
@@ -23,19 +19,16 @@ def mostrar_introducao():
     config.TELA.fill(config.BACKGROUND_JOGO)
     
     altura_historia = config.PADDING_TOP_HISTORIA
-    if not config.skipIntroducao:
-        linhas_mostradas = []
-        delay_linha = 40
-        delay_paragrafo = 580
-        for i, paragrafo in enumerate(TEXTO):
-            pular = main.digitar_lento(paragrafo, linhas_mostradas, delay_linha, altura=altura_historia)
-            linhas_mostradas.append(paragrafo)
-            if pular:
-                delay_linha = 0
-                delay_paragrafo = 30
-
-            main.pygame.time.delay(delay_paragrafo)
-            
-        main.aguardar(largura=(config.PADDING_LEFT + len(TEXTO[len(TEXTO) - 1]) * 11),altura=(altura_historia + (len(TEXTO) * 40 - 40)), cor=config.COR_TEXTO)
-    
-    menu.inicar_menu()
+    linhas_mostradas = []
+    delay_linha = 50
+    delay_paragrafo = 580
+    for i, paragrafo in enumerate(TEXTO):
+        pular = main.digitar_lento(paragrafo, linhas_mostradas, delay_linha, altura=altura_historia)
+        linhas_mostradas.append(paragrafo)
+        if pular:
+            delay_linha = 0
+            delay_paragrafo = 30
+        
+        main.pygame.time.delay(delay_paragrafo)
+        
+    main.aguardar(largura=(config.PADDING_LEFT + len(TEXTO[len(TEXTO) - 1]) * 11),altura=(altura_historia + (len(TEXTO) * 40 - 40)), cor=config.COR_TEXTO)

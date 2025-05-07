@@ -80,9 +80,11 @@ def imprime_relatorio_fase(texto, valor, cor_principal, cor_valor, largura_texto
     main.pygame.time.delay(delay)
 
 
-def desenha_final_missao(soma_arestas_usuario, soma_arestas_cpu, texto=[], largura_texto=config.LARGURA // 2 - 350, altura_texto=100):
+def desenha_final_missao(soma_arestas_usuario, soma_arestas_cpu, texto=[], largura_texto=config.LARGURA // 2, altura_texto=50):
     altura = 30
     config.TELA.fill(config.BACKGROUND_JOGO)
+    main.pygame.display.update()
+    main.pygame.time.delay(600)
     
     escreve_soma_peso_grafo(soma_arestas_usuario)
     rank = obtem_ranking_by_soma_arestas(soma_arestas_usuario, soma_arestas_cpu)
@@ -90,6 +92,7 @@ def desenha_final_missao(soma_arestas_usuario, soma_arestas_cpu, texto=[], largu
     texto.append("")
     
     raio = 400
+    largura_texto = (largura_texto - raio) + 50
     #LINHA 1
     pos1_linha = (config.LARGURA // 2 - raio, altura)
     pos2_linha =  (config.LARGURA // 2 - raio, config.ALTURA - altura)
@@ -110,7 +113,7 @@ def desenha_final_missao(soma_arestas_usuario, soma_arestas_cpu, texto=[], largu
     
     linhas_mostradas = []
     for i, paragrafo in enumerate(texto):
-        pular = main.digitar_lento(paragrafo, linhas_mostradas, delay_linha, config.CINZA_CLARO, altura=altura_texto, largura=largura_texto)
+        pular = main.digitar_lento(paragrafo, linhas_mostradas, delay_linha, config.CINZA_CLARO, altura=altura_texto, largura=largura_texto, fonte=config.FONTE_FINAL_FASE)
         linhas_mostradas.append(paragrafo)
         if pular:
             delay_linha = 0

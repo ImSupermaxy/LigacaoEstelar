@@ -5,197 +5,278 @@ import main
 import menu.menu as menu
 import math
 import fases.final_fase as desenha_final
+import heapq
 
-def primeira_fase_iniciar():
-    # Nós com posições (x, y)
-    nos = {
-        "A": (100, 30),
-        "B": (230, 90),
-        "C": (270, 190),
-        "D": (120, 130),
-        "E": (180, 220),
-        "F": (110, 400),
-        "G": (200, 380),
-        "H": (250, 300),
-        "I": (320, 260),
-        "J": (330, 100),
-        "K": (450, 160),
-        "L": (450, 220),
-        "M": (550, 200),
-        "N": (650, 150),
-        "O": (610, 240),
-        "P": (780, 160),
-        "Q": (730, 350),
-        "R": (710, 240),
-        "S": (680, 420),
-        "T": (800, 530),
-        "U": (560, 420),
-        "V": (680, 580),
-        "W": (540, 510),
-        "X": (450, 540),
-        "Y": (450, 640),
-        "Z": (300, 570),
-        "AA": (120, 620),
-        "AB": (210, 480),
-        "AC": (300, 400),
-        "AD": (410, 430),
-        "AE": (480, 340)
-    }
+# Nós com posições (x, y)
+nos = {
+    "A": (100, 30),
+    "B": (230, 90),
+    "C": (270, 190),
+    "D": (120, 130),
+    "E": (180, 220),
+    "F": (110, 400),
+    "G": (200, 380),
+    "H": (250, 300),
+    "I": (320, 260),
+    "J": (330, 100),
+    "K": (450, 160),
+    "L": (450, 220),
+    "M": (550, 200),
+    "N": (650, 150),
+    "O": (610, 240),
+    "P": (780, 160),
+    "Q": (730, 350),
+    "R": (710, 240),
+    "S": (680, 420),
+    "T": (800, 530),
+    "U": (560, 420),
+    "V": (680, 580),
+    "W": (540, 510),
+    "X": (450, 540),
+    "Y": (450, 640),
+    "Z": (300, 570),
+    "AA": (120, 620),
+    "AB": (210, 480),
+    "AC": (300, 400),
+    "AD": (410, 430),
+    "AE": (480, 340)
+}
 
-    # Arestas no formato: (nó1, nó2, peso)
-    arestas = { #Mudar para dict...
-        "A": [("B", -15), ("D", 5)],
-        "B": [("A", -15), ("C", 2), ("D", 3)],
-        "C": [("B", 2), ("E", 5), ("J", 3)],
-        "D": [("A", 5), ("B", 3), ("E", 3), ("F", 2)],
-        "E": [("C", 5), ("D", 3), ("G", 4)],
-        "F": [("D", 2), ("G", 2), ("AA", 3)],
-        "G": [("E", 4), ("F", 2), ("H", 3), ("AB", 2)],
-        "H": [("G", 3), ("I", 1)],
-        "I": [("H", 1), ("K", 2), ("L", 2)],
-        "J": [("C", 3), ("K", 3)],
-        "K": [("I", 2), ("J", 3), ("M", 2)],
-        "L": [("I", 2), ("AE", 5)],
-        "M": [("K", 2), ("N", 6), ("O", 1), ("AE", 2)],
-        "N": [("M", 6), ("P", 4)],
-        "O": [("M", 1), ("Q", 4)],
-        "P": [("N", 4), ("R", 5)],
-        "Q": [("O", 4), ("R", 2), ("S", 3)],
-        "R": [("P", 5), ("Q", 2), ("U", 3)],
-        "S": [("Q", 3), ("T", 3)],
-        "T": [("S", 3), ("V", 3), ("W", 6)],
-        "U": [("R", 3), ("V", 5), ("AD", 2), ("AE", 3)],
-        "V": [("T", 3), ("U", 5), ("Y", 3)],
-        "W": [("T", 6), ("X", 2)],
-        "X": [("W", 2), ("Y", 1), ("Z", 1)],
-        "Y": [("V", 3), ("X", 1), ("AA", 2)],
-        "Z": [("X", 1), ("AA", 4), ("AB", 2), ("AC", 4)],
-        "AA": [("F", 3), ("Y", 2), ("Z", 4)],
-        "AB": [("G", 2), ("Z", 2)],
-        "AC": [("Z", 4), ("AD", 5), ("AE", 4)],
-        "AD": [("U", 2), ("AC", 5)],
-        "AE": [("L", 5), ("M", 2), ("U", 3), ("AC", 4)]
-    }
+arestas = {
+    "A": [("D", 5)],
+    "B": [("C", 2), ("D", 3)],
+    "C": [("B", 2), ("E", 5), ("J", 3)],
+    "D": [("A", 5), ("B", 3), ("E", 3), ("F", 2)],
+    "E": [("C", 5), ("D", 3), ("G", 4)],
+    "F": [("D", 2), ("G", 2), ("AA", 3)],
+    "G": [("E", 4), ("F", 2), ("H", 3), ("AB", 2)],
+    "H": [("G", 3), ("I", 1)],
+    "I": [("H", 1), ("K", 2), ("L", 2)],
+    "J": [("C", 3), ("K", 3)],
+    "K": [("I", 2), ("J", 3), ("M", 2)],
+    "L": [("I", 2), ("AE", 5)],
+    "M": [("K", 2), ("N", 6), ("O", 1), ("AE", 2)],
+    "N": [("M", 6), ("P", 4)],
+    "O": [("M", 1), ("Q", 4)],
+    "P": [("N", 4), ("R", 5)],
+    "Q": [("O", 4), ("R", 2), ("S", 3)],
+    "R": [("P", 5), ("Q", 2), ("U", 3)],
+    "S": [("Q", 3), ("T", 3)],
+    "T": [("S", 3), ("V", 3), ("W", 6)],
+    "U": [("R", 3), ("V", 5), ("AD", 2), ("AE", 3)],
+    "V": [("T", 3), ("U", 5), ("Y", 3)],
+    "W": [("T", 6), ("X", 2)],
+    "X": [("W", 2), ("Y", 1), ("Z", 1)],
+    "Y": [("V", 3), ("X", 1), ("AA", 2)],
+    "Z": [("X", 1), ("AA", 4), ("AB", 2), ("AC", 4)],
+    "AA": [("F", 3), ("Y", 2), ("Z", 4)],
+    "AB": [("G", 2), ("Z", 2)],
+    "AC": [("Z", 4), ("AD", 5), ("AE", 4)],
+    "AD": [("U", 2), ("AC", 5)],
+    "AE": [("L", 5), ("M", 2), ("U", 3), ("AC", 4)]
+}
+
+graph = {
+    "A": ["D"],
+    "B": ["C", "D"],
+    "C": ["B", "E", "J"],
+    "D": ["A", "B", "E", "F"],
+    "E": ["C", "D", "G"],
+    "F": ["D", "G", "AA"],
+    "G": ["E", "F", "H", "AB"],
+    "H": ["G", "I"],
+    "I": ["H", "K", "L"],
+    "J": ["C", "K"],
+    "K": ["I", "J", "M"],
+    "L": ["I", "AE"],
+    "M": ["K", "N", "O", "AE"],
+    "N": ["M", "P"],
+    "O": ["M", "Q"],
+    "P": ["N", "R"],
+    "Q": ["O", "R", "S"],
+    "R": ["P", "Q", "U"],
+    "S": ["Q", "T"],
+    "T": ["S", "V", "W"],
+    "U": ["R", "V", "AD", "AE"],
+    "V": ["T", "U", "Y"],
+    "W": ["T", "X"],
+    "X": ["W", "Y", "Z"],
+    "Y": ["V", "X", "AA"],
+    "Z": ["X", "AA", "AB", "AC"],
+    "AA": ["F", "Y", "Z"],
+    "AB": ["G", "Z"],
+    "AC": ["Z", "AD", "AE"],
+    "AD": ["U", "AC"],
+    "AE": ["L", "M", "U", "AC"]
+}
+
+# Estado
+inicial_node = "A"
+final_node = "T"
+current_node = inicial_node
+visited_nodes = [current_node]
+visited_edges = set()
+NODE_RADIUS = 15
+soma_arestas = 0
+
+texto_introducao_fase = [
+    "\"Nave B-12, câmbio... Nave B-12, na escuta?... Vamo trabalhar!?\"",
+    "\"Você acorda na sua nave com o som do seu companheiro no rádio, chamando para uma provável nova expedição.\"",
+    "Na janela da cabine, a mesma visão monótona de sempre: o vasto — e agora incomum — espaço, ",
+    "sem nenhuma estrela visível, apenas uma imensidão de lixo. Restos de naves, satélites abandonados e ",
+    "resíduos expelidos pelas civilizações. ",
+    "",
+    "A humanidade agora está espalhada por diversos planetas em todo o espaço, após os acontecimentos ",
+    "catastróficos no planeta Terra...",
+    "\"Chrr-chrr\" — seus pensamentos são interrompidos pelo rádio e, em seguida, a voz dele de novo:",
+    "\"Precisam de você aqui. Temos que abrir caminho pra mais um ricasso de férias. Câmbio.\"",
+    "Você suspira, liga sua nave, e parte — mais uma vez — para mais um dia de trabalho.",
+]
+
+def reset():
+    global inicial_node
+    global final_node
+    global current_node
+    global visited_nodes
+    global visited_edges
+    global soma_arestas
     
-    graph = {
-        "A": ["D", "B"],
-        "B": ["A", "C", "D"],
-        "C": ["B", "E", "J"],
-        "D": ["A", "B", "E", "F"],
-        "E": ["C", "D", "G"],
-        "F": ["D", "G", "AA"],
-        "G": ["E", "F", "H", "AB"],
-        "H": ["G", "I"],
-        "I": ["H", "K", "L"],
-        "J": ["C", "K"],
-        "K": ["I", "J", "M"],
-        "L": ["I", "AE"],
-        "M": ["K", "N", "O"],
-        "N": ["M", "P"],
-        "O": ["M", "Q"],
-        "P": ["N", "R"],
-        "Q": ["O", "R", "S"],
-        "R": ["P", "Q", "U"],
-        "S": ["Q", "T"],
-        "T": ["S", "V", "W"],
-        "U": ["R", "V", "AD", "AE"],
-        "V": ["T", "U", "Y"],
-        "W": ["T", "X"],
-        "X": ["W", "Y", "Z"],
-        "Y": ["V", "X", "AA"],
-        "Z": ["X", "AA", "AB", "AC"],
-        "AA": ["F", "Y", "Z"],
-        "AB": ["G", "Z"],
-        "AC": ["Z", "AD", "AE"],
-        "AD": ["U", "AC"],
-        "AE": ["L", "M", "U", "AC"]
-    }
-
-    # Estado
     inicial_node = "A"
     final_node = "T"
     current_node = inicial_node
     visited_nodes = [current_node]
     visited_edges = set()
-    NODE_RADIUS = 15
     soma_arestas = 0
+
+def desenhar_grafo():
+    config.TELA.fill(config.BACKGROUND_JOGO)
+    desenha_final.escreve_soma_peso_grafo(soma_arestas)
+    
+    # Desenha as arestas
+    for comeco, vizinhos in arestas.items():
+        for fim, peso in vizinhos:
+            if (fim, comeco) not in visited_edges and (comeco, fim) not in visited_edges:
+                (x1, y1) = nos[comeco]
+                (x2, y2) = nos[fim]
+                pygame.draw.line(config.TELA, config.CINZA_CLARO, (x1, y1), (x2, y2), 2)
+                # Posição intermediária para o peso
+                px, py = (x1 + x2) // 2, (y1 + y2) // 2
+                texto = config.FONTE_PESO.render(str(peso), True, config.VERDE_ESCURO)
+                config.TELA.blit(texto, (px - texto.get_width() // 2, py - texto.get_height() // 2))
+    # Desenhar conexões feitas
+    for a, b in visited_edges:
+        pygame.draw.line(config.TELA, config.ROXO2, nos[a], nos[b], 4)
+        desenha_peso(a, b)
+    # Desenha os nós
+    for nome, (x, y) in nos.items():
+        color = config.VERDE_INICIAL if nome == inicial_node else config.CINZA_FINAL if nome == final_node else config.ROSA2 if nome in visited_nodes else config.AZUL_CLARO2
+        pygame.draw.circle(config.TELA, color, (x, y), NODE_RADIUS)
+        # pygame.draw.circle(config.TELA, config.BRANCO, (x, y), NODE_RADIUS, 2)
+        #validação pra ver se é dev, (pra exibir o nome das vertices...)
+        if config.IsDevVar:
+            texto = config.FONTE_GRAFO.render(nome, True, config.PRETO)
+            config.TELA.blit(texto, (x - texto.get_width() // 2, y - texto.get_height() // 2))
+    pygame.display.update()
+
+
+def desenha_peso(a, b):
+    x1, y1 = nos[a]
+    x2, y2 = nos[b] 
+    px, py = (x1 + x2) // 2, (y1 + y2) // 2
+    peso = next((item for item in arestas[a] if item[0] == (b)), None)[1]
+    texto = config.FONTE_PESO.render(str(peso), True, config.BRANCO)
+    config.TELA.blit(texto, (px - texto.get_width() // 2, py - texto.get_height() // 2))
+
+
+def get_node_clicked(pos):
+    for node_id, node_pos in nos.items():
+        dist = math.hypot(pos[0] - node_pos[0], pos[1] - node_pos[1])
+        if dist <= NODE_RADIUS:
+            return node_id
+    return None
+
+
+def all_nodes_visited():
+    return len(visited_nodes) == len(nos)
+
+
+def get_peso_aresta(clicked_node):
+    global current_node
+    
+    for aresta in arestas[clicked_node]:
+        if aresta[0] == current_node:
+            return aresta[1]
+
+
+def letra_para_numero(letra: str) -> int:
+    letra = letra.upper()
+    resultado = 0
+    for i, c in enumerate(reversed(letra)):
+        resultado += (ord(c) - 64) * (26 ** i)
+    return resultado
+
+
+def numero_para_letra(numero: int) -> str:
+    resultado = ""
+    while numero > 0:
+        numero -= 1  # Ajuste para 1-indexado
+        resultado = chr((numero % 26) + 65) + resultado
+        numero //= 26
+    return resultado
+
+
+def escreve_introducao_final_fase(texto):
+    config.TELA.fill(config.BACKGROUND_JOGO)
+    main.pygame.display.update()
+    main.pygame.time.delay(600)
+    
+    
+    altura_historia = config.PADDING_TOP_HISTORIA
+    linhas_mostradas = []
+    delay_linha = 40
+    delay_paragrafo = 580
+    for i, paragrafo in enumerate(texto):
+        pular = main.digitar_lento(paragrafo, linhas_mostradas, delay_linha, altura=altura_historia)
+        linhas_mostradas.append(paragrafo)
+        if pular:
+            delay_linha = 0
+            delay_paragrafo = 30
+        main.pygame.time.delay(delay_paragrafo)
         
-    def desenhar_grafo():
+    main.aguardar(largura=(config.PADDING_LEFT + len(texto[len(texto) - 1]) * 11),altura=(altura_historia + (len(texto) * 40 - 40)), cor=config.COR_TEXTO)
+
+
+def dijkstra(grafo, inicio, destino):
+    fila = [(0, inicio, [inicio])]  # (custo_acumulado, nó_atual, caminho)
+    visitado = set()
+
+    while fila:
+        custo, atual, caminho = heapq.heappop(fila)
+
+        if atual == destino:
+            return caminho, custo  # Caminho e custo total
+
+        if atual in visitado:
+            continue
+        visitado.add(atual)
+
+        for vizinho, peso in grafo[atual]:
+            if vizinho not in visitado:
+                heapq.heappush(fila, (custo + peso, vizinho, caminho + [vizinho]))
+
+    return None, float('inf')  # Caso não encontre caminho
+
+
+def primeira_fase_iniciar():
+    print("Linha 249 - fase1.py: ", config.dados["isContinuacao"])
+    if not config.IsContinuacao:
+        escreve_introducao_final_fase(texto_introducao_fase)
         config.TELA.fill(config.BACKGROUND_JOGO)
-
-        desenha_final.escreve_soma_peso_grafo(soma_arestas)
-        
-        # Desenha as arestas
-        for comeco, vizinhos in arestas.items():
-            for fim, peso in vizinhos:
-                if (fim, comeco) not in visited_edges and (comeco, fim) not in visited_edges:
-                    (x1, y1) = nos[comeco]
-                    (x2, y2) = nos[fim]
-                    pygame.draw.line(config.TELA, config.CINZA_CLARO, (x1, y1), (x2, y2), 2)
-
-                    # Posição intermediária para o peso
-                    px, py = (x1 + x2) // 2, (y1 + y2) // 2
-                    texto = config.FONTE_PESO.render(str(peso), True, config.VERDE_ESCURO)
-                    config.TELA.blit(texto, (px - texto.get_width() // 2, py - texto.get_height() // 2))
-
-        # Desenhar conexões feitas
-        for a, b in visited_edges:
-            pygame.draw.line(config.TELA, config.AZUL, nos[a], nos[b], 4)
-            desenha_peso(a, b)
-
-        # Desenha os nós
-        for nome, (x, y) in nos.items():
-            color = config.AZUL_CLARO if nome == inicial_node else config.LARANJA if nome == final_node else config.VERMELHO if nome in visited_nodes else config.AMARELO
-            pygame.draw.circle(config.TELA, color, (x, y), NODE_RADIUS)
-            pygame.draw.circle(config.TELA, config.BRANCO, (x, y), NODE_RADIUS, 2)
-
-            #validação pra ver se é dev, (pra exibir o nome das vertices...)
-            if config.IsDevVar:
-                texto = config.FONTE_GRAFO.render(nome, True, config.PRETO)
-                config.TELA.blit(texto, (x - texto.get_width() // 2, y - texto.get_height() // 2))
-
-        pygame.display.update()
-
-
-    def desenha_peso(a, b):
-        x1, y1 = nos[a]
-        x2, y2 = nos[b] 
-        px, py = (x1 + x2) // 2, (y1 + y2) // 2
-        peso = next((item for item in arestas[a] if item[0] == (b)), None)[1]
-        texto = config.FONTE_PESO.render(str(peso), True, config.VERDE_ESCURO)
-        config.TELA.blit(texto, (px - texto.get_width() // 2, py - texto.get_height() // 2))
-
-    def get_node_clicked(pos):
-        for node_id, node_pos in nos.items():
-            dist = math.hypot(pos[0] - node_pos[0], pos[1] - node_pos[1])
-            if dist <= NODE_RADIUS:
-                return node_id
-        return None
-
-
-    def all_nodes_visited():
-        return len(visited_nodes) == len(nos)
     
-    def get_peso_aresta(clicked_node):
-        for aresta in arestas[clicked_node]:
-            if aresta[0] == current_node:
-                return aresta[1]
-    
-    def letra_para_numero(letra: str) -> int:
-        letra = letra.upper()
-        resultado = 0
-        for i, c in enumerate(reversed(letra)):
-            resultado += (ord(c) - 64) * (26 ** i)
-        return resultado
-
-
-    def numero_para_letra(numero: int) -> str:
-        resultado = ""
-        while numero > 0:
-            numero -= 1  # Ajuste para 1-indexado
-            resultado = chr((numero % 26) + 65) + resultado
-            numero //= 26
-        return resultado
+    global current_node
+    global visited_nodes
+    global visited_edges
+    global soma_arestas
 
     last_clicked_node = visited_nodes[-1]
     rodando = True
@@ -207,10 +288,10 @@ def primeira_fase_iniciar():
                 main.fechar_jogo()
 
             if all_nodes_visited():
-                    rodando = False
-                    text = config.FONTE_GRAFO.render("Todos os nós foram visitados!", True, config.BRANCO)
-                    config.TELA.blit(text, (config.LARGURA // 2 - 200, 50))
-                    pygame.display.flip()
+                rodando = False
+                text = config.FONTE_GRAFO.render("Todos os nós foram visitados!", True, config.BRANCO)
+                config.TELA.blit(text, (config.LARGURA // 2 - 200, 50))
+                pygame.display.flip()
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 clicked_node = get_node_clicked(event.pos)
@@ -242,14 +323,24 @@ def primeira_fase_iniciar():
                 if event.key == pygame.K_ESCAPE:
                     menu.inicar_menu(False)
     
-    texto_final_fase = [
-        "Você conclui mais uma missão",
-        "Seu rendimento hoje ajudou significativamente na remoção de todo ",
-        "o lixo nesses arredores, quase como se alguns grãos de areia ",
-        "fossem removidos de uma praia. Você lembra delas? ",
-        "É... acho que não ",
-        "Enfim, descanse por hora em sua nave..."
+    config.TELA.fill(config.BACKGROUND_JOGO)
+    
+    # escreve_introducao_final_fase(texto_final_fase)
+        
+    texto_final_missao = [
+        "Você concluiu mais uma missão",
+        "Seu rendimento hoje ajudou significativamente ",
+        "na remoção de todo o lixo nesses arredores, ",
+        "quase como se alguns grãos de areia ",
+        "fossem removidos de uma praia. ",
+        "Você lembra delas? É... acho que não ",
+        "Enfim, descanse por hora em sua nave...",
+        "Aproveite seus momentos de descanso"
     ]
-    # main.aguardar(texto_final_fase, cor=config.VERDE_ESCURO, largura=((config.LARGURA // 2) + 300), altura=config.ALTURA-200)
-    soma_arestas_cpu = 20
-    desenha_final.desenha_final_missao(soma_arestas, soma_arestas_cpu, texto_final_fase)
+
+    caminho, soma_arestas_cpu = dijkstra(arestas, inicial_node, final_node)
+    print(f'Caminho: {caminho}, Custo: {soma_arestas_cpu}')
+    
+    desenha_final.desenha_final_missao(soma_arestas, soma_arestas_cpu, texto_final_missao)
+    reset()
+    menu.inicar_menu()

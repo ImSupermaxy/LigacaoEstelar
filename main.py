@@ -10,10 +10,10 @@ pygame.font.init()
 pygame.display.set_caption(config.NOME_PROJETO)
 
 # Renderiza todos os parágrafos atuais
-def desenhar_textos(linhas, cor=config.COR_TEXTO, altura=config.PADDING_TOP,largura=config.PADDING_LEFT, atualizaTela=True):
+def desenhar_textos(linhas, cor=config.COR_TEXTO, altura=config.PADDING_TOP,largura=config.PADDING_LEFT, atualizaTela=True, fonte=config.FONTE):
     y = altura
     for linha in linhas:
-        render = config.FONTE.render(linha, False, cor)
+        render = fonte.render(linha, False, cor)
         config.TELA.blit(render, (largura, y))
         y += config.ESPACAMENTO_LINHA  # espaço entre linhas
     if atualizaTela:
@@ -21,12 +21,12 @@ def desenhar_textos(linhas, cor=config.COR_TEXTO, altura=config.PADDING_TOP,larg
 
 
 # Escreve uma linha com efeito de digitação
-def digitar_lento(linha, linhas_anteriores, delay=50, cor=config.COR_TEXTO, altura=config.PADDING_TOP, largura=config.PADDING_LEFT):
-    texto_atual = ""
+def digitar_lento(linha, linhas_anteriores, delay=50, cor=config.COR_TEXTO, altura=config.PADDING_TOP, largura=config.PADDING_LEFT, fonte=config.FONTE):
+    texto_atual = ""    
     for char in linha:
         texto_atual += char
         linhas_para_mostrar = linhas_anteriores + [texto_atual]
-        desenhar_textos(linhas_para_mostrar, cor, altura=altura, largura=largura)
+        desenhar_textos(linhas_para_mostrar, cor, altura=altura, largura=largura, fonte=fonte)
         pygame.time.delay(delay)
 
         for evento in pygame.event.get():
@@ -38,7 +38,7 @@ def digitar_lento(linha, linhas_anteriores, delay=50, cor=config.COR_TEXTO, altu
     return False
 
 
-def aguardar_confirmacao(texto="Pressione ENTER para continuar...",largura=0,altura=0, cor=config.BRANCO):
+def aguardar_confirmacao(texto="Pressione [ENTER] para continuar...",largura=0,altura=0, cor=config.BRANCO):
     # TELA.fill(BACKGROUND_JOGO)
     if altura == 0:
         altura = config.ALTURA // 2
@@ -63,7 +63,7 @@ def aguardar(texto="...",largura=0,altura=0, cor=config.COR_TEXTO, delay=200):
     if altura == 0:
         altura = config.ALTURA // 2
     if largura == 0:
-        largura = config.LARGURA // 2 - texto.get_width() // 2
+        largura = config.LARGURA // 2 - len(texto) // 2
         
     prox_cor = config.BACKGROUND_JOGO
     
@@ -120,7 +120,11 @@ def fechar_jogo():
 def main():
     config.TELA.fill(config.BACKGROUND_JOGO)
     pygame.display.update()
-    introducao.mostrar_introducao()
+    
+    if not config.skipIntroducao:
+        introducao.mostrar_introducao()
+    
+    menu.inicar_menu()
 
 
 if __name__ == "__main__":
