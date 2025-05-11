@@ -106,12 +106,14 @@ def transicao(delay = 200):
         tmp = cor
         cor = prox_cor
         prox_cor = tmp
+        
         i += delay
         pygame.time.delay(delay)
 
 
 def fechar_jogo():
     config.update_variables_json()
+    
     pygame.quit()
     sys.exit()
 

@@ -33,6 +33,10 @@ def obtem_ranking_by_soma_arestas(soma_usuario, soma_cpu):
     # Quanto mais próximo de 100%, maior a pontuação (e melhor o ranking)
     pontuacao = round(max(0, 100 - distancia))
 
+    #Atualizar essa lógica (trazer o valor máximo possível na fase também, 
+    # ou seja calcular em cima da distância do valor da cpu(MIN) e o valor máximo da fase (MAX) 
+    # verificar onde está o valor do usuário)
+
     # Tabela de rankings com base na pontuação (0 a 100)
     rankings = [
         (96, 100, "S"),

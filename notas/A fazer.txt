@@ -1,11 +1,15 @@
 FAZENDO:
-- Criar texto de introdução do jogo...
-
-- Fazer a primeira fase coesa (com inicio e final)
-    - Adicionar transição da primeira fase (Adicionar a transição do menu para a primeira fase)
-        - com a história que o Lucas vai fazer
-    - (FEITO) Adicioanr a lógica de peercorrer o grafo após ele chegar ao destino (Djikstra)
-    - (FEITO) Fazer a tela de conclusão de fases
+- Ajeitar tela de conclusão de fase
+- (FEITO) Fazer o menu de fases
+    - Fazer a limitação de qual até qual fase o jogador vai poder selecionar no menu de fases
+        - só mudar o valor máximo do if na seleção do menu (if i + 1 > 5) etc...
+    - Deixar a "próxima fase" branca, como se fosse possível chegar nela
+- Adicionar um manual para explicar como o jogo funciona, e as lógicas
+    - Todas as fases terão o mesmo gráfico como base
+    - Conforme você for passando por uma aresta (o peso dela diminuirá de uma fase para outra)
+    - Você terá um limite máximo para todo o jogo de "capacidade de lixo"
+    - (Exibir durante as fases a quantidade de "lixos" obtidos durante a fase) - (Exibir o total máximo e a soma por fases também)
+    - (Você pode passar por um caminho mais de uma vez??...)
 
 - Adicionar lógica da variável isDevVar, caso seja true, quando iniciar o programa voltar as configurações padrão do jogo
     Lógico só deixar ativa depois de testar tudo né... KKKKKKKKKKKKKKKK
@@ -21,15 +25,7 @@ PENDENTE:
 - Adicionar no menu (enquanto estiver em alguma fase) a opção de "sair e salvar"
 - Quando fechar o jogo pela janela, salvar as informações também... (adcionar essa lógica, isso não acontece)
 - Não salvar o grafo quando o jogador só sair, salvar apenas quando clicar em "sair e salvar"
-- Ajeitar tela de conclusão de fase
-- Fazer o menu de fases
 - (tutorial?) Fazer o tutorial?...
-- Adicionar um manual para explicar como o jogo funciona, e as lógicas
-    - Todas as fases terão o mesmo gráfico como base
-    - Conforme você for passando por uma aresta (o peso dela diminuirá de uma fase para outra)
-    - Você terá um limite máximo para todo o jogo de "capacidade de lixo"
-    - (Exibir durante as fases a quantidade de "lixos" obtidos durante a fase) - (Exibir o total máximo e a soma por fases também)
-    - (Você pode passar por um caminho mais de uma vez??...)
 - Adicionar a música do menu (e fazer o loop dela corretamente)
 - Adicionar os sons da hitória no tempo certo em que ela é digitada (pegar o som do sans ou undertale quando aparece algum texto...)
 - Adicionar as músicas da primeira fase
@@ -53,3 +49,9 @@ FEITO:
 - (FEITO) Adicionar grafo da fase um
 - (FEITO) Vertice inicial deve ser pintado com outra cor
 - (FEITO) Fazer a lógica de chegar no destino, (ponto final do grafo) (outra cor tbm)
+- (FEITO) Criar texto de introdução do jogo...
+- (FEITO) Fazer a primeira fase coesa (com inicio e final)
+    - (FEITO) Adicionar transição da primeira fase (Adicionar a transição do menu para a primeira fase)
+        - (FEITO) com a história que o Lucas vai fazer
+    - (FEITO) Adicioanr a lógica de peercorrer o grafo após ele chegar ao destino (Djikstra)
+    - (FEITO) Fazer a tela de conclusão de fases

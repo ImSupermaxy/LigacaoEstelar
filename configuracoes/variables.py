@@ -108,14 +108,40 @@ FASES = [
 
 FASE_ATUAL = FASES[dados["fases"]["atual"] - 1]
 
+
+def update_fase_atual(fase):
+    global FASE_ATUAL
+    dados["fases"]["atual"] = fase
+    
+    FASE_ATUAL = FASES[dados["fases"]["atual"] - 1]
+
+
+def get_info_resumo_fase(opcao):
+    
+    #pra cada um obter de um arquivo json separado essas infos... (tanto do texto quanto dos nomes dos arquivo no mesmo json...)
+    match opcao:
+        case "fase 1":
+            teste = True
+        case "fase 2":
+            teste = True
+        case "fase 3":
+            teste = True
+        case "fase 5":
+            teste = True
+        case "fase 5":
+            teste = True
+
+    
 def update_variables_json():
     mjson.update_variables_json(dados)
+
     
 def update_is_continuacao(value=True):
     global IsContinuacao
     IsContinuacao = value
     dados["isContinuacao"] = value
     dados["texto"]["skipIntroducao"] = value
+
     
 def update_all_volumes():
     global Volume

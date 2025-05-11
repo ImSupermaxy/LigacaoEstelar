@@ -19,6 +19,7 @@
         "volumeMusica": 100
     },
     "fases": {
-        "atual": 1
+        "atual": 1,
+        "isAllCompleted": false
     }
 }

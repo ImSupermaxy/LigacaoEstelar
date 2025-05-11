@@ -4,8 +4,9 @@ import main
 import configuracoes.variables as config
 
 opcoes_menu = {
-    1: "VOLUME",
-    2: "TEXTOS", #Aparecer a configuração da velocidade dos diálogos / fonte do texto...
+    1: "Volume",
+    2: "Textos", #Aparecer a configuração da velocidade dos diálogos / fonte do texto...
+    3: "Voltar",
 }
 opcao_atual = 1
 
@@ -54,8 +55,10 @@ def selecao_menu():
         desenhar_selecao_menu()
     
     if is_switch_to_opcao:
-        switch_to_opcao(opcao_atual)
-        selecao_menu()   
+        show_menu_again = not switch_to_opcao(opcao_atual)
+        
+        if show_menu_again:
+            selecao_menu()
         
 
 def desenhar_selecao_menu(delay=0):
@@ -64,8 +67,8 @@ def desenhar_selecao_menu(delay=0):
     
     for i, texto in opcoes_menu.items():
         cor = config.SELECIONADO if i == opcao_atual else config.CINZA_CLARO
-        render = config.FONTE.render(texto, True, cor)
-        linha_posicao = config.PADDING_TOP + i * config.ESPACAMENTO_LINHA
+        render = config.FONTE_MENU.render(texto, True, cor)
+        linha_posicao = config.PADDING_TOP + i * config.ESPACAMENTO_LINHA_MENU
         # ultima_linha = linha_posicao
         config.TELA.blit(render, (config.PADDING_LEFT, linha_posicao))
         pygame.time.delay(delay)
@@ -79,6 +82,10 @@ def switch_to_opcao(opcao):
             alterar_volume()
         case 2:
             main.fechar_jogo()
+        case 3:
+            return True
+        
+    return False
 
 
 def alterar_volume():
@@ -116,16 +123,16 @@ def alterar_volume():
 
 def desenhar_selecao_menu_volume(delay=0):
     config.TELA.fill(config.BACKGROUND_JOGO)
-    render = config.FONTE.render("Configurações Volume: ", True, config.AZUL_CLARO)
-    config.TELA.blit(render, ((config.PADDING_LEFT / 2), (config.PADDING_TOP / 2)))
+    render = config.FONTE_MENU.render("Configurações Volume: ", True, config.AZUL_CLARO)
+    config.TELA.blit(render, ((config.PADDING_LEFT / 2) + 20, (config.PADDING_TOP / 2)))
     
     global opcao_volume_atual
     alturas = []
     
     for i, texto in opcoes_volume.items():
         cor = config.SELECIONADO if i == opcao_volume_atual else config.COR_TEXTO
-        render = config.FONTE.render(texto, True, cor)
-        linha_posicao = config.PADDING_TOP + i * config.ESPACAMENTO_LINHA
+        render = config.FONTE_MENU.render(texto, True, cor)
+        linha_posicao = config.PADDING_TOP + i * config.ESPACAMENTO_LINHA_MENU
         
         alturas.append(linha_posicao)
         config.TELA.blit(render, (config.PADDING_LEFT, linha_posicao))
@@ -164,7 +171,7 @@ def change_volume(alturas):
 
 def exibir_volume_to_change(altura, texto, valor_to_exibir):
     all_texto = valor_to_exibir + "%"
-    posicao_texto = len(texto) * 12
+    posicao_texto = len(texto) * 14
     retangulo = pygame.Rect(config.PADDING_LEFT + posicao_texto, altura, len(all_texto) + 60, 50)
 
     # Desenhando o retângulo vermelho
