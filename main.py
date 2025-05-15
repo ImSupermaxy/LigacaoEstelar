@@ -10,12 +10,12 @@ pygame.font.init()
 pygame.display.set_caption(config.NOME_PROJETO)
 
 # Renderiza todos os parágrafos atuais
-def desenhar_textos(linhas, cor=config.COR_TEXTO, altura=config.PADDING_TOP,largura=config.PADDING_LEFT, atualizaTela=True, fonte=config.FONTE):
+def desenhar_textos(linhas, cor=config.COR_TEXTO, altura=config.PADDING_TOP,largura=config.PADDING_LEFT, atualizaTela=True, fonte=config.FONTE, espacamento=config.ESPACAMENTO_LINHA):
     y = altura
     for linha in linhas:
         render = fonte.render(linha, False, cor)
         config.TELA.blit(render, (largura, y))
-        y += config.ESPACAMENTO_LINHA  # espaço entre linhas
+        y += espacamento  # espaço entre linhas
     if atualizaTela:
         pygame.display.update()
 

@@ -1,0 +1,97 @@
+{
+    "1": {
+        "resumo": [
+            "Resumo grande da fase 1, onde apenas este é um exemplo",
+            "da descrição, adicionar o resumo feito pelo lucas aqui",
+            "Não se preocupar com o tamanho dele também...",
+            "Não sei mais o que escrever aqui em relação a isso... :/",
+            "",
+            "Resumo grande da fase 1, onde apenas este é um exemplo",
+            "da descrição, adicionar o resumo feito pelo lucas aqui",
+            "Não se preocupar com o tamanho dele também...",
+            "Não sei mais o que escrever aqui em relação a isso... :/",
+            "",
+            "Resumo grande da fase 1, onde apenas este é um exemplo",
+            "da descrição, adicionar o resumo feito pelo lucas aqui",
+            "Não se preocupar com o tamanho dele também...",
+            "Não sei mais o que escrever aqui em relação a isso... :/",
+            "Resumo grande da fase 1, onde apenas este é um exemplo",
+            "da descrição, adicionar o resumo feito pelo lucas aqui"
+        ],
+        "cliente": "Jóse da Silva Benedito",
+        "planeta": "Alpha Incrível",
+        "destino": "Alpha Desincrível",
+        "dificuldade": "A+",
+        "arquivo_cliente": "",
+        "arquivo_planeta": "Planeta-fase-1.jpg",
+        "visitados": [ ]
+    },
+    "2": {
+        "resumo": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "cliente": "",
+        "planeta": "",
+        "destino": "",
+        "dificuldade": "A+",
+        "arquivo_cliente": "",
+        "arquivo_planeta": "/assets/imagens/Planeta-fase-2.jpg",
+        "visitados": []
+    },
+    "3": {
+        "resumo": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "cliente": "",
+        "planeta": "",
+        "destino": "",
+        "dificuldade": "A+",
+        "arquivo_cliente": "",
+        "arquivo_planeta": "/assets/imagens/Planeta-fase-3.jpg",
+        "visitados": []
+    },
+    "4": {
+        "resumo": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "cliente": "",
+        "planeta": "",
+        "destino": "",
+        "dificuldade": "A+",
+        "arquivo_cliente": "",
+        "arquivo_planeta": "/assets/imagens/Planeta-fase-4.jpg",
+        "visitados": []
+    },
+    "5": {
+        "resumo": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "cliente": "",
+        "planeta": "",
+        "destino": "",
+        "dificuldade": "A+",
+        "arquivo_cliente": "",
+        "arquivo_planeta": "/assets/imagens/Planeta-fase-5.jpg",
+        "visitados": []
+    }
+}

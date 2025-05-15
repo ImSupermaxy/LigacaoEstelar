@@ -20,6 +20,7 @@
     },
     "fases": {
         "atual": 1,
-        "isAllCompleted": false
+        "isAllCompleted": false,
+        "auto_atualiza": false
     }
 }

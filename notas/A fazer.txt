@@ -1,15 +1,20 @@
 FAZENDO:
+- Mudar o grafo para um arquivo só e obter ele de lá
+    - Todas as fazes seguintes devem fazer o "cálculo" dos pesos dos grafos de acordo com esse grafo geral
+        Seguindo o caminho das fases anteriores até a atual, ou seja, se estiver na 3 fase, ele calcula o grafo da fase 2
+        passando pelo caminho feito na fase 1, para depois calcular o da fase 3, sendo feito pelo caminho passado pela fase 2.
+
 - Ajeitar tela de conclusão de fase
+
 - (FEITO) Fazer o menu de fases
     - Fazer a limitação de qual até qual fase o jogador vai poder selecionar no menu de fases
         - só mudar o valor máximo do if na seleção do menu (if i + 1 > 5) etc...
     - Deixar a "próxima fase" branca, como se fosse possível chegar nela
-- Adicionar um manual para explicar como o jogo funciona, e as lógicas
-    - Todas as fases terão o mesmo gráfico como base
-    - Conforme você for passando por uma aresta (o peso dela diminuirá de uma fase para outra)
-    - Você terá um limite máximo para todo o jogo de "capacidade de lixo"
+- (FEITO) Adicionar um manual para explicar como o jogo funciona, e as lógicas
+    - (FEITO) Todas as fases terão o mesmo gráfico como base
+    - (FEITO) Conforme você for passando por uma aresta (o peso dela diminuirá de uma fase para outra)
+    - (FEITO) Você terá um limite máximo para todo o jogo de "capacidade de lixo"
     - (Exibir durante as fases a quantidade de "lixos" obtidos durante a fase) - (Exibir o total máximo e a soma por fases também)
-    - (Você pode passar por um caminho mais de uma vez??...)
 
 - Adicionar lógica da variável isDevVar, caso seja true, quando iniciar o programa voltar as configurações padrão do jogo
     Lógico só deixar ativa depois de testar tudo né... KKKKKKKKKKKKKKKK

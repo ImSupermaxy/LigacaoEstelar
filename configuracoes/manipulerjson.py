@@ -1,12 +1,14 @@
 import json
 import os
 
+import pygame
+
 NOMEJSON = "variables.json"
 
 # Pegar a pasta onde está o .py
 pasta_atual = os.path.dirname(__file__)
 
-def get_variables_form_json():
+def get_variables_form_json(nome_arquivo=NOMEJSON):
     global pasta_atual
     localConfiguracao = "mainpuler json GET: "
     
@@ -14,7 +16,7 @@ def get_variables_form_json():
     # pasta_anterior = os.path.abspath(os.path.join(pasta_atual, '..'))
 
     # Construir o caminho até o arquivo JSON
-    caminho_json = os.path.join(pasta_atual, NOMEJSON)
+    caminho_json = os.path.join(pasta_atual, nome_arquivo)
 
     # 1. Tentar ler o arquivo
     if os.path.exists(caminho_json): # nome do arquivo ou caminho do arquivo..
@@ -26,15 +28,15 @@ def get_variables_form_json():
             return { }
     else:
         print(localConfiguracao +"Aviso: Arquivo não encontrado, criando novo...")
-        return { }  
+        return { }
 
 
-def update_variables_json(dados):
+def update_variables_json(dados, nome_arquivo=NOMEJSON):
     global pasta_atual
     localConfiguracao = "mainpuler json PUT: "
     print(localConfiguracao, dados)
     
-    caminho_json = os.path.join(pasta_atual, NOMEJSON)
+    caminho_json = os.path.join(pasta_atual, nome_arquivo)
     
     try:
         with open(caminho_json, 'w', encoding='utf-8') as f: # nome do arquivo ou caminho do arquivo..

@@ -16,6 +16,7 @@ SkipHistoria = dados["texto"]["skipHistoria"]
 SkipDialogos = dados["texto"]["skipDialogos"]
 IsContinuacao = dados["isContinuacao"]
 IsFullSream = dados["isFullScream"]
+fases_auto_atualiza = dados["fases"]["auto_atualiza"]
 
 #--> CORES <--
 PRETO = (0, 0, 0)
@@ -37,17 +38,22 @@ ROSA2 = (255, 102, 196)
 ROXO2 = (140, 82, 255)
 VERDE_INICIAL = (93, 219, 90)
 CINZA_FINAL = (196, 212, 238)
+CIANO = (51, 219, 204)
+LINHA_FASES_MENU = (79, 137, 236)
 
 #--> CONFIGURAÇÕES GERAIS <--
 NOME_PROJETO = "Ligação Estelar"
 LARGURA, ALTURA = dados["video"]["width"], dados["video"]["heigth"] if not IsFullSream else (0,0)
 TELA = pygame.display.set_mode((LARGURA, ALTURA)) if not IsFullSream else pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 FONTE = pygame.font.SysFont("arial", 28)
+FONTE2 = pygame.font.SysFont("arial", 40)
+FONTE_RESUMO_FASE = pygame.font.SysFont("arial", 23)
 PADDING_LEFT = 50
 PADDING_TOP = 200
 ESPACAMENTO_LINHA = 40
 BACKGROUND_JOGO = PRETO
 COR_TEXTO = BRANCO
+PASTA_IMAGENS = "C:\\Faculdade\\3° Semestre\\Teoria dos Grafos (opt)\\Trabalho\\LigacaoEstelar\\assets\\imagens"
 
 INFO_DISPLAY = pygame.display.Info()
 if IsFullSream:
@@ -108,6 +114,39 @@ FASES = [
 
 FASE_ATUAL = FASES[dados["fases"]["atual"] - 1]
 
+#Passar para o json
+Primeira_Fase_Vertices_Visitados = []
+Segunda_Fase_Vertices_Visitados = []
+Terceira_Fase_Vertices_Visitados = []
+Quarta_Fase_Vertices_Visitados = []
+Quinta_Fase_Vertices_Visitados = []
+
+ARQUIVO_INFO_FASE = "info_fases.json"
+
+
+def get_all_vertices_visitados():
+    global Primeira_Fase_Vertices_Visitados
+    global Segunda_Fase_Vertices_Visitados
+    global Terceira_Fase_Vertices_Visitados
+    global Quarta_Fase_Vertices_Visitados
+    global Quinta_Fase_Vertices_Visitados
+    
+    info = mjson.get_variables_form_json(ARQUIVO_INFO_FASE)
+    
+    Primeira_Fase_Vertices_Visitados = info["1"]["visitados"]
+    Segunda_Fase_Vertices_Visitados = info["2"]["visitados"]
+    Terceira_Fase_Vertices_Visitados = info["3"]["visitados"]
+    Quarta_Fase_Vertices_Visitados = info["4"]["visitados"]
+    Quinta_Fase_Vertices_Visitados = info["5"]["visitados"]
+
+
+def update_vertices_visitados(fase, visitados):
+    info = mjson.get_variables_form_json(ARQUIVO_INFO_FASE)
+    info[str(fase)]["visitados"] = visitados
+    mjson.update_variables_json(info, ARQUIVO_INFO_FASE)
+    
+    get_all_vertices_visitados()
+    
 
 def update_fase_atual(fase):
     global FASE_ATUAL
@@ -117,19 +156,7 @@ def update_fase_atual(fase):
 
 
 def get_info_resumo_fase(opcao):
-    
-    #pra cada um obter de um arquivo json separado essas infos... (tanto do texto quanto dos nomes dos arquivo no mesmo json...)
-    match opcao:
-        case "fase 1":
-            teste = True
-        case "fase 2":
-            teste = True
-        case "fase 3":
-            teste = True
-        case "fase 5":
-            teste = True
-        case "fase 5":
-            teste = True
+    return mjson.get_variables_form_json(ARQUIVO_INFO_FASE)[str(opcao)]
 
     
 def update_variables_json():

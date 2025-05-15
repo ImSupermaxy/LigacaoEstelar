@@ -1,7 +1,9 @@
+import os
 import main
 from fases import fase1, fase2#, fase3, fase4, fase5
 import pygame
 import configuracoes.variables as config
+import menu.menu as menu
 
 def visualizar_fases():
     iniciar_menu()
@@ -22,13 +24,14 @@ def iniciar_fase(fase):
             fase1.primeira_fase_iniciar()
             config.update_is_continuacao()
         case "fase 2":
+            # fase2.segunda_fase_iniciar(config.Primeira_Fase_Vertices_Visitados)
             print("Dois")
         case "fase 3":
             print("Três")
         case "fase 4":
             print("Outro número")
     
-    main.fechar_jogo()
+    menu.inicar_menu()
 
 
 def iniciar_menu():
@@ -68,24 +71,11 @@ def open_resumo_fase():
     ]
     
     opcao_menu_atual = 1
-        
-    info_fase = {
-        "resumo": [],
-        "cliente": "",
-        "planeta": "",
-        "Destino": "",
-        "dificuldade": "?",
-        "arquivo_cliente": "",
-        "arquivo_planeta": ""
-    }
-    
-    info_fase = config.get_info_resumo_fase(config.FASES[opcao_atual -1])
-
-    #desenhar quadrado do lado direito com as infos de resumo da missão / o quadradinho da fase também...
 
     rodando = True
     while rodando:
-        desenha_opces_menu(True)
+        desenha_opces_menu()
+        desenhar_resumo_missao(True)
         
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
@@ -120,7 +110,7 @@ def switch_to_opcao():
                 opcoes_menu = [
                     "Voltar",
                 ]
-                opcao_menu_atual = 1
+                opcao_menu_atual = 0
     
                 return True
             case "Começar missão":
@@ -190,25 +180,98 @@ def desenha_opces_menu(update_tela = False):
         pygame.display.update()
 
 
-def desenha_caixa_fases(largura, altura, cor):
-    raio = 80
+def desenhar_resumo_missao(is_update_tela):
+    largura_caixa_fase = 320
+    altura_caixa_fase = 120
+       
+    render = config.FONTE.render(config.FASES[opcao_atual - 1], True, config.CIANO)
+    config.TELA.blit(render, (largura_caixa_fase, altura_caixa_fase))
+    
+    desenha_caixa_fases(largura_caixa_fase, altura_caixa_fase, config.CIANO)
+
+    largura_caixa_descricao = 1100
+    altura_caixa_descricao = 380
+    padding_top_caixa_descricao = 90
+    desenha_caixa_fases(largura_caixa_descricao, (config.ALTURA // 2) - 50, config.LINHA_FASES_MENU, altura_caixa_descricao, padding_top_caixa_descricao, 4)
+    
+    padding_top_caixa_imagem = 60
+    #LINHA 1
+    pos1_linha = (largura_caixa_descricao + 128, padding_top_caixa_descricao - 20)
+    pos2_linha =  (largura_caixa_descricao + 128, altura_caixa_descricao - padding_top_caixa_imagem)
+    main.pygame.draw.line(config.TELA, config.LINHA_FASES_MENU, pos1_linha, pos2_linha, 4)
+    
+    #LINHA 2
+    pos1_linha = (largura_caixa_descricao + 128, altura_caixa_descricao - padding_top_caixa_imagem)
+    pos2_linha =  (largura_caixa_descricao + 128 + 300, altura_caixa_descricao - padding_top_caixa_imagem)
+    main.pygame.draw.line(config.TELA, config.LINHA_FASES_MENU, pos1_linha, pos2_linha, 4)
+
+    #desenhar infos da tela...
+    info_fase = {
+        "resumo": [],
+        "cliente": "",
+        "planeta": "",
+        "destino": "",
+        "dificuldade": "?",
+        "arquivo_cliente": "",
+        "arquivo_planeta": ""
+    }
+    
+    info_fase = config.get_info_resumo_fase(opcao_atual)
+    
+    pasta_atual = config.PASTA_IMAGENS
+    caminho = os.path.join(pasta_atual, info_fase["arquivo_planeta"])
+    imagem_original = pygame.image.load(caminho)
+
+    imagem = imagem_original
+    # Redimensionar a imagem (por exemplo, para 50% do tamanho original)
+    if imagem_original.get_width() > 560:
+        largura = imagem_original.get_width() // 4
+        altura = imagem_original.get_height() // 4
+        imagem = pygame.transform.scale(imagem_original, (largura, altura))
+    else:
+        largura = imagem_original.get_width() // 2
+        altura = imagem_original.get_height() // 2
+        imagem = pygame.transform.scale(imagem_original, (largura, altura))
+    
+    config.TELA.blit(imagem, (largura_caixa_descricao + 134, padding_top_caixa_descricao - 23))
+        
+    padding_resumo = largura_caixa_fase + 420
+    main.desenhar_textos(info_fase["resumo"], config.COR_TEXTO, padding_top_caixa_descricao - 20, padding_resumo, False, config.FONTE_RESUMO_FASE, 30)
+    
+    nome_cliente = info_fase["cliente"]
+    nome_planeta = info_fase["planeta"]
+    destino = info_fase["destino"]
+    dificuldade = info_fase["dificuldade"]
+
+    desenha_resumo_geral_missao("Cliente: ", nome_cliente, padding_resumo, config.ALTURA - (70 + 30 * 4))
+    desenha_resumo_geral_missao("planeta: ", nome_planeta, padding_resumo, config.ALTURA - (70 + 30 * 3))
+    desenha_resumo_geral_missao("destino: ", destino, padding_resumo, config.ALTURA - (70 + 30 * 2))
+    desenha_resumo_geral_missao("dificuldade: ", dificuldade, padding_resumo, config.ALTURA - (70 + 30 * 1), config.VERDE)
+    
+    #DESENHA TÍTULO
+    main.desenhar_textos(["D e s c r i ç ã o   d a   m i s s ã o"], config.AMARELO, padding_top_caixa_descricao - 65, padding_resumo, False, config.FONTE2)
+    
+    if is_update_tela:
+        config.pygame.display.update()
+    
+
+def desenha_caixa_fases(largura, altura, cor, raio = 80, padding_top = 40, largura_linha = 2):
     padding_text = 50
-    padding_top = 40
     
     #LINHA 1
     pos1_linha = (largura - raio, altura - (raio - padding_top))
     pos2_linha =  (largura - raio, altura + raio)
-    main.pygame.draw.line(config.TELA, cor, pos1_linha, pos2_linha, 2)
+    main.pygame.draw.line(config.TELA, cor, pos1_linha, pos2_linha, largura_linha)
     
     #LINHA 2
     pos1_linha = (largura + (raio + padding_text), altura - (raio - padding_top))
     pos2_linha =  (largura + (raio + padding_text), altura + raio)
-    main.pygame.draw.line(config.TELA, cor, pos1_linha, pos2_linha, 2)
+    main.pygame.draw.line(config.TELA, cor, pos1_linha, pos2_linha, largura_linha)
     
     #LINHA 3
     pos1_linha = (largura - raio, altura + raio)
     pos2_linha =  (largura + (raio + padding_text), altura + raio)
-    main.pygame.draw.line(config.TELA, cor, pos1_linha, pos2_linha, 2)
+    main.pygame.draw.line(config.TELA, cor, pos1_linha, pos2_linha, largura_linha)
 
 
 def desenhar_selecao_fases(update_tela = False):    
@@ -243,3 +306,8 @@ def desenhar_selecao_fases(update_tela = False):
     if update_tela:
         pygame.display.update()
     # aguardar_confirmacao(altura=ultima_linha + 60)
+    
+    
+def desenha_resumo_geral_missao(texto, valor, altura, largura, cor_secundaria=config.COR_TEXTO):
+    main.desenhar_textos([texto], config.SELECIONADO, largura, altura, False, config.FONTE_RESUMO_FASE)
+    main.desenhar_textos([valor], cor_secundaria, largura, altura + len(texto) * 8, False, config.FONTE_RESUMO_FASE)

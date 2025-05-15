@@ -6,157 +6,7 @@ import menu.menu as menu
 import math
 import fases.final_fase as desenha_final
 import heapq
-
-# Nós com posições (x, y)
-nos = {
-    "A": (100, 30),
-    "B": (230, 90),
-    "C": (270, 190),
-    "D": (120, 130),
-    "E": (180, 220),
-    "F": (110, 400),
-    "G": (200, 380),
-    "H": (250, 300),
-    "I": (320, 260),
-    "J": (330, 100),
-    "K": (450, 160),
-    "L": (450, 220),
-    "M": (550, 200),
-    "N": (650, 150),
-    "O": (610, 240),
-    "P": (780, 160),
-    "Q": (730, 350),
-    "R": (710, 240),
-    "S": (680, 420),
-    "T": (800, 530),
-    "U": (560, 420),
-    "V": (680, 580),
-    "W": (540, 510),
-    "X": (450, 540),
-    "Y": (450, 640),
-    "Z": (300, 570),
-    "AA": (120, 620),
-    "AB": (210, 480),
-    "AC": (300, 400),
-    "AD": (410, 430),
-    "AE": (480, 340),
-    "AF": (500, 50),
-    "AG": (710, 30),
-    "AH": (860, 100),
-    "AI": (820, 270),
-    "AJ": (950, 40),
-    "AK": (1090, 80),
-    "AL": (930, 320),
-    "AM": (830, 440),
-    "AN": (1000, 410),
-    "AO": (960, 190),
-    "AP": (1100, 220),
-    "AQ": (1120, 520),
-    "AR": (980, 620),
-    "AS": (820, 660),
-    "AT": (630, 700),
-    "AU": (340, 690)
-}
-
-arestas = {
-    "A": [("D", 5)],
-    "B": [("C", 2), ("D", 3)],
-    "C": [("B", 2), ("E", 5), ("J", 3)],
-    "D": [("A", 5), ("B", 3), ("E", 3), ("F", 2)],
-    "E": [("C", 5), ("D", 3), ("G", 4)],
-    "F": [("D", 2), ("G", 2), ("AA", 3)],
-    "G": [("E", 4), ("F", 2), ("H", 3), ("AB", 2)],
-    "H": [("G", 3), ("I", 1)],
-    "I": [("H", 1), ("K", 2), ("L", 2)],
-    "J": [("C", 3), ("K", 3), ("AF", 4)],
-    "K": [("I", 2), ("J", 3), ("M", 2)],
-    "L": [("I", 2), ("AE", 5)],
-    "M": [("K", 2), ("N", 6), ("O", 1), ("AE", 2), ("AG", 5)],
-    "N": [("M", 6), ("P", 4), ("AF", 6)],
-    "O": [("M", 1), ("Q", 4)],
-    "P": [("N", 4), ("R", 5), ("AH", 4)],
-    "Q": [("O", 4), ("R", 2), ("S", 3), ("AN", 5)],
-    "R": [("P", 5), ("Q", 2), ("U", 3), ("AI", 3)],
-    "S": [("Q", 3), ("T", 3), ("AM", 4)],
-    "T": [("S", 3), ("V", 3), ("W", 6), ("AS", 4)],
-    "U": [("R", 3), ("V", 5), ("AD", 2), ("AE", 3)],
-    "V": [("T", 3), ("U", 5), ("Y", 3), ("AS", 6)],
-    "W": [("T", 6), ("X", 2)],
-    "X": [("W", 2), ("Y", 1), ("Z", 1)],
-    "Y": [("V", 3), ("X", 1), ("AA", 2), ("AT", 4), ("AU", 3)],
-    "Z": [("X", 1), ("AA", 4), ("AB", 2), ("AC", 4)],
-    "AA": [("F", 3), ("Y", 2), ("Z", 4)],
-    "AB": [("G", 2), ("Z", 2)],
-    "AC": [("Z", 4), ("AD", 5), ("AE", 4)],
-    "AD": [("U", 2), ("AC", 5)],
-    "AE": [("L", 5), ("M", 2), ("U", 3), ("AC", 4)],
-    "AF": [("J", 4), ("N", 6)],
-    "AG": [("M", 5), ("AH", 6), ("AJ", 5)],
-    "AH": [("P", 4), ("AG", 6), ("AK", 3)],
-    "AI": [("R", 3), ("AL", 3), ("AO", 4)],
-    "AJ": [("AG", 5), ("AK", 2)],
-    "AK": [("AH", 3), ("AJ", 2), ("AO", 3)],
-    "AL": [("AI", 3), ("AP", 2)],
-    "AM": [("S", 4), ("AN", 3), ("AQ", 4)],
-    "AN": [("Q", 5), ("AM", 3), ("AP", 4)],
-    "AO": [("AI", 4), ("AK", 3)],
-    "AP": [("AL", 2), ("AN", 4)],
-    "AQ": [("AM", 4), ("AR", 3)],
-    "AR": [("AQ", 3), ("AS", 5)],
-    "AS": [("T", 4), ("AR", 5), ("AT", 4)],
-    "AT": [("Y", 4), ("AS", 4), ("AU", 5)],
-    "AU": [("Y", 3), ("AT", 5)]
-}
-
-graph = {
-    "A": ["D"],
-    "B": ["C", "D"],
-    "C": ["B", "E", "J"],
-    "D": ["A", "B", "E", "F"],
-    "E": ["C", "D", "G"],
-    "F": ["D", "G", "AA"],
-    "G": ["E", "F", "H", "AB"],
-    "H": ["G", "I"],
-    "I": ["H", "K", "L"],
-    "J": ["C", "K", "AF"],
-    "K": ["I", "J", "M"],
-    "L": ["I", "AE"],
-    "M": ["K", "N", "O", "AE", "AG"],
-    "N": ["M", "P", "AF"],
-    "O": ["M", "Q"],
-    "P": ["N", "R", "AH"],
-    "Q": ["O", "R", "S", "AN"], 
-    "R": ["P", "Q", "U", "AI"],
-    "S": ["Q", "T", "AM"],
-    "T": ["S", "V", "W"],
-    "U": ["R", "V", "AD", "AE"],
-    "V": ["T", "U", "Y"],
-    "W": ["T", "X"],
-    "X": ["W", "Y", "Z"],
-    "Y": ["V", "X", "AA", "AT"],
-    "Z": ["X", "AA", "AB", "AC"],
-    "AA": ["F", "Y", "Z"],
-    "AB": ["G", "Z"],
-    "AC": ["Z", "AD", "AE"],
-    "AD": ["U", "AC"],
-    "AE": ["L", "M", "U", "AC"],
-    "AF": ["J", "N"],
-    "AG": ["M", "AH", "AJ"],
-    "AH": ["P", "AG", "AK"],
-    "AI": ["R", "AL", "AO"],
-    "AJ": ["AG", "AK"],
-    "AK": ["AH", "AJ", "AO"],
-    "AL": ["AI", "AP"],
-    "AM": ["S", "AN", "AQ"],
-    "AN": ["Q", "AM", "AP"],
-    "AO": ["AI", "AK"],
-    "AP": ["AL", "AN"],
-    "AQ": ["AM", "AR"],
-    "AR": ["AQ", "AS"],
-    "AS": ["T", "AR", "AT"],
-    "AT": ["Y", "AS", "AU"],
-    "AU": ["Y", "AT"]
-}
+from fases import grafo
 
 # Estado
 inicial_node = "A"
@@ -198,14 +48,15 @@ def reset():
 
 def desenhar_grafo():
     config.TELA.fill(config.BACKGROUND_JOGO)
+    main.desenhar_textos(["FASE 1"], config.ROXO2, 25, config.LARGURA - 140, False, config.FONTE_PESO)
     desenha_final.escreve_soma_peso_grafo(soma_arestas)
     
     # Desenha as arestas
-    for comeco, vizinhos in arestas.items():
+    for comeco, vizinhos in grafo.arestas.items():
         for fim, peso in vizinhos:
             if (fim, comeco) not in visited_edges and (comeco, fim) not in visited_edges:
-                (x1, y1) = nos[comeco]
-                (x2, y2) = nos[fim]
+                (x1, y1) = grafo.nos[comeco]
+                (x2, y2) = grafo.nos[fim]
                 pygame.draw.line(config.TELA, config.CINZA_CLARO, (x1, y1), (x2, y2), 2)
                 # Posição intermediária para o peso
                 px, py = (x1 + x2) // 2, (y1 + y2) // 2
@@ -213,10 +64,10 @@ def desenhar_grafo():
                 config.TELA.blit(texto, (px - texto.get_width() // 2, py - texto.get_height() // 2))
     # Desenhar conexões feitas
     for a, b in visited_edges:
-        pygame.draw.line(config.TELA, config.ROXO2, nos[a], nos[b], 4)
+        pygame.draw.line(config.TELA, config.ROXO2, grafo.nos[a], grafo.nos[b], 4)
         desenha_peso(a, b)
     # Desenha os nós
-    for nome, (x, y) in nos.items():
+    for nome, (x, y) in grafo.nos.items():
         color = config.VERDE_INICIAL if nome == inicial_node else config.CINZA_FINAL if nome == final_node else config.ROSA2 if nome in visited_nodes else config.AZUL_CLARO2
         pygame.draw.circle(config.TELA, color, (x, y), NODE_RADIUS)
         # pygame.draw.circle(config.TELA, config.BRANCO, (x, y), NODE_RADIUS, 2)
@@ -228,16 +79,16 @@ def desenhar_grafo():
 
 
 def desenha_peso(a, b):
-    x1, y1 = nos[a]
-    x2, y2 = nos[b] 
+    x1, y1 = grafo.nos[a]
+    x2, y2 = grafo.nos[b] 
     px, py = (x1 + x2) // 2, (y1 + y2) // 2
-    peso = next((item for item in arestas[a] if item[0] == (b)), None)[1]
+    peso = next((item for item in grafo.arestas[a] if item[0] == (b)), None)[1]
     texto = config.FONTE_PESO.render(str(peso), True, config.BRANCO)
     config.TELA.blit(texto, (px - texto.get_width() // 2, py - texto.get_height() // 2))
 
 
 def get_node_clicked(pos):
-    for node_id, node_pos in nos.items():
+    for node_id, node_pos in grafo.nos.items():
         dist = math.hypot(pos[0] - node_pos[0], pos[1] - node_pos[1])
         if dist <= NODE_RADIUS:
             return node_id
@@ -245,13 +96,13 @@ def get_node_clicked(pos):
 
 
 def all_nodes_visited():
-    return len(visited_nodes) == len(nos)
+    return len(visited_nodes) == len(grafo.nos)
 
 
 def get_peso_aresta(clicked_node):
     global current_node
     
-    for aresta in arestas[clicked_node]:
+    for aresta in grafo.arestas[clicked_node]:
         if aresta[0] == current_node:
             return aresta[1]
 
@@ -344,7 +195,7 @@ def primeira_fase_iniciar():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 clicked_node = get_node_clicked(event.pos)
                 if clicked_node is not None:
-                    if clicked_node in graph[current_node]:
+                    if clicked_node in grafo.graph[current_node]:
                         edge = tuple(sorted((current_node, clicked_node)))
                         if edge not in visited_edges and clicked_node not in visited_nodes:
                             visited_edges.add(edge)
@@ -386,10 +237,17 @@ def primeira_fase_iniciar():
         "Aproveite seus momentos de descanso"
     ]
 
-    caminho, soma_arestas_cpu = dijkstra(arestas, inicial_node, final_node)
+    caminho, soma_arestas_cpu = dijkstra(grafo.arestas, inicial_node, final_node)
     print(f'Caminho: {caminho}, Custo: {soma_arestas_cpu}')
     
     desenha_final.desenha_final_missao(soma_arestas, soma_arestas_cpu, texto_final_missao)
+    print(visited_nodes)
+    
+    atualiza_dados_fase(visited_nodes)
     # reset()
-    config.update_fase_atual(2)
-    menu.inicar_menu()
+
+
+def atualiza_dados_fase(visitados):
+    config.update_vertices_visitados(1, visitados)
+    if config.fases_auto_atualiza:
+        config.update_fase_atual(2)

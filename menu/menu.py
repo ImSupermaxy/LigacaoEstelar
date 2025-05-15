@@ -6,19 +6,22 @@ import main
 from fases import fases_menu
 from menu import configuracoes
 import configuracoes.variables as config
+import menu.manual as manual
 
 primeira_opcao = "Iniciar" if not config.IsContinuacao else "Continuar"
 opcoes_menu = {
     1: primeira_opcao,
     2: "Config",
     3: "Fases",
-    4: "Fechar"
+    4: "Manual",
+    5: "Fechar"
 }
 opcao_atual = 1
 
 opcoes_menu_not_inicial = {
     1: opcoes_menu.get(2, ""),
     2: opcoes_menu.get(3, ""),
+    3: opcoes_menu.get(4, ""),
     3: "Voltar ao menu"
 }
 
@@ -49,10 +52,10 @@ def selecao_menu(is_calling_initial=True):
                     else:
                         opcao_atual = 1
                 elif evento.key == pygame.K_DOWN:
-                    if (opcao_atual + 1) < 5:
+                    if opcao_atual < len(opcoes_menu):
                         opcao_atual += 1
                     else: 
-                        opcao_atual = 4
+                        opcao_atual = len(opcoes_menu)
                 elif evento.key == pygame.K_RETURN:
                     switch_to_opcao(opcao_atual, is_calling_initial)
                 elif not is_calling_initial:
@@ -129,6 +132,8 @@ def switch_to_opcao(opcao, is_calling_initial):
             configuracoes.iniciar_menu()
         case "Fases":
             fases_menu.visualizar_fases()
+        case "Manual":
+            manual.show_manual()
         case "Fechar":
             main.fechar_jogo()
         case "Voltar ao menu":

@@ -12,3 +12,6 @@ fases/__pycache__/fase2.cpython-311.pyc
 historia/__pycache__/introducao.cpython-311.pyc
 configuracoes/__pycache__/variables.cpython-311.pyc
 fases/__pycache__/final_fase.cpython-311.pyc
+menu/__pycache__/manual.cpython-311.pyc
+fases/__pycache__/grafo.cpython-311.pyc
+configuracoes/__pycache__/manipulerjson.cpython-311.pyc
