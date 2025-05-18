@@ -22,24 +22,8 @@
         "dificuldade": "Fácil",
         "arquivo_cliente": "",
         "arquivo_planeta": "Planeta-fase-1.jpg",
-        "soma": 68,
-        "visitados": [
-            "A",
-            "D",
-            "E",
-            "G",
-            "H",
-            "I",
-            "L",
-            "AE",
-            "M",
-            "O",
-            "Q",
-            "R",
-            "AI",
-            "AL",
-            "AP"
-        ]
+        "soma": 0,
+        "visitados": []
     },
     "2": {
         "resumo": [
@@ -66,21 +50,8 @@
         "dificuldade": "Fácil",
         "arquivo_cliente": "",
         "arquivo_planeta": "Planeta-fase-2.jpg",
-        "soma": 38,
-        "visitados": [
-            "AK",
-            "AO",
-            "AI",
-            "R",
-            "Q",
-            "O",
-            "M",
-            "AE",
-            "L",
-            "I",
-            "H",
-            "G"
-        ]
+        "soma": 0,
+        "visitados": []
     },
     "3": {
         "resumo": [
@@ -107,14 +78,8 @@
         "dificuldade": "Médio",
         "arquivo_cliente": "",
         "arquivo_planeta": "Planeta-fase-3.jpg",
-        "soma": 22,
-        "visitados": [
-            "O",
-            "Q",
-            "S",
-            "T",
-            "AS"
-        ]
+        "soma": 0,
+        "visitados": []
     },
     "4": {
         "resumo": [
@@ -141,19 +106,8 @@
         "dificuldade": "Difícil",
         "arquivo_cliente": "",
         "arquivo_planeta": "Planeta-fase-4.jpg",
-        "soma": 46,
-        "visitados": [
-            "AJ",
-            "AK",
-            "AH",
-            "P",
-            "R",
-            "Q",
-            "S",
-            "T",
-            "V",
-            "Y"
-        ]
+        "soma": 0,
+        "visitados": []
     },
     "5": {
         "resumo": [
