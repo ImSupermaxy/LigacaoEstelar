@@ -14,7 +14,8 @@ local_arestas = copy.deepcopy(arestas)
 local_graph = copy.deepcopy(graph)
 
 # Estado
-inicial_node = fase1.final_node
+# inicial_node = fase1.final_node
+inicial_node = "AK"
 final_node = "G"
 current_node = inicial_node
 visited_nodes = [current_node]
@@ -23,17 +24,22 @@ NODE_RADIUS = 15
 soma_arestas = 0
 
 texto_introducao_fase = [
-    "\"Nave B-12, câmbio... Nave B-12, na escuta?... Vamo trabalhar!?\"",
-    "\"Você acorda na sua nave com o som do seu companheiro no rádio, chamando para uma provável nova expedição.\"",
-    "Na janela da cabine, a mesma visão monótona de sempre: o vasto — e agora incomum — espaço, ",
-    "sem nenhuma estrela visível, apenas uma imensidão de lixo. Restos de naves, satélites abandonados e ",
-    "resíduos expelidos pelas civilizações. ",
+    "\"Rafa, acho que acabamos. Mas minha nave precisa de alguns reparos... Espero ",
+    "que, dessa vez, me mandem peças novas” — você exclama no rádio, já quase sem ",
+    "esperança. ",
+    "\"Entendido. Vou ver o que consigo para você com nossos superiores. Câmbio.\"",
+    "Você se encosta no assento, deixando a mente vagar. Lembra do tempo em que ",
+    "voava nos protótipos mais instáveis e modernos do seu planeta natal, enquanto ",
+    "mentalmente preparava o relatório de defeitos e possíveis problemas futuros. ",
+    "Então encara o presente — uma nave feita às pressas, com peças de três gerações ",
+    "diferentes, recicladas dos destroços que cercam o horizonte. ",
     "",
-    "A humanidade agora está espalhada por diversos planetas em todo o espaço, após os acontecimentos ",
-    "catastróficos no planeta Terra...",
-    "\"Chrr-chrr\" — seus pensamentos são interrompidos pelo rádio e, em seguida, a voz dele de novo:",
-    "\"Precisam de você aqui. Temos que abrir caminho pra mais um ricasso de férias. Câmbio.\"",
-    "Você suspira, liga sua nave, e parte — mais uma vez — para mais um dia de trabalho.",
+    "Sua mente perdida em nostalgia ignora completamente o ruído do rádio, gerando ",
+    "surpresa ao ouvi-lo: ",
+    "\"Consegui o que pediu... mas vai ter que suar nessa missão, viu? Enfim, ligando a ",
+    "sonda. Câmbio.\"",
+    "\"Bip-Bip-Bip\" — A sonda mapeia os corredores de lixo e aponta os trechos com ",
+    "maior concentração de destroços."
 ]
 
 def reset():
@@ -44,7 +50,7 @@ def reset():
     global visited_edges
     global soma_arestas
     
-    inicial_node = fase1.final_node
+    inicial_node = "AK"
     final_node = "G"
     current_node = inicial_node
     visited_nodes = [current_node]
@@ -167,29 +173,27 @@ def escreve_introducao_final_fase(texto):
     main.aguardar(largura=(config.PADDING_LEFT + len(texto[len(texto) - 1]) * 11),altura=(altura_historia + (len(texto) * 40 - 40)), cor=config.COR_TEXTO)
 
 
-def segunda_fase_iniciar(vertices_fases, resetar=True):
+def segunda_fase_iniciar(resetar=True):
     global soma_arestas
     global current_node
     global visited_nodes
     global visited_edges
     
-    # if config.dados["fases"]["atual"] > 2 or resetar and not config.SkipHistoria:
-    #     escreve_introducao_final_fase(texto_introducao_fase)
-    #     config.TELA.fill(config.BACKGROUND_JOGO)
+    if (config.dados["fases"]["atual"] <= 2 or resetar) and not config.SkipHistoria:
+        escreve_introducao_final_fase(texto_introducao_fase)
+        config.TELA.fill(config.BACKGROUND_JOGO)
 
     tmpI = 1
-    fase_atual = config.dados["fases"]["atual"]
-    while tmpI < 2:
-        if tmpI < fase_atual:
-            if vertices_fases[tmpI - 1] != []:
-                visited_nodes = vertices_fases[tmpI - 1]
-                visited_edges = get_linhas_visitadas(visited_nodes)
-        elif tmpI > config.FASE_ATUAL and resetar:
+    while tmpI <= 2:
+        visited_nodes = config.get_info_resumo_fase(tmpI)["visitados"]
+        visited_edges = get_linhas_visitadas(visited_nodes)
+        soma_arestas = config.get_info_resumo_fase(tmpI)["soma"]
+        
+        if tmpI > 2 and resetar:
             atualiza_dados_fase(tmpI, [], 0, False)
         
-        update_grafo(vertices_fases[tmpI - 1])
+        update_grafo(visited_nodes)
         # soma_arestas = calcula_peso_arestas(local_arestas, vertices_fases[tmpI - 1], final_node)
-        soma_arestas += config.get_info_resumo_fase(tmpI)["soma"]
         
         tmpI += 1
         
@@ -247,13 +251,13 @@ def segunda_fase_iniciar(vertices_fases, resetar=True):
         
     texto_final_missao = [
         "Você concluiu mais uma missão",
-        "Seu rendimento hoje ajudou significativamente ",
-        "na remoção de todo o lixo nesses arredores, ",
-        "quase como se alguns grãos de areia ",
-        "fossem removidos de uma praia. ",
-        "Você lembra delas? É... acho que não ",
-        "Enfim, descanse por hora em sua nave...",
-        "Aproveite seus momentos de descanso"
+        "Seu rendimento hoje foi satisfatório ",
+        "Seus dias vagando pelo espaço ",
+        "não contribuem tanto a sua experência ",
+        "não tanto o quanto você gotaria ",
+        "Será que um dia esse trabalho vai acabar?",
+        "As vezes esse lixo não tem fim",
+        "Por hora aproveite que sua nave ainda está de pé"
     ]
 
     caminho, soma_arestas_cpu = dijkstra(local_arestas, inicial_node, final_node)
@@ -263,3 +267,4 @@ def segunda_fase_iniciar(vertices_fases, resetar=True):
     
     desenha_final.desenha_final_missao(soma_arestas, soma_arestas_cpu, texto_final_missao)
     print(visited_nodes)
+    return True

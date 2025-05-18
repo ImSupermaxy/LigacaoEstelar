@@ -1,6 +1,6 @@
 import os
 import main
-from fases import fase1, fase2#, fase3, fase4, fase5
+from fases import fase1, fase2, fase3, fase4#, fase5
 import pygame
 import configuracoes.variables as config
 import menu.menu as menu
@@ -19,24 +19,24 @@ opcao_menu_atual = 0
 
 # Chama a fase atual do personagem
 def iniciar_fase(fase, resetar):
-    # isFaseConcluida = False
+    isFaseConcluida = False
     
     match fase:
         case "fase 1":
-            fase1.primeira_fase_iniciar(resetar)
+            isFaseConcluida = fase1.primeira_fase_iniciar(resetar)
             config.update_is_continuacao()
         case "fase 2":
-            fase2.segunda_fase_iniciar([config.Primeira_Fase_Vertices_Visitados], resetar)
+            isFaseConcluida = fase2.segunda_fase_iniciar(resetar)
             # print("Dois")
         case "fase 3":
-            print("Três")
+            isFaseConcluida = fase3.terceira_fase_iniciar(resetar)
         case "fase 4":
-            print("Outro número")
+            isFaseConcluida = fase4.quarta_fase_iniciar(resetar)
         case "fase 5":
             print("Cinco")
     
-    # if not isFaseConcluida
-    menu.inicar_menu()
+    if not isFaseConcluida:
+        menu.inicar_menu()
 
 
 def iniciar_menu():

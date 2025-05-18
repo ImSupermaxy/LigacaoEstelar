@@ -13,26 +13,34 @@ local_arestas = copy.deepcopy(arestas)
 local_graph = copy.deepcopy(graph)
 
 # Estado
-inicial_node = "A"
-final_node = "AP"
+# inicial_node = fase2.final_node
+inicial_node = "AJ"
+final_node = "Y"
 current_node = inicial_node
 visited_nodes = [current_node]
 visited_edges = set()
 NODE_RADIUS = 15
 soma_arestas = 0
+atual_fase = 4
 
 texto_introducao_fase = [
-    "\"Nave B-12, câmbio... Nave B-12, na escuta?... Vamo trabalhar!?\"",
-    "\"Você acorda na sua nave com o som do seu companheiro no rádio, chamando para uma provável nova expedição.\"",
-    "Na janela da cabine, a mesma visão monótona de sempre: o vasto — e agora incomum — espaço, ",
-    "sem nenhuma estrela visível, apenas uma imensidão de lixo. Restos de naves, satélites abandonados e ",
-    "resíduos expelidos pelas civilizações. ",
-    "",
-    "A humanidade agora está espalhada por diversos planetas em todo o espaço, após os acontecimentos ",
-    "catastróficos no planeta Terra...",
-    "\"Chrr-chrr\" — seus pensamentos são interrompidos pelo rádio e, em seguida, a voz dele de novo:",
-    "\"Precisam de você aqui. Temos que abrir caminho pra mais um ricasso de férias. Câmbio.\"",
-    "Você suspira, liga sua nave, e parte — mais uma vez — para mais um dia de trabalho.",
+    "\"Sabe... nunca entendi direito como a humanidade chegou onde está hoje. Nem nas aulas de história isso fazia sentido.\"",
+    "Você dá uma risada curta. ",
+    "\"Eu posso te contar. Sei um pouco por causa do meu antigo trabalho.\" No início, não existia esse ",
+    "domínio do espaço e nem a divisão entre planetas. Mas a falta de cuidado com o próprio lar sempre ",
+    "esteve lá. O que vemos agora no espaço já acontecia — em escala maior — e num só planeta. ",
+    "Depois de muito tempo negligenciando a Terra, ela entrou num estado irreversível, praticamente ",
+    "inabitável. As grandes potências mundiais, então, começaram a construir foguetes para evacuar o ",
+    "planeta. Mas, como sempre, as divergências políticas falaram mais alto. Cada nação decidiu colonizar ",
+    "um planeta diferente, e assim a humanidade acabou espalhada — e em constante conflito. ",
+    "Mas, obviamente, em poucos lugares isso é contado dessa forma. Revelar que as raízes da sociedade ",
+    "atual destruíram o primeiro planeta habitado pela humanidade gera desconfiança demais no sistema ",
+    "em que todos vivem. ",
+    "Bip. Bip. Bip. ",
+    "Algo apita do outro lado do rádio. Dá pra ouvir Raphael empurrando a cadeira, deslizando até o outro ",
+    "lado da cabine, e logo depois retornando ao comunicador. \"Vamos ter que deixar a hora da história ",
+    "pra depois.\" — ele diz, em tom de desapontamento. — \"Temos mais uma missão pra fazer.\" ",
+    "Você liga a nave. Os sistemas ganham vida e, sem pensar muito, parte para mais um dia de trabalho. "
 ]
 
 def reset():
@@ -43,20 +51,36 @@ def reset():
     global visited_edges
     global soma_arestas
     
-    inicial_node = "A"
-    final_node = "AP"
+    # inicial_node = fase2.final_node
+    inicial_node = "AJ"
+    final_node = "Y"
     current_node = inicial_node
     visited_nodes = [current_node]
     visited_edges = set()
     soma_arestas = 0
+   
+    
+def update_grafo(vertices_visitados):
+    global local_arestas
+    
+    for i, vertice in enumerate(vertices_visitados):
+        ligacao_vertices = local_arestas[vertice]
+        for j, dict in enumerate(ligacao_vertices):
+            (vertice2, peso) = dict
+            if vertice2 != vertices_visitados[-1] and peso >= 1:
+                if i + 1 < len(vertices_visitados) and vertice2 == vertices_visitados[i + 1]:
+                    local_arestas[vertice][j] = (vertice2, peso - 1)
+                    for u, dict2 in enumerate(local_arestas[vertice2]):
+                        (vertice3, peso2) = dict2
+                        if vertice3 == vertice:
+                            local_arestas[vertice2][u] = (vertice3, peso - 1)
+
 
 def desenhar_grafo():
     config.TELA.fill(config.BACKGROUND_JOGO)
-    main.desenhar_textos(["FASE 1"], config.ROXO2, 25, config.LARGURA - 140, False, config.FONTE_PESO)
+    main.desenhar_textos(["FASE 4"], config.ROXO2, 25, config.LARGURA - 140, False, config.FONTE_PESO)
     
     desenha_final.escreve_info_pesos(soma_arestas)
-    
-    # local_arestas["A"][0] = ("D", 0)
     
     # Desenha as arestas
     for comeco, vizinhos in local_arestas.items():
@@ -77,7 +101,7 @@ def desenhar_grafo():
     for nome, (x, y) in local_nos.items():
         color = config.VERDE_INICIAL if nome == inicial_node else config.CINZA_FINAL if nome == final_node else config.ROSA2 if nome in visited_nodes else config.AZUL_CLARO2
         pygame.draw.circle(config.TELA, color, (x, y), NODE_RADIUS)
-        # pygame.draw.circle(config.TELA, config.BRANCO, (x, y), NODE_RADIUS, 2)
+        
         #validação pra ver se é dev, (pra exibir o nome das vertices...)
         if config.IsDevVar:
             texto = config.FONTE_GRAFO.render(nome, True, config.PRETO)
@@ -136,7 +160,6 @@ def escreve_introducao_final_fase(texto):
     main.pygame.display.update()
     main.pygame.time.delay(600)
     
-    
     altura_historia = config.PADDING_TOP_HISTORIA
     linhas_mostradas = []
     delay_linha = 40
@@ -152,25 +175,33 @@ def escreve_introducao_final_fase(texto):
     main.aguardar(largura=(config.PADDING_LEFT + len(texto[len(texto) - 1]) * 11),altura=(altura_historia + (len(texto) * 40 - 40)), cor=config.COR_TEXTO)
 
 
-def primeira_fase_iniciar(resetar=True):
-    print("Linha 249 - fase1.py: ", config.dados["isContinuacao"])
-    if (config.dados["fases"]["atual"] <= 1 or resetar) and not config.SkipHistoria:
-        escreve_introducao_final_fase(texto_introducao_fase)
-        config.TELA.fill(config.BACKGROUND_JOGO)
-    
+def quarta_fase_iniciar(resetar=True):
+    global soma_arestas
     global current_node
     global visited_nodes
     global visited_edges
-    global soma_arestas
-
-    soma_arestas = config.get_info_resumo_fase("1")["soma"]
-    visited_nodes = config.get_info_resumo_fase("1")["visitados"]
-    visited_edges = get_linhas_visitadas(visited_nodes)
-
-    if resetar:
-        atualiza_dados_fase(1, [], 0, False)
-        reset()
     
+    if (config.dados["fases"]["atual"] <= atual_fase or resetar) and not config.SkipHistoria:
+        escreve_introducao_final_fase(texto_introducao_fase)
+        config.TELA.fill(config.BACKGROUND_JOGO)
+
+    tmpI = 1
+    while tmpI <= atual_fase:
+        visited_nodes = config.get_info_resumo_fase(tmpI)["visitados"]
+        visited_edges = get_linhas_visitadas(visited_nodes)
+        soma_arestas = config.get_info_resumo_fase(tmpI)["soma"]
+        
+        if tmpI > atual_fase and resetar:
+            atualiza_dados_fase(tmpI, [], 0, False)
+        
+        update_grafo(visited_nodes)
+        # soma_arestas = calcula_peso_arestas(local_arestas, vertices_fases[tmpI - 1], final_node)
+        
+        tmpI += 1
+        
+    if resetar:
+        reset()
+
     last_clicked_node = visited_nodes[-1]
     rodando = True
     while rodando:
@@ -222,20 +253,20 @@ def primeira_fase_iniciar(resetar=True):
         
     texto_final_missao = [
         "Você concluiu mais uma missão",
-        "Seu rendimento hoje ajudou significativamente ",
-        "na remoção de todo o lixo nesses arredores, ",
-        "quase como se alguns grãos de areia ",
-        "fossem removidos de uma praia. ",
-        "Você lembra delas? É... acho que não ",
-        "Enfim, descanse por hora em sua nave...",
-        "Aproveite seus momentos de descanso"
+        "Seu rendimento hoje foi muito bom ",
+        "seria legal se mais clientes assim ",
+        "fossem os seus com frequência ",
+        "Você se sente melhor ",
+        "Apesar de todo lixo ao seu redor ser significante",
+        "Respire, e siga o seu próximo destino",
+        "Descanse e aproveite as próximas horas",
+        "No congelante silêncio do espaço"
     ]
 
     caminho, soma_arestas_cpu = dijkstra(local_arestas, inicial_node, final_node)
     print(f'Caminho: {caminho}, Custo: {soma_arestas_cpu}')
     
-    atualiza_dados_fase(1, visited_nodes, soma_arestas)
+    atualiza_dados_fase(atual_fase, visited_nodes, soma_arestas)
     
     desenha_final.desenha_final_missao(soma_arestas, soma_arestas_cpu, texto_final_missao)
-    
     return True

@@ -1,13 +1,13 @@
 {
-    "isDev": false,
-    "isContinuacao": false,
+    "isDev": true,
+    "isContinuacao": true,
     "isFullScream": false,
     "video": {
         "width": 1520,
         "heigth": 750
     },
     "texto": {
-        "skipIntroducao": false,
+        "skipIntroducao": true,
         "skipHistoria": false,
         "skipDialogos": false,
         "velocidade": 100
@@ -19,9 +19,9 @@
         "volumeMusica": 100
     },
     "fases": {
-        "atual": 1,
+        "atual": 5,
         "isAllCompleted": false,
         "auto_atualiza": true,
-        "total": 0
+        "total": 174
     }
 }

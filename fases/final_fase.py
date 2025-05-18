@@ -145,7 +145,7 @@ def desenha_final_missao(soma_arestas_usuario, soma_arestas_cpu, texto=[], largu
 
     soma_total_texto = "Sua soma total: "
     altura_soma_total = 160
-    imprime_relatorio_fase(soma_total_texto, str(soma_arestas_usuario), config.BRANCO, config.VERDE, largura_texto, config.ALTURA - altura - altura_soma_total)
+    imprime_relatorio_fase(soma_total_texto, str(config.total_peso_fases), config.BRANCO, config.VERDE, largura_texto, config.ALTURA - altura - altura_soma_total)
     
     max_total_texto = "Máximo valor: "
     altura_max_total = 120
