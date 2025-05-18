@@ -10,14 +10,15 @@ def show_manual():
     rodando = True
     while rodando:
         main.desenhar_textos(["Pressione qualquer tecla para voltar"], config.VERMELHO2, config.ALTURA // 2, config.LARGURA - 400, True)
-        config.pygame.time.delay(500)
+        config.pygame.time.delay(600)
         main.desenhar_textos(["Pressione qualquer tecla para voltar"], config.BACKGROUND_JOGO, config.ALTURA // 2, config.LARGURA - 400, True)
-        config.pygame.time.delay(500)
         for evento in config.pygame.event.get():
             if evento.type == config.pygame.QUIT:
                 main.fechar_jogo()
             elif evento.type == config.pygame.KEYDOWN:
                 rodando = False
+                
+        config.pygame.time.delay(600)
     
     # main.aguardar_confirmacao("Pressione [ENTER] para voltar", config.LARGURA // 2,config.ALTURA // 2, config.LARANJA)
     

@@ -5,8 +5,12 @@ import main
 import menu.menu as menu
 import math
 import fases.final_fase as desenha_final
-import heapq
-from fases import grafo
+import copy
+from fases.grafo import nos, arestas, graph, dijkstra, atualiza_dados_fase, calcula_peso_arestas, get_linhas_visitadas
+
+local_nos = copy.deepcopy(nos)
+local_arestas = copy.deepcopy(arestas)
+local_graph = copy.deepcopy(graph)
 
 # Estado
 inicial_node = "A"
@@ -49,14 +53,17 @@ def reset():
 def desenhar_grafo():
     config.TELA.fill(config.BACKGROUND_JOGO)
     main.desenhar_textos(["FASE 1"], config.ROXO2, 25, config.LARGURA - 140, False, config.FONTE_PESO)
-    desenha_final.escreve_soma_peso_grafo(soma_arestas)
+    
+    desenha_final.escreve_info_pesos(soma_arestas)
+    
+    # local_arestas["A"][0] = ("D", 0)
     
     # Desenha as arestas
-    for comeco, vizinhos in grafo.arestas.items():
+    for comeco, vizinhos in local_arestas.items():
         for fim, peso in vizinhos:
             if (fim, comeco) not in visited_edges and (comeco, fim) not in visited_edges:
-                (x1, y1) = grafo.nos[comeco]
-                (x2, y2) = grafo.nos[fim]
+                (x1, y1) = local_nos[comeco]
+                (x2, y2) = local_nos[fim]
                 pygame.draw.line(config.TELA, config.CINZA_CLARO, (x1, y1), (x2, y2), 2)
                 # Posição intermediária para o peso
                 px, py = (x1 + x2) // 2, (y1 + y2) // 2
@@ -64,10 +71,10 @@ def desenhar_grafo():
                 config.TELA.blit(texto, (px - texto.get_width() // 2, py - texto.get_height() // 2))
     # Desenhar conexões feitas
     for a, b in visited_edges:
-        pygame.draw.line(config.TELA, config.ROXO2, grafo.nos[a], grafo.nos[b], 4)
+        pygame.draw.line(config.TELA, config.ROXO2, local_nos[a], local_nos[b], 4)
         desenha_peso(a, b)
     # Desenha os nós
-    for nome, (x, y) in grafo.nos.items():
+    for nome, (x, y) in local_nos.items():
         color = config.VERDE_INICIAL if nome == inicial_node else config.CINZA_FINAL if nome == final_node else config.ROSA2 if nome in visited_nodes else config.AZUL_CLARO2
         pygame.draw.circle(config.TELA, color, (x, y), NODE_RADIUS)
         # pygame.draw.circle(config.TELA, config.BRANCO, (x, y), NODE_RADIUS, 2)
@@ -79,16 +86,16 @@ def desenhar_grafo():
 
 
 def desenha_peso(a, b):
-    x1, y1 = grafo.nos[a]
-    x2, y2 = grafo.nos[b] 
+    x1, y1 = local_nos[a]
+    x2, y2 = local_nos[b] 
     px, py = (x1 + x2) // 2, (y1 + y2) // 2
-    peso = next((item for item in grafo.arestas[a] if item[0] == (b)), None)[1]
+    peso = next((item for item in local_arestas[a] if item[0] == (b)), None)[1]
     texto = config.FONTE_PESO.render(str(peso), True, config.BRANCO)
     config.TELA.blit(texto, (px - texto.get_width() // 2, py - texto.get_height() // 2))
 
 
 def get_node_clicked(pos):
-    for node_id, node_pos in grafo.nos.items():
+    for node_id, node_pos in local_nos.items():
         dist = math.hypot(pos[0] - node_pos[0], pos[1] - node_pos[1])
         if dist <= NODE_RADIUS:
             return node_id
@@ -96,13 +103,13 @@ def get_node_clicked(pos):
 
 
 def all_nodes_visited():
-    return len(visited_nodes) == len(grafo.nos)
+    return len(visited_nodes) == len(local_nos)
 
 
 def get_peso_aresta(clicked_node):
     global current_node
     
-    for aresta in grafo.arestas[clicked_node]:
+    for aresta in local_arestas[clicked_node]:
         if aresta[0] == current_node:
             return aresta[1]
 
@@ -145,30 +152,9 @@ def escreve_introducao_final_fase(texto):
     main.aguardar(largura=(config.PADDING_LEFT + len(texto[len(texto) - 1]) * 11),altura=(altura_historia + (len(texto) * 40 - 40)), cor=config.COR_TEXTO)
 
 
-def dijkstra(grafo, inicio, destino):
-    fila = [(0, inicio, [inicio])]  # (custo_acumulado, nó_atual, caminho)
-    visitado = set()
-
-    while fila:
-        custo, atual, caminho = heapq.heappop(fila)
-
-        if atual == destino:
-            return caminho, custo  # Caminho e custo total
-
-        if atual in visitado:
-            continue
-        visitado.add(atual)
-
-        for vizinho, peso in grafo[atual]:
-            if vizinho not in visitado:
-                heapq.heappush(fila, (custo + peso, vizinho, caminho + [vizinho]))
-
-    return None, float('inf')  # Caso não encontre caminho
-
-
-def primeira_fase_iniciar():
+def primeira_fase_iniciar(resetar=True):
     print("Linha 249 - fase1.py: ", config.dados["isContinuacao"])
-    if not config.IsContinuacao:
+    if config.dados["fases"]["atual"] > 1 or resetar and not config.SkipHistoria:
         escreve_introducao_final_fase(texto_introducao_fase)
         config.TELA.fill(config.BACKGROUND_JOGO)
     
@@ -177,6 +163,10 @@ def primeira_fase_iniciar():
     global visited_edges
     global soma_arestas
 
+    if resetar:
+        atualiza_dados_fase(1, [], 0, False)
+        reset()
+    
     last_clicked_node = visited_nodes[-1]
     rodando = True
     while rodando:
@@ -195,7 +185,7 @@ def primeira_fase_iniciar():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 clicked_node = get_node_clicked(event.pos)
                 if clicked_node is not None:
-                    if clicked_node in grafo.graph[current_node]:
+                    if clicked_node in local_graph[current_node]:
                         edge = tuple(sorted((current_node, clicked_node)))
                         if edge not in visited_edges and clicked_node not in visited_nodes:
                             visited_edges.add(edge)
@@ -237,17 +227,11 @@ def primeira_fase_iniciar():
         "Aproveite seus momentos de descanso"
     ]
 
-    caminho, soma_arestas_cpu = dijkstra(grafo.arestas, inicial_node, final_node)
+    caminho, soma_arestas_cpu = dijkstra(local_arestas, inicial_node, final_node)
     print(f'Caminho: {caminho}, Custo: {soma_arestas_cpu}')
+    
+    atualiza_dados_fase(1, visited_nodes, soma_arestas)
     
     desenha_final.desenha_final_missao(soma_arestas, soma_arestas_cpu, texto_final_missao)
     print(visited_nodes)
-    
-    atualiza_dados_fase(visited_nodes)
-    # reset()
-
-
-def atualiza_dados_fase(visitados):
-    config.update_vertices_visitados(1, visitados)
-    if config.fases_auto_atualiza:
-        config.update_fase_atual(2)
+    print(visited_edges)

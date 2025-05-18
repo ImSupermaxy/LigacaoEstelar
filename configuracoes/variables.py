@@ -121,8 +121,9 @@ Terceira_Fase_Vertices_Visitados = []
 Quarta_Fase_Vertices_Visitados = []
 Quinta_Fase_Vertices_Visitados = []
 
-ARQUIVO_INFO_FASE = "info_fases.json"
+total_peso_fases = dados["fases"]["total"]
 
+ARQUIVO_INFO_FASE = "info_fases.json"
 
 def get_all_vertices_visitados():
     global Primeira_Fase_Vertices_Visitados
@@ -138,6 +139,29 @@ def get_all_vertices_visitados():
     Terceira_Fase_Vertices_Visitados = info["3"]["visitados"]
     Quarta_Fase_Vertices_Visitados = info["4"]["visitados"]
     Quinta_Fase_Vertices_Visitados = info["5"]["visitados"]
+
+
+def update_total(fase):
+    global total_peso_fases
+    
+    info = mjson.get_variables_form_json(ARQUIVO_INFO_FASE)
+    
+    total = 0
+    
+    i = 1
+    while i <= fase:
+        total += info[str(i)]["soma"]
+        i += 1
+
+    dados["fases"]["total"] = total
+    total_peso_fases = total
+    mjson.update_variables_json(dados)
+
+
+def update_soma_fase(fase, soma):
+    info = mjson.get_variables_form_json(ARQUIVO_INFO_FASE)
+    info[str(fase)]["soma"] = soma
+    mjson.update_variables_json(info, ARQUIVO_INFO_FASE)
 
 
 def update_vertices_visitados(fase, visitados):
@@ -180,3 +204,14 @@ def update_all_volumes():
     dados["volume"]["volumeEfeitos"] = Volume_Efeitos
     dados["volume"]["volumeDialogos"] = Volume_Dialogos
     dados["volume"]["volumeMusica"] = Volume_Musica
+    
+def update_all_texto():
+    global skipIntroducao
+    global SkipDialogos
+    global SkipHistoria
+    
+    dados["texto"]["skipIntroducao"] = skipIntroducao 
+    dados["texto"]["skipDialogos"] = SkipDialogos
+    dados["texto"]["skipHistoria"] = SkipHistoria
+    
+get_all_vertices_visitados()

@@ -5,18 +5,25 @@ import configuracoes.variables as config
 
 opcoes_menu = {
     1: "Volume",
-    2: "Textos", #Aparecer a configuração da velocidade dos diálogos / fonte do texto...
+    2: "Textos",
     3: "Voltar",
 }
 opcao_atual = 1
 
 opcoes_volume = {
-    1: "Volume Geral: ", #Altera a Variável Master
+    1: "Volume Geral: ",
     2: "Efeitos Sonoros: ",
     3: "Diálogos: ",
     4: "Músicas: "
 }
 opcao_volume_atual = 1
+
+opcoes_textos = {
+    1: "Pular histórias: ",
+    2: "Pular ???: ",
+    3: "... "
+}
+opcao_texto_atual = 1
 
 
 def iniciar_menu():
@@ -81,7 +88,7 @@ def switch_to_opcao(opcao):
         case 1:
             alterar_volume()
         case 2:
-            main.fechar_jogo()
+            alterar_textos()
         case 3:
             return True
         
@@ -219,4 +226,130 @@ def mudar_volume(volume_to_change):
     config.update_all_volumes()
 
     main.transicao(50)
+
+
+def alterar_textos():
+    global opcao_texto_atual
+    posicoes_y = desenhar_selecao_menu_textos(50)
+    
+    rodando_texto = True
+    while rodando_texto:
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                main.fechar_jogo()
+            elif evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_UP:
+                    if opcao_texto_atual == 0:
+                        opcao_texto_atual = 1
+                    elif (opcao_texto_atual - 1) > 0 :
+                        opcao_texto_atual -= 1
+                    else:
+                        opcao_texto_atual = 1
+                elif evento.key == pygame.K_DOWN:
+                    if opcao_texto_atual == 0:
+                        opcao_texto_atual = 1
+                    elif (opcao_texto_atual + 1) < len(opcoes_textos):
+                        opcao_texto_atual += 1
+                    else: 
+                        opcao_texto_atual = len(opcoes_textos)
+                elif evento.key == pygame.K_RETURN:
+                    change_texto(posicoes_y)
+                elif evento.key == pygame.K_ESCAPE:
+                    opcao_texto_atual = 1
+                    rodando_texto = False
         
+        desenhar_selecao_menu_textos()
+
+
+def desenhar_selecao_menu_textos(delay=0):
+    config.TELA.fill(config.BACKGROUND_JOGO)
+    render = config.FONTE_MENU.render("Configurações de Texto: ", True, config.AZUL_CLARO)
+    config.TELA.blit(render, ((config.PADDING_LEFT / 2) + 20, (config.PADDING_TOP / 2)))
+    
+    global opcao_texto_atual
+    alturas = []
+    
+    for i, texto in opcoes_textos.items():
+        cor = config.SELECIONADO if i == opcao_texto_atual else config.COR_TEXTO
+        render = config.FONTE_MENU.render(texto, True, cor)
+        linha_posicao = config.PADDING_TOP + i * config.ESPACAMENTO_LINHA_MENU
+        
+        alturas.append(linha_posicao)
+        config.TELA.blit(render, (config.PADDING_LEFT, linha_posicao))
+        pygame.time.delay(delay)
+
+    pygame.display.update()
+    return alturas
+
+
+def change_texto(alturas):
+    if opcao_texto_atual == 0:
+        return
+    altura, texto = alturas[opcao_texto_atual - 1], opcoes_textos.get(opcao_texto_atual)
+    valor_to_change = get_texto_to_change(opcao_texto_atual)
+
+    rodando = True
+    while rodando:
+        exibir_textos_to_change(altura, texto, str(valor_to_change))
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                main.fechar_jogo()
+            elif evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_LEFT:
+                    valor_to_change = not valor_to_change
+                elif evento.key == pygame.K_RIGHT:
+                    valor_to_change = not valor_to_change
+                elif evento.key == pygame.K_RETURN:
+                    mudar_textos(valor_to_change)
+                    rodando = False
+                elif evento.key == pygame.K_ESCAPE:
+                    exibir_textos_to_change(altura, "", "")
+                    rodando = False
+                    
+def get_texto_to_change(opcao):
+    match opcao:
+        case 1:
+            return config.SkipHistoria
+        case 2:
+            return config.SkipDialogos
+        case 3:
+            return False
+        case 4:
+            return False
+        
+    return 0
+
+def exibir_textos_to_change(altura, texto, valor_to_exibir):
+    all_texto = str(valor_to_exibir)
+    posicao_texto = len(texto) * 14
+    retangulo = pygame.Rect(config.PADDING_LEFT + posicao_texto, altura, len(all_texto) + 60, 50)
+
+    # Desenhando o retângulo vermelho
+    pygame.draw.rect(config.TELA, config.BACKGROUND_JOGO, retangulo)
+    
+    render = config.FONTE.render(all_texto, True, config.BRANCO)
+    config.TELA.blit(render, (config.PADDING_LEFT + posicao_texto, altura))
+    pygame.display.update()  
+    
+
+def mudar_textos(texto_to_change):
+    global opcao_texto_atual
+    
+    match opcao_volume_atual:
+        case 1:
+            config.SkipHistoria = texto_to_change
+        case 2:
+            config.SkipDialogos = texto_to_change
+        case 3:
+            return False
+        case 4:
+            return False
+        case 0:
+            config.Volume = config.Volume
+            config.Volume_Efeitos = config.Volume_Efeitos
+            config.Volume_Dialogos = config.Volume_Dialogos
+            config.Volume_Musica = config.Volume_Musica
+    
+    config.update_all_texto()
+
+    main.transicao(50)

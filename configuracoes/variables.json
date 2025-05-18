@@ -21,6 +21,7 @@
     "fases": {
         "atual": 1,
         "isAllCompleted": false,
-        "auto_atualiza": false
+        "auto_atualiza": true,
+        "total": 0
     }
 }

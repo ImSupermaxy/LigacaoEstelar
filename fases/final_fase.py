@@ -22,6 +22,8 @@ import main
 #F-: 5-9%
 #...: 0-4%
 
+max_peso_fases = 160
+
 def obtem_ranking_by_soma_arestas(soma_usuario, soma_cpu):
     if soma_cpu == 0:
         return "Erro: soma do grafo não pode ser zero."
@@ -69,9 +71,24 @@ def obtem_ranking_by_soma_arestas(soma_usuario, soma_cpu):
 
 
 def escreve_soma_peso_grafo(soma_arestas):
-    somaTotal = "Soma total: " + str(soma_arestas)
-    main.desenhar_textos([somaTotal], config.AZUL_CLARO, largura=config.LARGURA - len(somaTotal) * 12, atualizaTela=False)
+    somaTotal = "Soma total: "
+    main.desenhar_textos([somaTotal], config.AZUL_CLARO, largura=config.LARGURA - 200, atualizaTela=False)
+    main.desenhar_textos([str(soma_arestas)], config.VERDE, largura=config.LARGURA - 200 + len(somaTotal) * 13, atualizaTela=False)
 
+def escreve_total_peso_grafo(total):
+    somaTotal = "Soma fases: "
+    main.desenhar_textos([somaTotal], config.ROSA2, altura=config.PADDING_TOP + 50, largura=config.LARGURA - 200, atualizaTela=False)
+    main.desenhar_textos([str(total)], config.VERDE, altura=config.PADDING_TOP + 50, largura=config.LARGURA - 200 + len(str(somaTotal)) * 13, atualizaTela=False)
+
+def escreve_limite_peso_fases():
+    somaTotal = "Max: "
+    main.desenhar_textos([somaTotal], config.AMARELO, altura=config.PADDING_TOP + 100, largura=config.LARGURA - 200, atualizaTela=False)
+    main.desenhar_textos([str(max_peso_fases)], config.VERDE, altura=config.PADDING_TOP + 100, largura=config.LARGURA - 200 + len(str(somaTotal)) * 15, atualizaTela=False)
+    
+def escreve_info_pesos(soma_arestas_usuario):
+    escreve_soma_peso_grafo(soma_arestas_usuario)
+    escreve_total_peso_grafo(config.total_peso_fases)
+    escreve_limite_peso_fases()
 
 def imprime_relatorio_fase(texto, valor, cor_principal, cor_valor, largura_texto, altura, delay=350):
     render = config.FONTE.render(texto, False, cor_principal)
@@ -90,7 +107,8 @@ def desenha_final_missao(soma_arestas_usuario, soma_arestas_cpu, texto=[], largu
     main.pygame.display.update()
     main.pygame.time.delay(600)
     
-    escreve_soma_peso_grafo(soma_arestas_usuario)
+    escreve_info_pesos(soma_arestas_usuario)
+    
     rank = obtem_ranking_by_soma_arestas(soma_arestas_usuario, soma_arestas_cpu)
     texto.append("")
     texto.append("")
@@ -131,7 +149,7 @@ def desenha_final_missao(soma_arestas_usuario, soma_arestas_cpu, texto=[], largu
     
     max_total_texto = "Máximo valor: "
     altura_max_total = 120
-    imprime_relatorio_fase(max_total_texto, str(120), config.BRANCO, config.VERDE, largura_texto, config.ALTURA - altura - altura_max_total)
+    imprime_relatorio_fase(max_total_texto, str(max_peso_fases), config.BRANCO, config.VERDE, largura_texto, config.ALTURA - altura - altura_max_total)
 
     ranking_texto = "Seu ranking: "
     altura_ranking = 80

@@ -125,9 +125,9 @@ def switch_to_opcao(opcao, is_calling_initial):
     opcoes = opcoes_menu if is_calling_initial else opcoes_menu_not_inicial
     match opcoes.get(opcao, invalido):
         case "Iniciar":
-            fases_menu.iniciar_fase(config.FASE_ATUAL)
+            fases_menu.iniciar_fase(config.FASE_ATUAL, True)
         case "Continuar":
-            fases_menu.iniciar_fase(config.FASE_ATUAL)
+            fases_menu.iniciar_fase(config.FASE_ATUAL, True)
         case "Config":
             configuracoes.iniciar_menu()
         case "Fases":

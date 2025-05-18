@@ -3,6 +3,7 @@ FAZENDO:
     - Todas as fazes seguintes devem fazer o "cálculo" dos pesos dos grafos de acordo com esse grafo geral
         Seguindo o caminho das fases anteriores até a atual, ou seja, se estiver na 3 fase, ele calcula o grafo da fase 2
         passando pelo caminho feito na fase 1, para depois calcular o da fase 3, sendo feito pelo caminho passado pela fase 2.
+    - Caso o jogador esteja na 4 fase e volte, rejogando a segunda, limpar o array de vertices visitados da 3 fase.  
 
 - Ajeitar tela de conclusão de fase
 

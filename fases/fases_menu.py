@@ -18,19 +18,24 @@ opcoes_menu = [
 opcao_menu_atual = 0
 
 # Chama a fase atual do personagem
-def iniciar_fase(fase):
+def iniciar_fase(fase, resetar):
+    # isFaseConcluida = False
+    
     match fase:
         case "fase 1":
-            fase1.primeira_fase_iniciar()
+            fase1.primeira_fase_iniciar(resetar)
             config.update_is_continuacao()
         case "fase 2":
-            # fase2.segunda_fase_iniciar(config.Primeira_Fase_Vertices_Visitados)
-            print("Dois")
+            fase2.segunda_fase_iniciar([config.Primeira_Fase_Vertices_Visitados], resetar)
+            # print("Dois")
         case "fase 3":
             print("Três")
         case "fase 4":
             print("Outro número")
+        case "fase 5":
+            print("Cinco")
     
+    # if not isFaseConcluida
     menu.inicar_menu()
 
 
@@ -45,6 +50,7 @@ def iniciar_menu():
     ]
     
     opcao_menu_atual = 0
+    opcao_atual = config.dados["fases"]["atual"]
     
     if not config.dados["fases"]["isAllCompleted"]:
         for i in range(len(config.FASES), 0, -1):
@@ -67,6 +73,7 @@ def open_resumo_fase():
     config.TELA.fill(config.BACKGROUND_JOGO)
     opcoes_menu = [
         "Começar missão",
+        "Visualizar",
         "Voltar"
     ]
     
@@ -95,7 +102,7 @@ def open_resumo_fase():
                     else:
                         opcao_menu_atual = opcao_menu_atual - 1
                 elif evento.key == pygame.K_DOWN:
-                    if opcao_menu_atual + 1 > 2:
+                    if opcao_menu_atual + 1 > 3:
                         opcao_menu_atual = 1
                     else:
                         opcao_menu_atual = opcao_menu_atual + 1
@@ -113,8 +120,10 @@ def switch_to_opcao():
                 opcao_menu_atual = 0
     
                 return True
+            case "Visualizar":
+                iniciar_fase(config.FASES[opcao_atual - 1], False)
             case "Começar missão":
-                iniciar_fase(config.FASES[opcao_atual - 1])
+                iniciar_fase(config.FASES[opcao_atual - 1], True)
     else:  
         open_resumo_fase()
     

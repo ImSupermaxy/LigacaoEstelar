@@ -1,3 +1,6 @@
+import heapq
+import configuracoes.variables as config
+
 # Nós com posições (x, y)
 nos = {
     "A": (100, 30),
@@ -124,7 +127,7 @@ graph = {
     "V": ["T", "U", "Y", "AS"],
     "W": ["T", "X"],
     "X": ["W", "Y", "Z"],
-    "Y": ["V", "X", "AA", "AT"],
+    "Y": ["V", "X", "AA", "AT", "AU"],
     "Z": ["X", "AA", "AB", "AC"],
     "AA": ["F", "Y", "Z"],
     "AB": ["G", "Z"],
@@ -148,3 +151,58 @@ graph = {
     "AT": ["Y", "AS", "AU"],
     "AU": ["Y", "AT"]
 }
+
+
+def dijkstra(grafo, inicio, destino):
+    fila = [(0, inicio, [inicio])]  # (custo_acumulado, nó_atual, caminho)
+    visitado = set()
+
+    while fila:
+        custo, atual, caminho = heapq.heappop(fila)
+
+        if atual == destino:
+            return caminho, custo  # Caminho e custo total
+
+        if atual in visitado:
+            continue
+        visitado.add(atual)
+
+        for vizinho, peso in grafo[atual]:
+            if vizinho not in visitado:
+                heapq.heappush(fila, (custo + peso, vizinho, caminho + [vizinho]))
+
+    return None, float('inf')  # Caso não encontre caminho
+
+
+def calcula_peso_arestas(grafo, visitados, v_final):
+    soma = 0
+    
+    # Desenha as arestas
+    for i, item in enumerate(grafo.items()):
+        (comeco, vizinhos) = item
+        if comeco in visitados:
+            if comeco != v_final:
+                for item2 in vizinhos:
+                    (vertice, peso) = item2
+                    soma += peso
+    return soma
+
+
+def get_linhas_visitadas(vertices_visitados):
+    edges = set()
+    
+    for i, vertice in enumerate(vertices_visitados):
+        if vertice != vertices_visitados[-1]:
+            edge = tuple(sorted((vertice, vertices_visitados[i + 1])))
+            edges.add(edge)
+    
+    return edges
+    
+
+def atualiza_dados_fase(fase_atual, visitados, soma, change_fase_atual=True):
+    config.update_vertices_visitados(fase_atual, visitados)
+    config.update_soma_fase(fase_atual, soma)
+    config.update_total(fase_atual)
+    
+    if config.fases_auto_atualiza and change_fase_atual:
+        config.update_fase_atual(fase_atual + 1)
