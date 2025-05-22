@@ -3,6 +3,8 @@ import pygame
 import sys
 import configuracoes.manipulerjson as mjson
 import historia.introducao as introducao
+import os
+from pathlib import Path
 
 pygame.font.init()
 
@@ -53,7 +55,11 @@ PADDING_TOP = 200
 ESPACAMENTO_LINHA = 40
 BACKGROUND_JOGO = PRETO
 COR_TEXTO = BRANCO
-PASTA_IMAGENS = "C:\\Faculdade\\3° Semestre\\Teoria dos Grafos (opt)\\Trabalho\\LigacaoEstelar\\assets\\imagens"
+
+caminho_arquivo = Path(__file__)
+RAIZ_PROJETO = caminho_arquivo.parent.parent.resolve()
+PASTA_ASSETS = os.path.join(RAIZ_PROJETO, "assets")
+PASTA_IMAGENS = os.path.join(PASTA_ASSETS, "imagens")
 
 INFO_DISPLAY = pygame.display.Info()
 if IsFullSream:
