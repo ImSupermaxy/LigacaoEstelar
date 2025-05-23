@@ -63,17 +63,19 @@ def reset():
 def update_grafo(vertices_visitados):
     global local_arestas
     
-    for i, vertice in enumerate(vertices_visitados):
-        ligacao_vertices = local_arestas[vertice]
-        for j, dict in enumerate(ligacao_vertices):
-            (vertice2, peso) = dict
-            if vertice2 != vertices_visitados[-1] and peso >= 1:
-                if i + 1 < len(vertices_visitados) and vertice2 == vertices_visitados[i + 1]:
-                    local_arestas[vertice][j] = (vertice2, peso - 1)
-                    for u, dict2 in enumerate(local_arestas[vertice2]):
-                        (vertice3, peso2) = dict2
-                        if vertice3 == vertice:
-                            local_arestas[vertice2][u] = (vertice3, peso - 1)
+    if not config.OPEN_FASE_THREE:
+        for i, vertice in enumerate(vertices_visitados):
+            ligacao_vertices = local_arestas[vertice]
+            for j, dict in enumerate(ligacao_vertices):
+                (vertice2, peso) = dict
+                if vertice2 != vertices_visitados[-1] and peso >= 1:
+                    if i + 1 < len(vertices_visitados) and vertice2 == vertices_visitados[i + 1]:
+                        local_arestas[vertice][j] = (vertice2, peso - 1)
+                        for u, dict2 in enumerate(local_arestas[vertice2]):
+                            (vertice3, peso2) = dict2
+                            if vertice3 == vertice:
+                                local_arestas[vertice2][u] = (vertice3, peso - 1)
+        config.OPEN_FASE_THREE = True
 
 
 def desenhar_grafo():

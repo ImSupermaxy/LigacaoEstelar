@@ -55,7 +55,7 @@ PADDING_TOP = 200
 ESPACAMENTO_LINHA = 40
 BACKGROUND_JOGO = PRETO
 COR_TEXTO = BRANCO
-
+    
 caminho_arquivo = Path(__file__)
 RAIZ_PROJETO = caminho_arquivo.parent.parent.resolve()
 PASTA_ASSETS = os.path.join(RAIZ_PROJETO, "assets")
@@ -109,6 +109,11 @@ FASE_TWO = "fase 2"
 FASE_THREE = "fase 3"
 FASE_FOUR = "fase 4"
 FASE_FIVE = "fase 5"
+OPEN_FASE_TWO = False
+OPEN_FASE_THREE = False
+OPEN_FASE_FOUR = False
+OPEN_FASE_FIVE = False
+
 
 FASES = [
     FASE_ONE,

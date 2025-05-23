@@ -394,7 +394,6 @@
 
 # primeira_fase_iniciar()
 
-
 def obtem_ranking_by_soma_arestas(soma_usuario, soma_cpu):
     if soma_cpu == 0:
         return "Erro: soma do grafo não pode ser zero."
