@@ -67,6 +67,7 @@ RAIZ_PROJETO = caminho_arquivo.parent.parent.resolve()
 PASTA_ASSETS = os.path.join(RAIZ_PROJETO, "assets")
 PASTA_IMAGENS = os.path.join(PASTA_ASSETS, "imagens")
 PASTA_AUDIOS = os.path.join(PASTA_ASSETS, "audios")
+PASTA_MUSICA = os.path.join(PASTA_ASSETS, "musicas")
 
 INFO_DISPLAY = pygame.display.Info()
 if IsFullSream:

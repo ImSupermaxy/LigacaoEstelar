@@ -8,14 +8,14 @@ import sys
 
 MUSICA_MENU = "MusicaMenu.mp3"
 SOM_ATUAL = ""
-GLOBAL_MIXER = pygame.mixer.Sound(os.path.join(config.PASTA_AUDIOS, MUSICA_MENU))
+GLOBAL_MIXER = pygame.mixer.Sound(os.path.join(config.PASTA_MUSICA, MUSICA_MENU))
 DATA_INICIAL_SOM = datetime.now()
 
 def iniciar_musica_menu():
     global GLOBAL_MIXER
     global DATA_INICIAL_SOM
     
-    caminho_musica = os.path.join(config.PASTA_AUDIOS, MUSICA_MENU)
+    caminho_musica = os.path.join(config.PASTA_MUSICA, MUSICA_MENU)
     mixer = pygame.mixer.Sound(caminho_musica)
     GLOBAL_MIXER = mixer
     GLOBAL_MIXER.get_length()
