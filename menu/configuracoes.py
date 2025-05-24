@@ -2,6 +2,7 @@ import sys
 import pygame
 import main
 import configuracoes.variables as config
+import menu.menu as menu
 
 opcoes_menu = {
     1: "Volume",
@@ -226,6 +227,7 @@ def mudar_volume(volume_to_change):
     config.update_all_volumes()
 
     main.transicao(50)
+    menu.reiniciar_musica()
 
 
 def alterar_textos():

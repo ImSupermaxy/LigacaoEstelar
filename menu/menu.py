@@ -7,6 +7,8 @@ from fases import fases_menu
 from menu import configuracoes
 import configuracoes.variables as config
 import menu.manual as manual
+import assets.audios.manipuleraudio as maudio
+from datetime import datetime, timedelta
 
 primeira_opcao = "Iniciar" if not config.IsContinuacao else "Continuar"
 opcoes_menu = {
@@ -24,8 +26,13 @@ opcoes_menu_not_inicial = {
     3: opcoes_menu.get(4, ""),
     3: "Voltar ao menu"
 }
+data_to_loop = datetime.now()
+last_range = (datetime.now(), datetime.now())
+value_to_range = 2
+teste = 1
 
 def inicar_menu(is_calling_initial=True):
+    iniciar_musica()
     selecao_menu(is_calling_initial)
 
     pygame.display.update()
@@ -42,16 +49,23 @@ def selecao_menu(is_calling_initial=True):
     
     rodando = True
     while rodando:
+        loop = valida_to_loop()
+        if loop == True:
+            maudio.change_audio_to_loop(config.Volume_Musica)
+            iniciar_musica()
+
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 main.fechar_jogo()
             elif evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_UP:
+                    #Adicionar o áudio de mudar o menu AQUI:
                     if (opcao_atual - 1) > 0 :
                         opcao_atual -= 1
                     else:
                         opcao_atual = 1
                 elif evento.key == pygame.K_DOWN:
+                    #Adicionar o áudio de mudar o menu AQUI: (e dentro dos outros menus também... :/)
                     if opcao_atual < len(opcoes_menu):
                         opcao_atual += 1
                     else: 
@@ -67,6 +81,7 @@ def selecao_menu(is_calling_initial=True):
         
 
 def carregar_menu(is_calling_initial, draw_estrelas=False):
+    
     config.TELA.fill(config.BACKGROUND_JOGO)
     
     desenhar_selecao_menu(is_calling_initial)
@@ -74,21 +89,54 @@ def carregar_menu(is_calling_initial, draw_estrelas=False):
     if draw_estrelas:
         desenhar_menu()
     
-    if is_calling_initial:
-        desenhar_imagens_menu()
+    # if is_calling_initial:
+    #     desenhar_imagens_menu()
 
 
-def desenhar_imagens_menu():
-    global opcao_atual
+def iniciar_musica():
+    global data_to_loop
+    global teste
+    print("Quantidade vezes tocada música" + str(teste))
+    maudio.iniciar_musica_menu()
+    data_to_loop = maudio.get_data_to_loop(maudio.DATA_INICIAL_SOM)
+    teste += 1
+
+
+def reiniciar_musica():
+    maudio.parar_musica_atual()
+    pygame.time.delay(30)
+    iniciar_musica()
+    # maudio.update_volume_musica_atual(0)
+
+
+def valida_to_loop():
+    global last_range
     
-    # opcoes = opcoes_menu if is_calling_initial else opcoes_menu_not_inicial
-    # for i, texto in opcoes.items():
-    #     cor = SELECIONADO if i == opcao_atual else CINZA_CLARO
-    #     render = FONTE_MENU.render(texto, True, cor)
-    #     linha_posicao = PADDING_TOP + i * ESPACAMENTO_LINHA_MENU
-    #     TELA.blit(render, (PADDING_LEFT, linha_posicao))
-    #     pygame.time.delay(delay)
-    # pygame.display.update()
+    agora = datetime.now()
+    (last_min, last_max) = last_range
+    if agora >= last_min and agora <= last_max:
+        return False
+    
+    min = agora + timedelta(seconds=-value_to_range)
+    max = agora + timedelta(seconds=value_to_range)
+    if data_to_loop <= max and data_to_loop >= min:
+        last_range = (min, max)
+        return True
+    
+    return False
+
+
+# def desenhar_imagens_menu():
+#     global opcao_atual
+    
+#     # opcoes = opcoes_menu if is_calling_initial else opcoes_menu_not_inicial
+#     # for i, texto in opcoes.items():
+#     #     cor = SELECIONADO if i == opcao_atual else CINZA_CLARO
+#     #     render = FONTE_MENU.render(texto, True, cor)
+#     #     linha_posicao = PADDING_TOP + i * ESPACAMENTO_LINHA_MENU
+#     #     TELA.blit(render, (PADDING_LEFT, linha_posicao))
+#     #     pygame.time.delay(delay)
+#     # pygame.display.update()
 
     
 def desenhar_menu():

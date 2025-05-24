@@ -6,9 +6,15 @@ import historia.introducao as introducao
 import os
 from pathlib import Path
 
-pygame.font.init()
+def init_pygame():
+    pygame.font.init()
+    pygame.mixer.init()
 
+init_pygame()
 dados = mjson.get_variables_form_json()
+
+def atualiza_dados():
+    dados = mjson.get_variables_form_json()
 
 IsDevVar = dados["isDev"]
 # if IsDevVar:
@@ -60,6 +66,7 @@ caminho_arquivo = Path(__file__)
 RAIZ_PROJETO = caminho_arquivo.parent.parent.resolve()
 PASTA_ASSETS = os.path.join(RAIZ_PROJETO, "assets")
 PASTA_IMAGENS = os.path.join(PASTA_ASSETS, "imagens")
+PASTA_AUDIOS = os.path.join(PASTA_ASSETS, "audios")
 
 INFO_DISPLAY = pygame.display.Info()
 if IsFullSream:
@@ -80,13 +87,24 @@ FONTE_FINAL_FASE = pygame.font.SysFont("dejavuserif", 28)
 #--> CONFIGURAÇÕES DE INTERAÇÃO <--
 SELECIONADO = AZUL
 
+Volume = 0
+Volume_Efeitos = 0
+Volume_Dialogos = 0
+Volume_Musica = 0
 
 #--> CONFIGURAÇÕES DE VOLUME <--
-Volume = dados["volume"]["volumeMaster"]
-Volume_Efeitos = dados["volume"]["volumeEfeitos"]
-Volume_Dialogos = dados["volume"]["volumeDialogos"]
-Volume_Musica = dados["volume"]["volumeMusica"]
-
+def get_all_volumes():
+    global Volume
+    global Volume_Efeitos
+    global Volume_Dialogos
+    global Volume_Musica
+    
+    Volume  = dados["volume"]["volumeMaster"]
+    Volume_Efeitos = dados["volume"]["volumeEfeitos"]
+    Volume_Dialogos = dados["volume"]["volumeDialogos"]
+    Volume_Musica = dados["volume"]["volumeMusica"]
+    
+get_all_volumes()
 
 #--> CONFIGURAÇÕES DE VELOCIDADE <--
 VELOCIDADE_DIALOGOS = 100 #em % (alterar o delay e colocar o resto como porcentagem em relacão a esta variavel)
@@ -96,7 +114,6 @@ VELOCIDADE_DIALOGOS = 100 #em % (alterar o delay e colocar o resto como porcenta
 
 #--> CONFIGURAÇÕES HISTÓRIA <--
 PADDING_TOP_HISTORIA = PADDING_TOP - 150
-
 
 #--> INFO HISTÓRIA <-- (transformar em json e buscar de lá)
 # HISTORIA = historia.texto
@@ -204,6 +221,12 @@ def update_is_continuacao(value=True):
     dados["isContinuacao"] = value
     dados["texto"]["skipIntroducao"] = value
 
+
+def get_volume_musica() -> float:
+    teste = (Volume_Musica * (Volume / 100)) / 100
+    print("Volume: " + str(teste))
+    return teste
+
     
 def update_all_volumes():
     global Volume
@@ -211,10 +234,13 @@ def update_all_volumes():
     global Volume_Efeitos
     global Volume_Musica
     
-    dados["volume"]["volumeMaster"] = Volume 
+    dados["volume"]["volumeMaster"] = Volume
     dados["volume"]["volumeEfeitos"] = Volume_Efeitos
     dados["volume"]["volumeDialogos"] = Volume_Dialogos
     dados["volume"]["volumeMusica"] = Volume_Musica
+    update_variables_json()
+    atualiza_dados()
+    get_all_volumes()
     
 def update_all_texto():
     global skipIntroducao
