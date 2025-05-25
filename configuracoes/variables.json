@@ -2,6 +2,7 @@
     "isDev": false,
     "isContinuacao": false,
     "isFullScream": false,
+    "jogo_concluido": false,
     "video": {
         "width": 1520,
         "heigth": 750

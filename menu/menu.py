@@ -9,6 +9,9 @@ import configuracoes.variables as config
 import menu.manual as manual
 import assets.audios.manipuleraudio as maudio
 from datetime import datetime, timedelta
+import assets.imagens.manipulerimg as mimg
+import os
+import sys
 
 primeira_opcao = "Iniciar" if not config.IsContinuacao else "Continuar"
 opcoes_menu = {
@@ -49,11 +52,8 @@ def selecao_menu(is_calling_initial=True):
     
     rodando = True
     while rodando:
-        loop = valida_to_loop()
-        if loop == True:
-            maudio.change_audio_to_loop(config.Volume_Musica)
-            iniciar_musica()
-
+        loop_musica()
+        
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 main.fechar_jogo()
@@ -89,8 +89,10 @@ def carregar_menu(is_calling_initial, draw_estrelas=False):
     if draw_estrelas:
         desenhar_menu()
     
-    # if is_calling_initial:
-    #     desenhar_imagens_menu()
+    if is_calling_initial:
+        desenhar_imagens_menu()
+    
+    pygame.display.update()
 
 
 def iniciar_musica():
@@ -109,6 +111,12 @@ def reiniciar_musica():
     # maudio.update_volume_musica_atual(0)
 
 
+def loop_musica():
+    loop = valida_to_loop()
+    if loop == True:
+        maudio.change_audio_to_loop(config.Volume_Musica)
+        iniciar_musica()
+
 def valida_to_loop():
     global last_range
     
@@ -126,17 +134,25 @@ def valida_to_loop():
     return False
 
 
-# def desenhar_imagens_menu():
-#     global opcao_atual
+def desenhar_imagens_menu():
+    global opcao_atual
+    logo = "logo.jpg"    
+    imagem_original = mimg.get_imagem(os.path.join(config.PASTA_IMAGENS, logo))
     
-#     # opcoes = opcoes_menu if is_calling_initial else opcoes_menu_not_inicial
-#     # for i, texto in opcoes.items():
-#     #     cor = SELECIONADO if i == opcao_atual else CINZA_CLARO
-#     #     render = FONTE_MENU.render(texto, True, cor)
-#     #     linha_posicao = PADDING_TOP + i * ESPACAMENTO_LINHA_MENU
-#     #     TELA.blit(render, (PADDING_LEFT, linha_posicao))
-#     #     pygame.time.delay(delay)
-#     # pygame.display.update()
+    padding_img = 20
+    largura = imagem_original.get_width() // 10
+    altura = imagem_original.get_height() // 10
+    imagem = pygame.transform.scale(imagem_original, (largura, altura))
+    
+    config.TELA.blit(imagem, (config.LARGURA - imagem.get_width() - padding_img, padding_img))
+    # opcoes = opcoes_menu if is_calling_initial else opcoes_menu_not_inicial
+    # for i, texto in opcoes.items():
+    #     cor = SELECIONADO if i == opcao_atual else CINZA_CLARO
+    #     render = FONTE_MENU.render(texto, True, cor)
+    #     linha_posicao = PADDING_TOP + i * ESPACAMENTO_LINHA_MENU
+    #     TELA.blit(render, (PADDING_LEFT, linha_posicao))
+    #     pygame.time.delay(delay)
+    # pygame.display.update()
 
     
 def desenhar_menu():
@@ -163,8 +179,6 @@ def desenhar_selecao_menu(is_calling_initial, delay=0):
         linha_posicao = config.PADDING_TOP + i * config.ESPACAMENTO_LINHA_MENU
         config.TELA.blit(render, (config.PADDING_LEFT, linha_posicao))
         pygame.time.delay(delay)
-
-    pygame.display.update()
 
 
 def switch_to_opcao(opcao, is_calling_initial):

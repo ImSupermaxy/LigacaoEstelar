@@ -14,33 +14,17 @@ local_graph = copy.deepcopy(graph)
 
 # Estado
 # inicial_node = fase2.final_node
-inicial_node = "AJ"
-final_node = "Y"
+inicial_node = "Y"
+final_node = "AF"
 current_node = inicial_node
 visited_nodes = [current_node]
 visited_edges = set()
 NODE_RADIUS = 15
 soma_arestas = 0
-atual_fase = 4
+atual_fase = 5
 
 texto_introducao_fase = [
-    "\"Sabe... nunca entendi direito como a humanidade chegou onde está hoje. Nem nas aulas de história isso fazia sentido.\"",
-    "Você dá uma risada curta. ",
-    "\"Eu posso te contar. Sei um pouco por causa do meu antigo trabalho.\" No início, não existia esse ",
-    "domínio do espaço e nem a divisão entre planetas. Mas a falta de cuidado com o próprio lar sempre ",
-    "esteve lá. O que vemos agora no espaço já acontecia — em escala maior — e num só planeta. ",
-    "Depois de muito tempo negligenciando a Terra, ela entrou num estado irreversível, praticamente ",
-    "inabitável. As grandes potências mundiais, então, começaram a construir foguetes para evacuar o ",
-    "planeta. Mas, como sempre, as divergências políticas falaram mais alto. Cada nação decidiu colonizar ",
-    "um planeta diferente, e assim a humanidade acabou espalhada — e em constante conflito. ",
-    "Mas, obviamente, em poucos lugares isso é contado dessa forma. Revelar que as raízes da sociedade ",
-    "atual destruíram o primeiro planeta habitado pela humanidade gera desconfiança demais no sistema ",
-    "em que todos vivem. ",
-    "Bip. Bip. Bip. ",
-    "Algo apita do outro lado do rádio. Dá pra ouvir Raphael empurrando a cadeira, deslizando até o outro ",
-    "lado da cabine, e logo depois retornando ao comunicador. \"Vamos ter que deixar a hora da história ",
-    "pra depois.\" — ele diz, em tom de desapontamento. — \"Temos mais uma missão pra fazer.\" ",
-    "Você liga a nave. Os sistemas ganham vida e, sem pensar muito, parte para mais um dia de trabalho. "
+    "..."
 ]
 
 def reset():
@@ -52,8 +36,8 @@ def reset():
     global soma_arestas
     
     # inicial_node = fase2.final_node
-    inicial_node = "AJ"
-    final_node = "Y"
+    inicial_node = "Y"
+    final_node = "AF"
     current_node = inicial_node
     visited_nodes = [current_node]
     visited_edges = set()
@@ -62,7 +46,7 @@ def reset():
     
 def update_grafo(vertices_visitados):
     global local_arestas
-    if not config.OPEN_FASE_FOUR:
+    if not config.OPEN_FASE_FIVE:
         for i, vertice in enumerate(vertices_visitados):
             ligacao_vertices = local_arestas[vertice]
             for j, dict in enumerate(ligacao_vertices):
@@ -74,12 +58,12 @@ def update_grafo(vertices_visitados):
                             (vertice3, peso2) = dict2
                             if vertice3 == vertice:
                                 local_arestas[vertice2][u] = (vertice3, peso - 1)
-        config.OPEN_FASE_FOUR = True 
+        config.OPEN_FASE_FIVE = True 
 
 
 def desenhar_grafo():
     config.TELA.fill(config.BACKGROUND_JOGO)
-    main.desenhar_textos(["FASE 4"], config.ROXO2, 25, config.LARGURA - 140, False, config.FONTE_PESO)
+    main.desenhar_textos(["FASE 5"], config.ROXO2, 25, config.LARGURA - 140, False, config.FONTE_PESO)
     
     desenha_final.escreve_info_pesos(soma_arestas)
     
@@ -176,7 +160,7 @@ def escreve_introducao_final_fase(texto):
     main.aguardar(largura=(config.PADDING_LEFT + len(texto[len(texto) - 1]) * 11),altura=(altura_historia + (len(texto) * 40 - 40)), cor=config.COR_TEXTO)
 
 
-def quarta_fase_iniciar(resetar=True):
+def quinta_fase_iniciar(resetar=True):
     global soma_arestas
     global current_node
     global visited_nodes
@@ -203,7 +187,10 @@ def quarta_fase_iniciar(resetar=True):
     if resetar:
         reset()
 
-    last_clicked_node = visited_nodes[-1]
+    last_clicked_node = ""
+    if visited_edges != []:
+        last_clicked_node = visited_nodes[-1]
+        
     rodando = True
     while rodando:
         menu.loop_musica()
@@ -254,20 +241,13 @@ def quarta_fase_iniciar(resetar=True):
     # escreve_introducao_final_fase(texto_final_fase)
         
     texto_final_missao = [
-        "Você concluiu mais uma missão",
-        "Seu rendimento hoje foi muito bom ",
-        "seria legal se mais clientes assim ",
-        "fossem os seus com frequência ",
-        "Você se sente melhor ",
-        "Apesar de todo lixo ao seu redor ser significante",
-        "Respire, e siga o seu próximo destino",
-        "Descanse e aproveite as próximas horas",
-        "No congelante silêncio do espaço"
+        "..."
     ]
 
     caminho, soma_arestas_cpu = dijkstra(local_arestas, inicial_node, final_node)
     print(f'Caminho: {caminho}, Custo: {soma_arestas_cpu}')
     
+    config.dados["jogo_concluido"] = True    
     atualiza_dados_fase(atual_fase, visited_nodes, soma_arestas)
     
     desenha_final.desenha_final_missao(soma_arestas, soma_arestas_cpu, texto_final_missao)

@@ -1,9 +1,10 @@
 import os
 import main
-from fases import fase1, fase2, fase3, fase4#, fase5
+from fases import fase1, fase2, fase3, fase4, fase5
 import pygame
 import configuracoes.variables as config
 import menu.menu as menu
+import assets.imagens.manipulerimg as mimg
 
 def visualizar_fases():
     iniciar_menu()
@@ -33,7 +34,10 @@ def iniciar_fase(fase, resetar):
         case "fase 4":
             isFaseConcluida = fase4.quarta_fase_iniciar(resetar)
         case "fase 5":
-            print("Cinco")
+            isFaseConcluida = fase5.quinta_fase_iniciar(resetar)
+    
+    # if config.dados["jogo_concluido"]:
+        # colocar a tela de final de jogo aqui...
     
     if not isFaseConcluida:
         menu.inicar_menu()
@@ -226,10 +230,9 @@ def desenhar_resumo_missao(is_update_tela):
     }
     
     info_fase = config.get_info_resumo_fase(opcao_atual)
-    
-    pasta_atual = config.PASTA_IMAGENS
-    caminho = os.path.join(pasta_atual, info_fase["arquivo_planeta"])
-    imagem_original = pygame.image.load(caminho)
+
+    imagem = info_fase["arquivo_planeta"]
+    imagem_original = mimg.get_imagem(imagem)
 
     imagem = imagem_original
     # Redimensionar a imagem (por exemplo, para 50% do tamanho original)

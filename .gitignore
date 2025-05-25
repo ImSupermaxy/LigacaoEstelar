@@ -36,3 +36,5 @@ configuracoes/variables.json
 assets/audios/__pycache__/manipuleraudio.cpython-311.pyc
 fases/__pycache__/fase3.cpython-311.pyc
 fases/__pycache__/fase4.cpython-311.pyc
+assets/imagens/__pycache__/manipulerimg.cpython-311.pyc
+fases/__pycache__/fase5.cpython-311.pyc

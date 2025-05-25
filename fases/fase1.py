@@ -174,6 +174,7 @@ def primeira_fase_iniciar(resetar=True):
     last_clicked_node = visited_nodes[-1]
     rodando = True
     while rodando:
+        menu.loop_musica()
         desenhar_grafo()
         
         for event in pygame.event.get():
