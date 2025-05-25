@@ -21,7 +21,7 @@
         "destino": "Cygnus",
         "dificuldade": "Fácil",
         "arquivo_cliente": "",
-        "arquivo_planeta": "Planeta-fase-1.jpg",
+        "arquivo_planeta": "Planeta-fase-1.png",
         "soma": 0,
         "visitados": []
     },
@@ -49,7 +49,7 @@
         "destino": "Virgo",
         "dificuldade": "Fácil",
         "arquivo_cliente": "",
-        "arquivo_planeta": "Planeta-fase-2.jpg",
+        "arquivo_planeta": "Planeta-fase-2.png",
         "soma": 0,
         "visitados": []
     },
@@ -77,7 +77,7 @@
         "destino": "Peixes",
         "dificuldade": "Médio",
         "arquivo_cliente": "",
-        "arquivo_planeta": "Planeta-fase-3.jpg",
+        "arquivo_planeta": "Planeta-fase-3.png",
         "soma": 0,
         "visitados": []
     },
@@ -105,7 +105,7 @@
         "destino": "Corvus",
         "dificuldade": "Difícil",
         "arquivo_cliente": "",
-        "arquivo_planeta": "Planeta-fase-4.jpg",
+        "arquivo_planeta": "Planeta-fase-4.png",
         "soma": 0,
         "visitados": []
     },
@@ -132,7 +132,7 @@
         "destino": "",
         "dificuldade": "Difícil",
         "arquivo_cliente": "",
-        "arquivo_planeta": "Planeta-fase-5.jpg",
+        "arquivo_planeta": "Planeta-fase-5.png",
         "soma": 0,
         "visitados": []
     }

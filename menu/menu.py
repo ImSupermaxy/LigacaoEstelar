@@ -136,7 +136,7 @@ def valida_to_loop():
 
 def desenhar_imagens_menu():
     global opcao_atual
-    logo = "logo.jpg"    
+    logo = "logo.png"    
     imagem_original = mimg.get_imagem(os.path.join(config.PASTA_IMAGENS, logo))
     
     padding_img = 20
