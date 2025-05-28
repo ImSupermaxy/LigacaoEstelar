@@ -1,12 +1,15 @@
 # 🚀 Ligação Estelar
 
-**Resumo:** Ligação estelar é um jogo que busca oferecer entreterimento para o usuario enquanto exercita o raciocinio logico e aborta temas como poluição e meio ambiente, visando concientizar e criticar praticas relacionadas ao descarte de lixo. O jogo se passa em uma distopia futurista onde o protagonista é um piloto de nave espacial que trabalha em uma empresa de limpeza de rotas interplanetarias e segurança e tem como objetivo principal limpar caminhos no espaço, que está coberto de residuos, para chegar ao destino em que seu cliente deseja. Junto com  seu companheiro de trabalho, que traça rotas, verfica a quantidade de destroços e o-atualiza sobre as especificações de cada possibilidade de caminho. 
+**Resumo:** Ligação Estelar é um jogo que busca oferecer entretenimento ao usuário enquanto estimula o raciocínio lógico e aborda temas como poluição e meio ambiente. O jogo se passa em uma distopia futurista, onde o protagonista é um piloto de nave espacial que trabalha em uma empresa especializada em limpeza de rotas interplanetárias e segurança. Seu objetivo principal é limpar os caminhos no espaço — agora cobertos por resíduos — para garantir que seus clientes cheguem com segurança ao destino desejado.
 
 ---
 
 ## 🎯 Objetivo
 
-Descreva com mais detalhes os objetivos do projeto. O que o sistema resolve? Qual a motivação? Como ele se relaciona com o conteúdo da disciplina?
+Nosso projeto tem como principais objetivos conscientizar e criticar práticas relacionadas ao descarte de lixo, ao mesmo tempo em que oferece entretenimento ao jogador. Além disso, busca estimular o raciocínio lógico por meio de desafios envolvendo cálculos de peso total das rotas (arestas) e premiar o desempenho com uma pontuação proporcional à eficiência da escolha do caminho.
+Embora ambientado em um universo fictício, o projeto aborda um problema real: o descarte massivo de lixo no espaço, agravado pelo avanço tecnológico e pela falta de responsabilidade ambiental. A narrativa imagina um futuro onde o excesso de resíduos gerou até mesmo novas profissões, como a construção de naves com partes reaproveitadas e a limpeza de corredores espaciais, essenciais para garantir viagens seguras entre planetas. Essa ficção permite uma crítica social sobre os rumos da humanidade em relação ao meio ambiente, incentivando o jogador a refletir sobre sustentabilidade e consequências a longo prazo das ações humanas.
+O jogo se baseia em conceitos de grafo com o espaço sendo representado como um grafo conexo, ponderado e não direcionado, onde os vértices representam planetas e as arestas, os caminhos possíveis entre eles. Como o lixo espacial tornou alguns caminhos mais perigosos ou inviáveis, é necessário encontrar a rota mais segura e eficiente. Para isso, o sistema utiliza o Algoritmo de Dijkstra, que permite identificar o trajeto com menor peso (menor quantidade de destroços), validando o desempenho do jogador com base na escolha do caminho e sua semelhança com o trajeto tomado pelo Dijkstra.
+
 
 ---
 
