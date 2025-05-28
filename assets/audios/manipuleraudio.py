@@ -57,6 +57,19 @@ def parar_musica_atual():
     GLOBAL_MIXER.stop()
 
 
+def play_efeito_sonoro(nome, loop=False):
+    mixer = get_audio_by_nome(nome)
+    mixer.set_volume(config.get_volume_efeitos())
+    if loop:
+        mixer.play(-1)
+    else:
+        mixer.play()
+    return mixer
+
+def get_audio_by_nome(caminho_arquivo):
+    mixer = pygame.mixer.Sound(os.path.join(config.PASTA_AUDIOS, caminho_arquivo))
+    return mixer
+
 # def carregar_sons(pasta):
 #     sons = {}
 #     for nome_arquivo in os.listdir(pasta):

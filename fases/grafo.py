@@ -161,7 +161,7 @@ def dijkstra(grafo, inicio, destino):
         custo, atual, caminho = heapq.heappop(fila)
 
         if atual == destino:
-            return caminho, custo  # Caminho e custo total
+            return caminho, custo  #Caminho e custo total
 
         if atual in visitado:
             continue

@@ -3,6 +3,8 @@ import sys
 from menu import menu
 import configuracoes.variables as config
 import historia.introducao as introducao
+import assets.audios.manipuleraudio as maudio
+from datetime import datetime, timedelta
 
 # Inicializa o pygame
 pygame.init()
@@ -21,20 +23,30 @@ def desenhar_textos(linhas, cor=config.COR_TEXTO, altura=config.PADDING_TOP,larg
 
 
 # Escreve uma linha com efeito de digitação
-def digitar_lento(linha, linhas_anteriores, delay=50, cor=config.COR_TEXTO, altura=config.PADDING_TOP, largura=config.PADDING_LEFT, fonte=config.FONTE):
-    texto_atual = ""    
+def digitar_lento(linha, linhas_anteriores, delay=50, cor=config.COR_TEXTO, altura=config.PADDING_TOP, largura=config.PADDING_LEFT, fonte=config.FONTE, som=False):
+    texto_atual = ""
+    mixer = maudio.GLOBAL_MIXER
+    if som:
+        mixer = maudio.play_efeito_sonoro(config.AUDIO_TEXTO, True)
+    
     for char in linha:
         texto_atual += char
         linhas_para_mostrar = linhas_anteriores + [texto_atual]
         desenhar_textos(linhas_para_mostrar, cor, altura=altura, largura=largura, fonte=fonte)
+            
         pygame.time.delay(delay)
 
         for evento in pygame.event.get():
             if evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_SPACE or evento.key == pygame.K_RETURN:
+                    if som:
+                        mixer.stop()
                     return True
             elif evento.type == pygame.QUIT:
                 fechar_jogo()
+
+    if som:
+        mixer.stop()
     return False
 
 
@@ -71,7 +83,7 @@ def aguardar(texto="...",largura=0,altura=0, cor=config.COR_TEXTO, delay=200):
     while esperando:
         # fonte = FONTE.render(texto, True, cor)
         # TELA.blit(fonte, (largura, altura))
-        esperando = not digitar_lento(texto, [], 150, cor=cor, altura=altura, largura=largura)
+        esperando = not digitar_lento(texto, [], 150, cor=cor, altura=altura, largura=largura, som=False)
         pygame.display.update()
         
         tmp = cor

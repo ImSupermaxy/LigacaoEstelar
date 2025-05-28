@@ -35,7 +35,9 @@ value_to_range = 2
 teste = 1
 
 def inicar_menu(is_calling_initial=True):
-    iniciar_musica()
+    if is_calling_initial:
+        maudio.parar_musica_atual()
+        iniciar_musica()
     selecao_menu(is_calling_initial)
 
     pygame.display.update()
@@ -52,29 +54,30 @@ def selecao_menu(is_calling_initial=True):
     
     rodando = True
     while rodando:
-        loop_musica()
-        
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 main.fechar_jogo()
             elif evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_UP:
-                    #Adicionar o áudio de mudar o menu AQUI:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if (opcao_atual - 1) > 0 :
                         opcao_atual -= 1
                     else:
                         opcao_atual = 1
                 elif evento.key == pygame.K_DOWN:
-                    #Adicionar o áudio de mudar o menu AQUI: (e dentro dos outros menus também... :/)
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if opcao_atual < len(opcoes_menu):
                         opcao_atual += 1
                     else: 
                         opcao_atual = len(opcoes_menu)
                 elif evento.key == pygame.K_RETURN:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_FASE)
                     switch_to_opcao(opcao_atual, is_calling_initial)
                 elif not is_calling_initial:
                     if evento.key == pygame.K_ESCAPE:
+                        maudio.play_efeito_sonoro(config.AUDIO_DESELECAO_FASE)
                         rodando = False
+        loop_musica()
         # pygame.time.delay(150)
         # carregar_menu(is_calling_initial, True)
         carregar_menu(is_calling_initial)

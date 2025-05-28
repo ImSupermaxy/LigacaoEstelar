@@ -5,6 +5,7 @@ import pygame
 import configuracoes.variables as config
 import menu.menu as menu
 import assets.imagens.manipulerimg as mimg
+import assets.audios.manipuleraudio as maudio
 
 def visualizar_fases():
     iniciar_menu()
@@ -93,19 +94,23 @@ def open_resumo_fase():
                 main.fechar_jogo()
             elif evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_ESCAPE:
+                    maudio.play_efeito_sonoro(config.AUDIO_DESELECAO_FASE)
                     rodando = False
                     opcoes_menu = [
                         "Voltar",
                     ]
                     opcao_menu_atual = 0
                 elif evento.key == pygame.K_RETURN:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_FASE)
                     rodando = not switch_to_opcao()
                 elif evento.key == pygame.K_UP:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if opcao_menu_atual - 1 < 1:
                         opcao_menu_atual = 1
                     else:
                         opcao_menu_atual = opcao_menu_atual - 1
                 elif evento.key == pygame.K_DOWN:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if opcao_menu_atual + 1 > 3:
                         opcao_menu_atual = 1
                     else:
@@ -147,18 +152,21 @@ def selecao_fases():
                 main.fechar_jogo()
             elif evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_DOWN:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if opcao_menu_atual == 0:
                         if opcao_atual + 3 > 5:
                             opcao_atual = 5
                         else:
                             opcao_atual = opcao_atual + 3
                 if evento.key == pygame.K_UP:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if opcao_menu_atual == 0:
                         if opcao_atual - 3 < 1:
                             opcao_atual = 1
                         else:
                             opcao_atual = opcao_atual - 3
                 elif evento.key == pygame.K_LEFT:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if opcao_atual - 1 < 1:
                         if opcao_atual == 1:
                             opcao_atual = opcao_atual - 1
@@ -166,14 +174,17 @@ def selecao_fases():
                     else:
                         opcao_atual = opcao_atual - 1
                 elif evento.key == pygame.K_RIGHT:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     opcao_menu_atual = 0
                     if opcao_atual + 1 > 5:
                         opcao_atual = 5
                     else:
                         opcao_atual = opcao_atual + 1
                 elif evento.key == pygame.K_RETURN:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_FASE)
                     rodando = not switch_to_opcao()
                 elif evento.key == pygame.K_ESCAPE:
+                    maudio.play_efeito_sonoro(config.AUDIO_DESELECAO_FASE)
                     rodando = False
 
 

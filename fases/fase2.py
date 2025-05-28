@@ -8,6 +8,7 @@ import fases.final_fase as desenha_final
 import copy
 from fases.grafo import nos, arestas, graph, dijkstra, atualiza_dados_fase, calcula_peso_arestas, get_linhas_visitadas
 import fases.fase1 as fase1
+import assets.audios.manipuleraudio as maudio
 
 local_nos = copy.deepcopy(nos)
 local_arestas = copy.deepcopy(arestas)
@@ -163,10 +164,12 @@ def escreve_introducao_final_fase(texto):
     linhas_mostradas = []
     delay_linha = 40
     delay_paragrafo = 580
+    emit_sound = True
     for i, paragrafo in enumerate(texto):
-        pular = main.digitar_lento(paragrafo, linhas_mostradas, delay_linha, altura=altura_historia)
+        pular = main.digitar_lento(paragrafo, linhas_mostradas, delay_linha, altura=altura_historia, som=emit_sound)
         linhas_mostradas.append(paragrafo)
         if pular:
+            emit_sound = False
             delay_linha = 0
             delay_paragrafo = 30
         main.pygame.time.delay(delay_paragrafo)
@@ -223,6 +226,7 @@ def segunda_fase_iniciar(resetar=True):
                     if clicked_node in local_graph[current_node]:
                         edge = tuple(sorted((current_node, clicked_node)))
                         if edge not in visited_edges and clicked_node not in visited_nodes:
+                            maudio.play_efeito_sonoro(config.AUDIO_SELECAO_FASE)
                             visited_edges.add(edge)
                             soma_arestas += get_peso_aresta(clicked_node)
                         elif clicked_node == last_clicked_node:
@@ -233,6 +237,7 @@ def segunda_fase_iniciar(resetar=True):
                             last_clicked_node = current_node
                             current_node = clicked_node
                         elif clicked_node == last_clicked_node:
+                            maudio.play_efeito_sonoro(config.AUDIO_DESELECAO_FASE)
                             visited_nodes.remove(current_node)
                             current_node = last_clicked_node
                             if last_clicked_node != inicial_node:
@@ -242,6 +247,7 @@ def segunda_fase_iniciar(resetar=True):
                         if clicked_node == final_node:
                             rodando = False
                     else:
+                        maudio.play_efeito_sonoro(config.AUDIO_DESELECAO_FASE)
                         print("Movimento inválido: esse nó não é vizinho do atual.")
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:

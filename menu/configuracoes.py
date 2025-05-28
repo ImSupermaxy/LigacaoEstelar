@@ -3,6 +3,7 @@ import pygame
 import main
 import configuracoes.variables as config
 import menu.menu as menu
+import assets.audios.manipuleraudio as maudio
 
 opcoes_menu = {
     1: "Volume",
@@ -45,19 +46,23 @@ def selecao_menu():
                 main.fechar_jogo()
             elif evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_UP:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if (opcao_atual - 1) > 0 :
                         opcao_atual -= 1
                     else:
                         opcao_atual = 1
                 elif evento.key == pygame.K_DOWN:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if (opcao_atual + 1) < len(opcoes_menu):
                         opcao_atual += 1
                     else: 
                         opcao_atual = len(opcoes_menu)
                 elif evento.key == pygame.K_ESCAPE:
+                    maudio.play_efeito_sonoro(config.AUDIO_DESELECAO_FASE)
                     rodando = False
                     break
                 elif evento.key == pygame.K_RETURN:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_FASE)
                     rodando = False
                     is_switch_to_opcao = True
         desenhar_selecao_menu()
@@ -107,6 +112,7 @@ def alterar_volume():
                 main.fechar_jogo()
             elif evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_UP:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if opcao_volume_atual == 0:
                         opcao_volume_atual = 1
                     elif (opcao_volume_atual - 1) > 0 :
@@ -114,6 +120,7 @@ def alterar_volume():
                     else:
                         opcao_volume_atual = 1
                 elif evento.key == pygame.K_DOWN:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if opcao_volume_atual == 0:
                         opcao_volume_atual = 1
                     elif (opcao_volume_atual + 1) < len(opcoes_volume):
@@ -121,8 +128,10 @@ def alterar_volume():
                     else: 
                         opcao_volume_atual = len(opcoes_volume)
                 elif evento.key == pygame.K_RETURN:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_FASE)
                     change_volume(posicoes_y)
                 elif evento.key == pygame.K_ESCAPE:
+                    maudio.play_efeito_sonoro(config.AUDIO_DESELECAO_FASE)
                     opcao_volume_atual = 1
                     rodando_volume = False
         
@@ -164,15 +173,19 @@ def change_volume(alturas):
                 main.fechar_jogo()
             elif evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_LEFT:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if valor_to_change > 0:
                         valor_to_change -= 5
                 elif evento.key == pygame.K_RIGHT:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if valor_to_change < 100:
                         valor_to_change += 5
                 elif evento.key == pygame.K_RETURN:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_FASE)
                     mudar_volume(valor_to_change)
                     rodando = False
                 elif evento.key == pygame.K_ESCAPE:
+                    maudio.play_efeito_sonoro(config.AUDIO_DESELECAO_FASE)
                     exibir_volume_to_change(altura, "", "")
                     rodando = False    
 
@@ -241,6 +254,7 @@ def alterar_textos():
                 main.fechar_jogo()
             elif evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_UP:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if opcao_texto_atual == 0:
                         opcao_texto_atual = 1
                     elif (opcao_texto_atual - 1) > 0 :
@@ -248,6 +262,7 @@ def alterar_textos():
                     else:
                         opcao_texto_atual = 1
                 elif evento.key == pygame.K_DOWN:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if opcao_texto_atual == 0:
                         opcao_texto_atual = 1
                     elif (opcao_texto_atual + 1) < len(opcoes_textos):
@@ -255,8 +270,10 @@ def alterar_textos():
                     else: 
                         opcao_texto_atual = len(opcoes_textos)
                 elif evento.key == pygame.K_RETURN:
+                    maudio.play_efeito_sonoro(config.AUDIO_SELECAO_FASE)
                     change_texto(posicoes_y)
                 elif evento.key == pygame.K_ESCAPE:
+                    maudio.play_efeito_sonoro(config.AUDIO_DESELECAO_FASE)
                     opcao_texto_atual = 1
                     rodando_texto = False
         

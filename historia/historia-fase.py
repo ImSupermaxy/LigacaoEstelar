@@ -49,10 +49,12 @@ def mostrar_historia_fase(fase_atual):
         linhas_mostradas = []
         delay_linha = 45
         delay_paragrafo = 620
+        emit_sound = True
         for i, paragrafo in enumerate(TEXTO):
-            pular = main.digitar_lento(paragrafo, linhas_mostradas, delay_linha, altura=altura_historia)
+            pular = main.digitar_lento(paragrafo, linhas_mostradas, delay_linha, altura=altura_historia, som=emit_sound)
             linhas_mostradas.append(paragrafo)
             if pular:
+                emit_sound = False
                 delay_linha = 0
                 delay_paragrafo = 30
 

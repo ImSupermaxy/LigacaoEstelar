@@ -134,10 +134,12 @@ def desenha_final_missao(soma_arestas_usuario, soma_arestas_cpu, texto=[], largu
     delay_linha = 50
     
     linhas_mostradas = []
+    emit_sound = True
     for i, paragrafo in enumerate(texto):
-        pular = main.digitar_lento(paragrafo, linhas_mostradas, delay_linha, config.CINZA_CLARO, altura=altura_texto, largura=largura_texto, fonte=config.FONTE_FINAL_FASE)
+        pular = main.digitar_lento(paragrafo, linhas_mostradas, delay_linha, config.CINZA_CLARO, altura=altura_texto, largura=largura_texto, fonte=config.FONTE_FINAL_FASE, som=emit_sound)
         linhas_mostradas.append(paragrafo)
         if pular:
+            emit_sound = False
             delay_linha = 0
             delay_paragrafo = 30
 
