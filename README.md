@@ -1,6 +1,6 @@
 # 🚀 Ligação Estelar
 
-**Resumo:** Descreva aqui em 2 ou 3 linhas o propósito geral do seu projeto. Explique de forma clara e objetiva a solução proposta e seu contexto de aplicação.
+**Resumo:** Ligação estelar é um jogo que busca oferecer entreterimento para o usuario enquanto exercita o raciocinio logico e aborta temas como poluição e meio ambiente, visando concientizar e criticar praticas relacionadas ao descarte de lixo. O jogo se passa em uma distopia futurista onde o protagonista é um piloto de nave espacial que trabalha em uma empresa de limpeza de rotas interplanetarias e segurança e tem como objetivo principal limpar caminhos no espaço, que está coberto de residuos, para chegar ao destino em que seu cliente deseja. Junto com  seu companheiro de trabalho, que traça rotas, verfica a quantidade de destroços e o-atualiza sobre as especificações de cada possibilidade de caminho. 
 
 ---
 
