@@ -25,7 +25,23 @@ soma_arestas = 0
 atual_fase = 5
 
 texto_introducao_fase = [
-    "..."
+    "\"Cara, ainda tô impressionado com a quantidade de naves de escolta que ele tinha. O sujeito deve ser realmente importante.\" — ",
+    "diz Raphael, ainda surpreso. \"No relatório dizia que ele era do alto escalão, mas com aquela segurança toda... ",
+    "provavelmente era o presidente. Ou o vice.\" — você responde, com o tom de quem entende de protocolos militares.",
+    "\"De acordo com os boatos, eles querem dar um jeito nesse lixo todo. Parece que nem os mais ricos aguentam mais. ",
+    "Estão falando em financiar alguma iniciativa pra resolver isso de vez. Acho ótimo… mas fico pensando como vai ficar o nosso ",
+    "trabalho depois disso.\" — comenta Raphael, pensativo. \"Talvez acabem colocando a gente pra escoltar gente importante ",
+    "por aí. Não seria um público tão diferente.\" — você ri. — \"Mas duvido que aceitem minha nave pra isso.\" ",
+    "\"Dizem que quando o piloto é bom, a nave pouco importa. E você é um dos melhores que eu já vi—\" ",
+    "",
+    "Bip. Bip. Bip. ",
+    "",
+    "\"Falando em futuro... parece que temos uma grande surpresa.\" — Raphael ri. — \"Prepara a nave e sua ",
+    "melhor roupa… e aproveita, terror dos destroços, que essa pode ser sua última missão com esse título.\" ",
+    "Você sorri sozinho, olhando para o painel diante de si. Suas mãos percorrem os controles com precisão. ",
+    "A nave ganha vida, luzes piscam ao redor e o motor começa a vibrar suavemente. ",
+    "Você respira fundo. ",
+    "\"Vamos ver o que me espera dessa vez.\"",
 ]
 
 def reset():
@@ -196,7 +212,7 @@ def quinta_fase_iniciar(resetar=True):
         
     rodando = True
     while rodando:
-        menu.loop_musica()
+        maudio.parar_musica_atual()
         desenhar_grafo()
         
         for event in pygame.event.get():

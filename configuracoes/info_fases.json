@@ -44,7 +44,7 @@
             "contente. Finalmente, sua companheira de jornada vai receber ",
             "os upgrades que tanto merece. "
         ],
-        "cliente": "Caio H. Nowak",
+        "cliente": "Isabelle H. Nowak",
         "planeta": "Cetus",
         "destino": "Virgo",
         "dificuldade": "Fácil",
@@ -127,9 +127,9 @@
             "consegue descrever, mas logo se acalma. Mesmo que seja seu ",
             "último serviço, ainda há muito trabalho pela frente."
         ],
-        "cliente": "",
-        "planeta": "",
-        "destino": "",
+        "cliente": "Arthur Servero",
+        "planeta": "Ursa Maior",
+        "destino": "Andromeda",
         "dificuldade": "Difícil",
         "arquivo_cliente": "",
         "arquivo_planeta": "Planeta-fase-5.png",
