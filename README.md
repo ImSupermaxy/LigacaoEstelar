@@ -158,7 +158,7 @@ python main.py
 |------|--------|
 | Matheus Morais | [@ImSupermaxy](https://github.com/ImSupermaxy) |
 | Lucas Dias | [@eepymistdev](https://github.com/eepymistdev) |
-
+| Gustavo Milanezi | [@ciclano](https://github.com/ciclano) |
 ---
 
 ## 🧠 Disciplinas Envolvidas
