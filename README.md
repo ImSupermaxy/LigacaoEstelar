@@ -50,6 +50,7 @@ Liste as principais tecnologias, linguagens, frameworks e bibliotecas utilizadas
 │   ├── fase5.py
 │   ├── fases_menu.py
 │   ├── final_fase.py
+│   ├── final_jogo.py
 │   └── grafo.py
 ├── 📁 historia
 │   ├── historia-fase.py
@@ -105,10 +106,23 @@ python main.py
   ### Menu Inicial
   
   ![image](https://github.com/user-attachments/assets/9855d67e-56a9-4043-b4ed-2a258b9a7995)
-
+  
+  
   O primeiro menu visivel assim que se executa o jogo. 
 
+
+  ### Primeira Fase
+
   ![image](https://github.com/user-attachments/assets/535f6436-637c-4a97-ba4a-44c92b7c76fd)
+
+  
+  Grafo da primeira fase sem nenhuma alteração feita 
+
+  
+  https://github.com/user-attachments/assets/64e53c66-c013-48ea-94b6-d88bf17cb95e
+
+  
+  Demostração de como funciona o jogo
 
   
 
