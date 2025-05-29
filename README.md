@@ -1,6 +1,6 @@
 # 🚀 Ligação Estelar
 
-**Resumo:** Ligação Estelar é um jogo que busca oferecer entretenimento ao usuário enquanto estimula o raciocínio lógico e aborda temas como poluição e meio ambiente. O jogo se passa em uma distopia futurista, onde o protagonista é um piloto de nave espacial que trabalha em uma empresa especializada em limpeza de rotas interplanetárias e segurança. Seu objetivo principal é limpar os caminhos no espaço — agora cobertos por resíduos — para garantir que seus clientes cheguem com segurança ao destino desejado.
+ Ligação Estelar é um jogo que busca oferecer entretenimento ao usuário enquanto estimula o raciocínio lógico e aborda temas como poluição e meio ambiente. O jogo se passa em uma distopia futurista, onde o protagonista é um piloto de nave espacial que trabalha em uma empresa especializada em limpeza de rotas interplanetárias e segurança. Seu objetivo principal é limpar os caminhos no espaço — agora cobertos por resíduos — para garantir que seus clientes cheguem com segurança ao destino desejado.
 
 ---
 
@@ -102,15 +102,15 @@ python main.py
 
 ## 📸 Demonstrações
 
-Inclua aqui prints, gifs ou vídeos mostrando a interface ou o funcionamento do sistema:
-
-- Tela inicial
-- Exemplo de funcionalidade
-- Resultados esperados
-
+  ### Menu Inicial
+  
   ![image](https://github.com/user-attachments/assets/9855d67e-56a9-4043-b4ed-2a258b9a7995)
 
+  O primeiro menu visivel assim que se executa o jogo. 
+
   ![image](https://github.com/user-attachments/assets/535f6436-637c-4a97-ba4a-44c92b7c76fd)
+
+  
 
   ![image](https://github.com/user-attachments/assets/4cb348bb-56eb-418a-8e7d-2183e1c348fe)
 
