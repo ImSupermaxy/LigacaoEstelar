@@ -138,8 +138,8 @@ Execute o comando no teclado: CRL + F5
   ---
 
   ### Menu de fases
-  
-  ![image](https://github.com/user-attachments/assets/d27ffbe8-c6c7-40a5-9428-3b2c4fdebac9)
+
+  ![image](https://github.com/user-attachments/assets/559a1b65-d7df-489f-a732-7794f19ffd0e)
 
 
     Menu com as cinco fases, ao entrar na fase, é mostrado o resumo abaixo: 
