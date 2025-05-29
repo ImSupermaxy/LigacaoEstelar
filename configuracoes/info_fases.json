@@ -23,6 +23,7 @@
         "arquivo_cliente": "",
         "arquivo_planeta": "Planeta-fase-1.png",
         "soma": 0,
+        "is_concluded": false,
         "visitados": []
     },
     "2": {
@@ -51,6 +52,7 @@
         "arquivo_cliente": "",
         "arquivo_planeta": "Planeta-fase-2.png",
         "soma": 0,
+        "is_concluded": false,
         "visitados": []
     },
     "3": {
@@ -79,6 +81,7 @@
         "arquivo_cliente": "",
         "arquivo_planeta": "Planeta-fase-3.png",
         "soma": 0,
+        "is_concluded": false,
         "visitados": []
     },
     "4": {
@@ -107,6 +110,7 @@
         "arquivo_cliente": "",
         "arquivo_planeta": "Planeta-fase-4.png",
         "soma": 0,
+        "is_concluded": false,
         "visitados": []
     },
     "5": {
@@ -134,6 +138,7 @@
         "arquivo_cliente": "",
         "arquivo_planeta": "Planeta-fase-5.png",
         "soma": 0,
+        "is_concluded": false,
         "visitados": []
     }
 }
