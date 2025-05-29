@@ -21,11 +21,6 @@ Liste as principais tecnologias, linguagens, frameworks e bibliotecas utilizadas
 - pip keyboard 0.13.5
 - pip mutagen  1.47.0
 - pip pygame   2.6.1
-- Streamlit / FastAPI / Flask
-- SQLite / PostgreSQL
-- React / HTML + CSS + JS
-- Graphviz / NetworkX (caso use grafos)
-- Outros...
 
 
 ---
@@ -42,6 +37,7 @@ Liste as principais tecnologias, linguagens, frameworks e bibliotecas utilizadas
 │   ├── manipulerjson.py
 │   ├── variables.json
 │   └── variables.py
+├── 📁 exemplos_modelos
 ├── 📁 fases
 │   ├── fase1.py
 │   ├── fase2.py
@@ -90,13 +86,17 @@ source venv/bin/activate  # ou venv\Scripts\activate no Windows
 3. Instale as dependências:
 
 ```
-pip install -r requirements.txt
+pip install pygame==2.6.1
+pip install mutagen==1.47.0
+pip install pygame==2.6.1
 ```
 
 4. Execute a aplicação:
 
 ```
 python main.py
+(Pelo Visual Studio Code)
+Execute o comando no teclado: CRL + F5
 ```
 
 ---
