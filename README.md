@@ -108,7 +108,7 @@ python main.py
   ![image](https://github.com/user-attachments/assets/9855d67e-56a9-4043-b4ed-2a258b9a7995)
   
   
-  O primeiro menu visivel assim que se executa o jogo. 
+    O primeiro menu visivel assim que se executa o jogo. 
 
   --- 
 
@@ -117,13 +117,13 @@ python main.py
   ![image](https://github.com/user-attachments/assets/535f6436-637c-4a97-ba4a-44c92b7c76fd)
 
   
-  Grafo da primeira fase sem nenhuma alteração feita 
+    Grafo da primeira fase sem nenhuma alteração feita 
 
   
   https://github.com/user-attachments/assets/64e53c66-c013-48ea-94b6-d88bf17cb95e
 
   
-  Demostração de como funciona o jogo
+    Demostração de como funciona o jogo
 
   ---
 
@@ -132,7 +132,7 @@ python main.py
   ![image](https://github.com/user-attachments/assets/4cb348bb-56eb-418a-8e7d-2183e1c348fe)
 
 
-  Informações sobre o desempenho do jogador na fase 
+    Informações sobre o desempenho do jogador na fase 
 
 
   ---
@@ -142,7 +142,7 @@ python main.py
   ![image](https://github.com/user-attachments/assets/d27ffbe8-c6c7-40a5-9428-3b2c4fdebac9)
 
 
-  Menu com as cinco fases, ao entrar na fase, é mostrado o resumo abaixo: 
+    Menu com as cinco fases, ao entrar na fase, é mostrado o resumo abaixo: 
 
   
 
