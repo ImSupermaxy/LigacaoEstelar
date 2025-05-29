@@ -8,6 +8,7 @@ import fases.final_fase as desenha_final
 import copy
 from fases.grafo import nos, arestas, graph, dijkstra, atualiza_dados_fase, calcula_peso_arestas, get_linhas_visitadas
 import assets.audios.manipuleraudio as maudio
+import fases.final_jogo as final
 
 local_nos = copy.deepcopy(nos)
 local_arestas = copy.deepcopy(arestas)
@@ -185,7 +186,7 @@ def quinta_fase_iniciar(resetar=True):
     global visited_nodes
     global visited_edges
     
-    if (config.dados["fases"]["atual"] <= atual_fase or resetar) and not config.SkipHistoria:
+    if resetar and not config.SkipHistoria:
         escreve_introducao_final_fase(texto_introducao_fase)
         config.TELA.fill(config.BACKGROUND_JOGO)
 
@@ -263,14 +264,24 @@ def quinta_fase_iniciar(resetar=True):
     # escreve_introducao_final_fase(texto_final_fase)
         
     texto_final_missao = [
-        "..."
+        "Parece que este é o final de um ciclo",
+        "Você sente como se algo estivesse prestes ",
+        "a mudar... ",
+        "Como se fosse a ponta de uma flecha ",
+        "seguindo em direção a uma nova era ",
+        "Seus esforços estão sendo recoompensados",
+        "Suas ações fizeram a diferença",
+        "Quase como se praias inteiras fossem",
+        "limpas e retornacem a sua forma de pura areia",
+        "Não descanse ainda, tem muito mais a ser feito."
     ]
 
     caminho, soma_arestas_cpu = dijkstra(local_arestas, inicial_node, final_node)
     print(f'Caminho: {caminho}, Custo: {soma_arestas_cpu}')
     
     config.dados["jogo_concluido"] = True    
-    atualiza_dados_fase(atual_fase, visited_nodes, soma_arestas)
+    atualiza_dados_fase(atual_fase, visited_nodes, soma_arestas, False)
     
     desenha_final.desenha_final_missao(soma_arestas, soma_arestas_cpu, texto_final_missao)
+    final.desenha_final_jogo()
     return True

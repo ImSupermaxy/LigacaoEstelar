@@ -192,7 +192,7 @@ def switch_to_opcao(opcao, is_calling_initial):
         case "Iniciar":
             fases_menu.iniciar_fase(config.FASE_ATUAL, True)
         case "Continuar":
-            fases_menu.iniciar_fase(config.FASE_ATUAL, True)
+            fases_menu.iniciar_fase(config.FASE_ATUAL, ...)
         case "Config":
             configuracoes.iniciar_menu()
         case "Fases":

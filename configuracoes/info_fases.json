@@ -22,9 +22,23 @@
         "dificuldade": "Fácil",
         "arquivo_cliente": "",
         "arquivo_planeta": "Planeta-fase-1.png",
-        "soma": 0,
-        "is_concluded": false,
-        "visitados": []
+        "soma": 68,
+        "is_concluded": true,
+        "visitados": [
+            "A",
+            "D",
+            "E",
+            "C",
+            "J",
+            "K",
+            "M",
+            "N",
+            "P",
+            "R",
+            "AI",
+            "AL",
+            "AP"
+        ]
     },
     "2": {
         "resumo": [
@@ -51,9 +65,20 @@
         "dificuldade": "Fácil",
         "arquivo_cliente": "",
         "arquivo_planeta": "Planeta-fase-2.png",
-        "soma": 0,
-        "is_concluded": false,
-        "visitados": []
+        "soma": 44,
+        "is_concluded": true,
+        "visitados": [
+            "AK",
+            "AO",
+            "AI",
+            "R",
+            "U",
+            "AE",
+            "L",
+            "I",
+            "H",
+            "G"
+        ]
     },
     "3": {
         "resumo": [

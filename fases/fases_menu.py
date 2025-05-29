@@ -25,30 +25,39 @@ def iniciar_fase(fase, resetar):
     
     match fase:
         case "fase 1":
+            if resetar:
+                config.reset_fases_of_atual(1)
             isFaseConcluida = fase1.primeira_fase_iniciar(resetar)
             config.update_is_continuacao()
         case "fase 2":
+            if resetar:
+                config.reset_fases_of_atual(2)
             isFaseConcluida = fase2.segunda_fase_iniciar(resetar)
-            # print("Dois")
         case "fase 3":
+            if resetar:
+                config.reset_fases_of_atual(3)
             isFaseConcluida = fase3.terceira_fase_iniciar(resetar)
         case "fase 4":
+            if resetar:
+                config.reset_fases_of_atual(4)
             isFaseConcluida = fase4.quarta_fase_iniciar(resetar)
         case "fase 5":
+            if resetar:
+                config.reset_fases_of_atual(5)
             isFaseConcluida = fase5.quinta_fase_iniciar(resetar)
     
     # if config.dados["jogo_concluido"]:
         # colocar a tela de final de jogo aqui...
     
-    if not isFaseConcluida:
+    if not isFaseConcluida or fase == "fase 5":
         menu.inicar_menu()
 
 
 def iniciar_menu():
-    global fases_concluidas
     global opcao_atual
     global opcoes_menu
     global opcao_menu_atual
+    global fases_concluidas
     
     opcoes_menu = [
         "Voltar",
@@ -57,12 +66,11 @@ def iniciar_menu():
     opcao_menu_atual = 0
     opcao_atual = config.dados["fases"]["atual"]
     
-    if not config.dados["fases"]["isAllCompleted"]:
-        for i in range(len(config.FASES), 0, -1):
-            if i < opcao_atual:
-                fases_concluidas.append(config.FASES[i - 1])
-    else:
-        fases_concluidas = config.FASES
+    i = 1
+    fases_concluidas = []
+    while i <= len(config.FASES_CONCLUIDAS):
+        fases_concluidas.append(config.FASES[config.FASES_CONCLUIDAS[i - 1] - 1])
+        i = i + 1
     
     selecao_fases()
 
@@ -108,13 +116,19 @@ def open_resumo_fase():
                     if opcao_menu_atual - 1 < 1:
                         opcao_menu_atual = 1
                     else:
-                        opcao_menu_atual = opcao_menu_atual - 1
+                        if config.FASES[opcao_atual - 1] not in fases_concluidas:
+                            opcao_menu_atual = 1
+                        else:
+                            opcao_menu_atual = opcao_menu_atual - 1
                 elif evento.key == pygame.K_DOWN:
                     maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if opcao_menu_atual + 1 > 3:
                         opcao_menu_atual = 1
                     else:
-                        opcao_menu_atual = opcao_menu_atual + 1
+                        if config.FASES[opcao_atual - 1] not in fases_concluidas and opcao_menu_atual == 1:
+                            opcao_menu_atual = opcao_menu_atual + 2
+                        else:
+                            opcao_menu_atual = opcao_menu_atual + 1
 
 def switch_to_opcao():
     global opcoes_menu
@@ -154,8 +168,8 @@ def selecao_fases():
                 if evento.key == pygame.K_DOWN:
                     maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     if opcao_menu_atual == 0:
-                        if opcao_atual + 3 > 5:
-                            opcao_atual = 5
+                        if opcao_atual + 3 > config.dados["fases"]["atual"]:
+                            opcao_atual = config.dados["fases"]["atual"]
                         else:
                             opcao_atual = opcao_atual + 3
                 if evento.key == pygame.K_UP:
@@ -176,8 +190,8 @@ def selecao_fases():
                 elif evento.key == pygame.K_RIGHT:
                     maudio.play_efeito_sonoro(config.AUDIO_SELECAO_MENU)
                     opcao_menu_atual = 0
-                    if opcao_atual + 1 > 5:
-                        opcao_atual = 5
+                    if opcao_atual + 1 > config.dados["fases"]["atual"]:
+                        opcao_atual = config.dados["fases"]["atual"]
                     else:
                         opcao_atual = opcao_atual + 1
                 elif evento.key == pygame.K_RETURN:
@@ -192,7 +206,7 @@ def desenha_opces_menu(update_tela = False):
     config.TELA.fill(config.BACKGROUND_JOGO)
     
     for i, texto in enumerate(opcoes_menu):
-        cor = config.SELECIONADO if i == opcao_menu_atual - 1 else config.CINZA_CLARO
+        cor = config.SELECIONADO if i == opcao_menu_atual - 1 else config.CINZA_FASES_MENU if i == 1 and config.FASES[opcao_atual - 1] not in fases_concluidas else config.COR_TEXTO
         render = config.FONTE.render(texto, True, cor)
          
         posicao_inicial = 320
@@ -305,7 +319,7 @@ def desenhar_selecao_fases(update_tela = False):
 
     i2 = 1
     for i, texto in enumerate(config.FASES):
-        cor = config.SELECIONADO if (i + 1) == opcao_atual else config.AMARELO if texto in fases_concluidas else config.CINZA_CLARO
+        cor = config.SELECIONADO if (i + 1) == opcao_atual else config.AMARELO if texto in fases_concluidas else config.CINZA_FASES_MENU if i + 1 > config.dados["fases"]["atual"] else config.COR_TEXTO
         render = config.FONTE.render(texto, True, cor)
          
         linha_posicao = padding_left_caixa_fase + (i + 1) * espacamento_caixa_fase

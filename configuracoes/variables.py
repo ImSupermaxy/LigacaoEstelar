@@ -14,6 +14,7 @@ init_pygame()
 dados = mjson.get_variables_form_json()
 
 def atualiza_dados():
+    global dados
     dados = mjson.get_variables_form_json()
 
 IsDevVar = dados["isDev"]
@@ -36,6 +37,7 @@ AZUL = (50, 100, 255)
 AZUL_CLARO = (3, 207, 252)
 CINZA = (180, 180, 180)
 CINZA_CLARO = (210, 210, 210)
+CINZA_FASES_MENU = (136, 139, 142)
 AMARELO = (255, 255, 0)
 LARANJA = (254, 127, 0)
 ROXO = (137, 44, 220)
@@ -155,6 +157,7 @@ Segunda_Fase_Vertices_Visitados = []
 Terceira_Fase_Vertices_Visitados = []
 Quarta_Fase_Vertices_Visitados = []
 Quinta_Fase_Vertices_Visitados = []
+FASES_CONCLUIDAS = []
 
 total_peso_fases = dados["fases"]["total"]
 
@@ -178,11 +181,11 @@ def get_all_vertices_visitados():
 
 def update_total(fase):
     global total_peso_fases
+    global dados
     
     info = mjson.get_variables_form_json(ARQUIVO_INFO_FASE)
     
     total = 0
-    
     i = 1
     while i <= fase:
         total += info[str(i)]["soma"]
@@ -207,11 +210,34 @@ def update_vertices_visitados(fase, visitados):
     get_all_vertices_visitados()
     
 
+def get_fases_concluidas():
+    global FASES_CONCLUIDAS
+    
+    info = mjson.get_variables_form_json(ARQUIVO_INFO_FASE)
+    FASES_CONCLUIDAS = []
+    
+    i = 1
+    while i <= len(FASES):
+        valor = info[str(i)]["is_concluded"]
+        if valor == True:
+            FASES_CONCLUIDAS.append(i)
+        i = i + 1
+
+
+def update_fase_concluida(fase, valor=True):
+    info = mjson.get_variables_form_json(ARQUIVO_INFO_FASE)
+    info[str(fase)]["is_concluded"] = valor
+    mjson.update_variables_json(info, ARQUIVO_INFO_FASE)
+    get_fases_concluidas()
+
+
 def update_fase_atual(fase):
     global FASE_ATUAL
-    dados["fases"]["atual"] = fase
+    global dados
     
+    dados["fases"]["atual"] = fase
     FASE_ATUAL = FASES[dados["fases"]["atual"] - 1]
+    mjson.update_variables_json(dados)
 
 
 def get_info_resumo_fase(opcao):
@@ -224,6 +250,8 @@ def update_variables_json():
     
 def update_is_continuacao(value=True):
     global IsContinuacao
+    global dados
+    
     IsContinuacao = value
     dados["isContinuacao"] = value
     dados["texto"]["skipIntroducao"] = value
@@ -245,6 +273,7 @@ def update_all_volumes():
     global Volume_Dialogos
     global Volume_Efeitos
     global Volume_Musica
+    global dados
     
     dados["volume"]["volumeMaster"] = Volume
     dados["volume"]["volumeEfeitos"] = Volume_Efeitos
@@ -258,9 +287,28 @@ def update_all_texto():
     global skipIntroducao
     global SkipDialogos
     global SkipHistoria
+    global dados
     
     dados["texto"]["skipIntroducao"] = skipIntroducao 
     dados["texto"]["skipDialogos"] = SkipDialogos
     dados["texto"]["skipHistoria"] = SkipHistoria
+
+
+def reset_fases_of_atual(fase_atual):
+    info = mjson.get_variables_form_json(ARQUIVO_INFO_FASE)
     
+    i = fase_atual
+    while i <= len(FASES):
+        info[str(i)]["soma"] = 0
+        info[str(i)]["is_concluded"] = False
+        info[str(i)]["visitados"] = []
+        i = i + 1
+
+    mjson.update_variables_json(info, ARQUIVO_INFO_FASE)
+    update_fase_atual(fase_atual)
+    update_total(fase_atual)
+    get_fases_concluidas()
+    
+
+get_fases_concluidas()
 get_all_vertices_visitados()

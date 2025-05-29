@@ -1,41 +1,19 @@
 FAZENDO:
-- (FEITO) Fazer o menu de fases
-    - Fazer a limitação de qual até qual fase o jogador vai poder selecionar no menu de fases
-        - só mudar o valor máximo do if na seleção do menu (if i + 1 > 5) etc...
-    - Deixar a "próxima fase" branca, como se fosse possível chegar nela
-
-- Terminar a frase de conclusão de fases da fase 4
-- (FEITO) Mudar o grafo para um arquivo só e obter ele de lá
-    - (FEITO) Todas as fazes seguintes devem fazer o "cálculo" dos pesos dos grafos de acordo com esse grafo geral
-        Seguindo o caminho das fases anteriores até a atual, ou seja, se estiver na 3 fase, ele calcula o grafo da fase 2
-        passando pelo caminho feito na fase 1, para depois calcular o da fase 3, sendo feito pelo caminho passado pela fase 2.
-    - Caso o jogador esteja na 4 fase e volte, rejogando a segunda, limpar o array de vertices visitados da 3 fase.  
-
-- Ajeitar tela de conclusão de fase
-
-- (FEITO) Adicionar um manual para explicar como o jogo funciona, e as lógicas
-    - (FEITO) Todas as fases terão o mesmo gráfico como base
-    - (FEITO) Conforme você for passando por uma aresta (o peso dela diminuirá de uma fase para outra)
-    - (FEITO) Você terá um limite máximo para todo o jogo de "capacidade de lixo"
-    - (Exibir durante as fases a quantidade de "lixos" obtidos durante a fase) - (Exibir o total máximo e a soma por fases também)
-
-- Adicionar lógica da variável isDevVar, caso seja true, quando iniciar o programa voltar as configurações padrão do jogo
-    Lógico só deixar ativa depois de testar tudo né... KKKKKKKKKKKKKKKK
-
-- Atualizar as variáveis de PADDING ou relacionadas a tela, para uma % da altura / largura da tela 
-- Enfeitar o Menu principal (ta meio complicado...)
-- (Será que dá?...) Adicionar um inicio legal, com transição para o menu
-
+- (MELHORIA) Adicionar no menu (enquanto estiver em alguma fase) a opção de "sair e salvar"
+- (MELHORIA) Adicionar botão de restartar a fase no menu (dentro de uma fase)
+- (MELHORIA) Salvar o progresso da fase, quando fechado o jogo ou quando sair da fase
+- (MELHORIA) Quando fechar o jogo pela janela, salvar as informações também... (adcionar essa lógica, isso não acontece)
+- (MELHORIA) Não salvar o grafo quando o jogador só sair, salvar apenas quando clicar em "sair e salvar"
+- (MELHORIA) Adicionar músicas para cada fase
 
 PENDENTE:
-- Adicionar botão de restartar a fase no menu (dentro de uma fase)
-- Salvar o progresso da fase, quando fechado o jogo ou quando sair da fase
-- Adicionar no menu (enquanto estiver em alguma fase) a opção de "sair e salvar"
-- Quando fechar o jogo pela janela, salvar as informações também... (adcionar essa lógica, isso não acontece)
-- Não salvar o grafo quando o jogador só sair, salvar apenas quando clicar em "sair e salvar"
-- Adicionar os sons da hitória no tempo certo em que ela é digitada (pegar o som do sans ou undertale quando aparece algum texto...)
-- Adicionar as músicas da primeira fase
-- Fazer a tela de conclusão do jogo
+- (MELHORIA) Adicionar as músicas da primeira fase
+- (DEPOIS) Atualizar as variáveis de PADDING ou relacionadas a tela, para uma % da altura / largura da tela 
+- (NÃO) Enfeitar o Menu principal (ta meio complicado...)
+- (Será que dá?... - NÃO) Adicionar um inicio legal, com transição para o menu
+- (DEPOIS) Adicionar lógica da variável isDevVar, caso seja true, quando iniciar o programa voltar as configurações padrão do jogo
+    Lógico só deixar ativa depois de testar tudo né... KKKKKKKKKKKKKKKK
+- (DEPOIS) Ajeitar tela de conclusão de fase
 
 
 FEITO:
@@ -63,3 +41,19 @@ FEITO:
     - (FEITO) Adicioanr a lógica de peercorrer o grafo após ele chegar ao destino (Djikstra)
     - (FEITO) Fazer a tela de conclusão de fases
 - (FEITO) Adicionar a música do menu (e fazer o loop dela corretamente)
+- (FEITO) Fazer o menu de fases
+    - (FEITO) Fazer a limitação de qual até qual fase o jogador vai poder selecionar no menu de fases
+        - só mudar o valor máximo do if na seleção do menu (if i + 1 > 5) etc...
+- (FEITO) Mudar o grafo para um arquivo só e obter ele de lá
+    - (FEITO) Todas as fazes seguintes devem fazer o "cálculo" dos pesos dos grafos de acordo com esse grafo geral
+        Seguindo o caminho das fases anteriores até a atual, ou seja, se estiver na 3 fase, ele calcula o grafo da fase 2
+        passando pelo caminho feito na fase 1, para depois calcular o da fase 3, sendo feito pelo caminho passado pela fase 2.
+    - (FEITO) Caso o jogador esteja na 4 fase e volte, rejogando a segunda, limpar o array de vertices visitados da 3 fase.  
+- (FEITO) Terminar a frase de conclusão de fases da fase 4
+- (FEITO) Adicionar um manual para explicar como o jogo funciona, e as lógicas
+    - (FEITO) Todas as fases terão o mesmo gráfico como base
+    - (FEITO) Conforme você for passando por uma aresta (o peso dela diminuirá de uma fase para outra)
+    - (FEITO) Você terá um limite máximo para todo o jogo de "capacidade de lixo"
+    - (FEITO) (Exibir durante as fases a quantidade de "lixos" obtidos durante a fase) - (Exibir o total máximo e a soma por fases também)
+- (FEITO) Fazer a tela de conclusão do jogo
+- (FEITO) Adicionar os sons da hitória no tempo certo em que ela é digitada (pegar o som do sans ou undertale quando aparece algum texto...)
