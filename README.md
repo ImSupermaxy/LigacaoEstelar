@@ -172,7 +172,7 @@ python main.py
 ## 🏫 Informações Acadêmicas
 
 - Universidade: **Universidade Braz Cubas**
-- Curso: **Ciência da Computação / Análise e Desenvolvimento de Sistemas**
+- Curso: **Análise e Desenvolvimento de Sistemas**
 - Semestre: 3º
 - Período: Noite
 - Professora orientadora: **Dra. Andréa Ono Sakai**
