@@ -30,20 +30,40 @@ Liste as principais tecnologias, linguagens, frameworks e bibliotecas utilizadas
 
 ---
 
-## 🗂️ Estrutura do Projeto
-
-Caso o projeto tenha uma estrutura de pastas significativa, insira aqui um diagrama com os diretórios principais:
-
-A estrutura a seguir é um exemplo. Vocês devem usar a estrutura do seu projeto obrigatóriamente. 
+## 🗂️ Estrutura do Projeto 
 ```
-📦 nome-do-projeto
-├── 📁 app
-│   ├── main.py
-│   ├── models/
-│   ├── views/
-│   └── utils/
-├── README.md
-└── requirements.txt
+📦 LigacaoEstelar
+├── 📁 assets
+│   ├── 📁 audios
+│   ├── 📁 imagens
+│   └── 📁 musicas
+├── 📁 configuracoes
+│   ├── info_fases.json
+│   ├── manipulerjson.py
+│   ├── variables.json
+│   └── variables.py
+├── 📁 fases
+│   ├── fase1.py
+│   ├── fase2.py
+│   ├── fase3.py
+│   ├── fase4.py
+│   ├── fase5.py
+│   ├── fases_menu.py
+│   ├── final_fase.py
+│   └── grafo.py
+├── 📁 historia
+│   ├── historia-fase.py
+│   ├── introducao.py
+│   └── tutorial.py
+├── 📁 menu
+│   ├── configuracoes.py
+│   ├── manual.py
+│   └── menu.py
+├── 📁 notas
+├── .gitignore
+├── main.py
+└── README.md
+
 ```
 
 ---
@@ -88,14 +108,29 @@ Inclua aqui prints, gifs ou vídeos mostrando a interface ou o funcionamento do 
 - Exemplo de funcionalidade
 - Resultados esperados
 
+  ![image](https://github.com/user-attachments/assets/9855d67e-56a9-4043-b4ed-2a258b9a7995)
+
+  ![image](https://github.com/user-attachments/assets/535f6436-637c-4a97-ba4a-44c92b7c76fd)
+
+  ![image](https://github.com/user-attachments/assets/4cb348bb-56eb-418a-8e7d-2183e1c348fe)
+
+  ![image](https://github.com/user-attachments/assets/d27ffbe8-c6c7-40a5-9428-3b2c4fdebac9)
+
+  ![image](https://github.com/user-attachments/assets/9f23770d-9e33-48e2-8c65-18dac6591e97)
+
+
+  
+
+
+
 ---
 
 ## 👥 Equipe
 
 | Nome | GitHub |
 |------|--------|
-| Fulano da Silva | [@fulano](https://github.com/fulano) |
-| Ciclano Souza | [@ciclano](https://github.com/ciclano) |
+| Matheus Morais | [@ImSupermaxy](https://github.com/ImSupermaxy) |
+| Lucas Dias | [@eepymistdev](https://github.com/eepymistdev) |
 
 ---
 
