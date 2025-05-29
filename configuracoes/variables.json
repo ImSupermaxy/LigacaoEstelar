@@ -1,6 +1,6 @@
 {
     "isDev": false,
-    "isContinuacao": true,
+    "isContinuacao": false,
     "isFullScream": false,
     "jogo_concluido": false,
     "video": {
@@ -8,21 +8,21 @@
         "heigth": 750
     },
     "texto": {
-        "skipIntroducao": true,
+        "skipIntroducao": false,
         "skipHistoria": false,
         "skipDialogos": false,
         "velocidade": 100
     },
     "volume": {
-        "volumeMaster": 50,
+        "volumeMaster": 100,
         "volumeEfeitos": 100,
         "volumeDialogos": 100,
         "volumeMusica": 0
     },
     "fases": {
-        "atual": 3,
+        "atual": 1,
         "isAllCompleted": false,
         "auto_atualiza": true,
-        "total": 112
+        "total": 0
     }
 }
