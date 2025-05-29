@@ -110,6 +110,7 @@ python main.py
   
   O primeiro menu visivel assim que se executa o jogo. 
 
+  --- 
 
   ### Primeira Fase
 
@@ -124,19 +125,31 @@ python main.py
   
   Demostração de como funciona o jogo
 
-  
+  ---
 
+  ### Conclusão de fase
+  
   ![image](https://github.com/user-attachments/assets/4cb348bb-56eb-418a-8e7d-2183e1c348fe)
 
+
+  Informações sobre o desempenho do jogador na fase 
+
+
+  ---
+
+  ### Menu de fases
+  
   ![image](https://github.com/user-attachments/assets/d27ffbe8-c6c7-40a5-9428-3b2c4fdebac9)
+
+
+  Menu com as cinco fases, ao entrar na fase, é mostrado o resumo abaixo: 
+
+  
 
   ![image](https://github.com/user-attachments/assets/9f23770d-9e33-48e2-8c65-18dac6591e97)
 
 
   
-
-
-
 ---
 
 ## 👥 Equipe
