@@ -1,8 +1,0 @@
-- JOGO:
-    - Os grafos terão peso, e serão somando a quantidade de peso conforme ele for passando pelas arestas
-    - A soma desses pessos irão refletir no limite global do quanto o "equipamento" de limpeza suporta 
-        (excedido esse limite você não consegue prosseguir e concluir seus trabalhos)
-    - Após concluir a fase aparecerá o ranking de conclusão (que será calculado a partir da melhor solução para percorrer o grafo e concluir a fase)
-        - Que será percorrido com a lógica Djikstra
-    - As arestas percorridas e seus pesos irão ser enviados para a próxima fase, e serão subtraídos da próxima fase
-    - 
