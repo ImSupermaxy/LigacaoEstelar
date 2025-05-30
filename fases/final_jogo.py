@@ -13,7 +13,7 @@ CREDITOS = {
     "Jogo feito por: ": "",
     "Desenvolvimento: ": "Matheus Morais",
     "Roteirização: ": "Lucas Dias",
-    "Musica e Audio: ": "Gustavo Milanezi",
+    "Musica e Audio: ": "Gustavo Milanezi, Undertale - (by: Tobby FOX)",
     "Produção Geral: ": "Matheus Morais, Lucas Dias, Gustavo Milanezi",
     "Testes": "Lucas Dias",
     "Documentação: ": "Lucas Dias",

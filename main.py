@@ -5,6 +5,7 @@ import configuracoes.variables as config
 import historia.introducao as introducao
 import assets.audios.manipuleraudio as maudio
 from datetime import datetime, timedelta
+from historia import game_over as go 
 
 # Inicializa o pygame
 pygame.init()
@@ -133,6 +134,10 @@ def fechar_jogo():
 # Início
 def main():
     config.TELA.fill(config.BACKGROUND_JOGO)
+    # if config.IsDevVar:
+    #   go.desenha_final_jogo()
+    #   return;
+    
     pygame.display.update()
     
     if not config.skipIntroducao:
