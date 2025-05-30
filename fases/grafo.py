@@ -205,5 +205,6 @@ def atualiza_dados_fase(fase_atual, visitados, soma, change_fase_atual=True):
     config.update_total(fase_atual)
     
     if config.fases_auto_atualiza and change_fase_atual:
+        config.update_is_continuacao(True)
         config.update_fase_concluida(fase_atual)
         config.update_fase_atual(fase_atual + 1)

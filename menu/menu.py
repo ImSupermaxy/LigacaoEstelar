@@ -73,6 +73,8 @@ def selecao_menu(is_calling_initial=True):
                 elif evento.key == pygame.K_RETURN:
                     maudio.play_efeito_sonoro(config.AUDIO_SELECAO_FASE)
                     switch_to_opcao(opcao_atual, is_calling_initial)
+                    primeira_opcao = "Iniciar" if not config.IsContinuacao else "Continuar"
+                    opcoes_menu[1] = primeira_opcao
                 elif not is_calling_initial:
                     if evento.key == pygame.K_ESCAPE:
                         maudio.play_efeito_sonoro(config.AUDIO_DESELECAO_FASE)
