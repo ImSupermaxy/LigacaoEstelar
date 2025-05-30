@@ -101,7 +101,7 @@ def carregar_menu(is_calling_initial, draw_estrelas=False):
 def iniciar_musica():
     global data_to_loop
     global teste
-    print("Quantidade vezes tocada música" + str(teste))
+    # print("Quantidade vezes tocada música" + str(teste))
     maudio.iniciar_musica_menu()
     data_to_loop = maudio.get_data_to_loop(maudio.DATA_INICIAL_SOM)
     teste += 1
@@ -192,7 +192,7 @@ def switch_to_opcao(opcao, is_calling_initial):
         case "Iniciar":
             fases_menu.iniciar_fase(config.FASE_ATUAL, True)
         case "Continuar":
-            fases_menu.iniciar_fase(config.FASE_ATUAL, False)
+            fases_menu.iniciar_fase(config.FASE_ATUAL, True)
         case "Config":
             configuracoes.iniciar_menu()
         case "Fases":

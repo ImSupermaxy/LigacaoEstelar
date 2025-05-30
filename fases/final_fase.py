@@ -22,7 +22,7 @@ import main
 #F-: 5-9%
 #...: 0-4%
 
-max_peso_fases = 200
+max_peso_fases = config.MAX_PESOS_VERTICES
 
 def obtem_ranking_by_soma_arestas(soma_usuario, soma_cpu):
     if soma_cpu == 0:

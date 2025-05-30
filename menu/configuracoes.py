@@ -220,7 +220,7 @@ def get_volume_to_change(opcao):
 
 def mudar_volume(volume_to_change):
     global opcao_volume_atual
-    print(volume_to_change)
+    # print(volume_to_change)
     
     match opcao_volume_atual:
         case 1:

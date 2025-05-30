@@ -33,8 +33,8 @@ def get_variables_form_json(nome_arquivo=NOMEJSON):
 
 def update_variables_json(dados, nome_arquivo=NOMEJSON):
     global pasta_atual
-    localConfiguracao = "mainpuler json PUT: "
-    print(localConfiguracao, dados)
+    # localConfiguracao = "mainpuler json PUT: "
+    # print(localConfiguracao, dados)
     
     caminho_json = os.path.join(pasta_atual, nome_arquivo)
     

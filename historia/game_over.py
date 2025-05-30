@@ -1,4 +1,3 @@
-#PEGAR MUSICA DE GAME OVER DE UNDERTALE
 import main
 import pygame
 import configuracoes.variables as config
@@ -15,7 +14,7 @@ opcoes_menu = {
     3: "Fechar jogo"
 }
 
-def desenha_final_jogo():
+def desenha_game_over():
     config.TELA.fill(config.BACKGROUND_JOGO)
     
     desenha_texto()

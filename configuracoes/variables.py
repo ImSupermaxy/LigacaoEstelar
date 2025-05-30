@@ -81,7 +81,7 @@ AUDIO_SELECAO_FASE = "som_selecao_undertale.mp3"
 AUDIO_DESELECAO_FASE = "som_deselecionado_undertale.mp3"
 AUDIO_SELECAO_MENU = "som_selecao_teste.mp3"
 AUDIO_TEXTO = "som_texto_toriel.mp3"
-
+MAX_PESOS_VERTICES = 200
 
 #--> CONFIGURAÇÕES DO MENU <--
 FONTE_MENU = pygame.font.SysFont("calibri", 32)
@@ -259,7 +259,7 @@ def update_is_continuacao(value=True):
 
 def get_volume_musica() -> float:
     teste = (Volume_Musica * (Volume / 100)) / 100
-    print("Volume Música: " + str(teste))
+    # print("Volume Música: " + str(teste))
     return teste
 
 

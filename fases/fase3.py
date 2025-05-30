@@ -9,6 +9,7 @@ import copy
 from fases.grafo import nos, arestas, graph, dijkstra, atualiza_dados_fase, calcula_peso_arestas, get_linhas_visitadas
 import fases.fase2 as fase2
 import assets.audios.manipuleraudio as maudio
+from historia import game_over as go
 
 local_nos = copy.deepcopy(nos)
 local_arestas = copy.deepcopy(arestas)
@@ -187,7 +188,7 @@ def terceira_fase_iniciar(resetar=True):
     global visited_nodes
     global visited_edges
     
-    if (config.dados["fases"]["atual"] <= atual_fase or resetar) and not config.SkipHistoria:
+    if atual_fase not in config.FASES_CONCLUIDAS and resetar and not config.SkipHistoria:
         escreve_introducao_final_fase(texto_introducao_fase)
         config.TELA.fill(config.BACKGROUND_JOGO)
 
@@ -218,12 +219,6 @@ def terceira_fase_iniciar(resetar=True):
             if event.type == pygame.QUIT:
                 main.fechar_jogo()
 
-            if all_nodes_visited():
-                rodando = False
-                text = config.FONTE_GRAFO.render("Todos os nós foram visitados!", True, config.BRANCO)
-                config.TELA.blit(text, (config.LARGURA // 2 - 200, 50))
-                pygame.display.flip()
-
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 clicked_node = get_node_clicked(event.pos)
                 if clicked_node is not None:
@@ -249,6 +244,8 @@ def terceira_fase_iniciar(resetar=True):
                             else:
                                 last_clicked_node = inicial_node
                         if clicked_node == final_node:
+                            if config.total_peso_fases + soma_arestas > config.MAX_PESOS_VERTICES:
+                                go.desenha_game_over()
                             rodando = False
                     else:
                         maudio.play_efeito_sonoro(config.AUDIO_DESELECAO_FASE)

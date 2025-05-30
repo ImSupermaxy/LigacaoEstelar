@@ -41,11 +41,11 @@ def desenha_texto():
 
 
 def desenha_creditos():
-    padding_creditos = 550
+    padding_creditos = 680
     altura = config.ALTURA - (len(CREDITOS) * 40)
     largura = config.LARGURA
     for tema, paragrafo in CREDITOS.items():
-        render = config.FONTE.render(tema, False, config.AZUL_CLARO2)
+        render = config.FONTE.render(tema, False, config.AMARELO)
         config.TELA.blit(render, (largura - padding_creditos, altura))
         altura = altura + 40
         
@@ -63,4 +63,4 @@ def desenha_final_jogo():
     config.TELA.fill(config.BACKGROUND_JOGO)
     desenha_texto()
     desenha_creditos()
-    main.aguardar_confirmacao(altura=config.ALTURA - 50, largura=config.LARGURA // 2 - (12 * 40))
+    main.aguardar_confirmacao(altura=config.ALTURA - 50, largura=config.LARGURA // 2 - (12 * 40), cor=config.AZUL_CLARO2)

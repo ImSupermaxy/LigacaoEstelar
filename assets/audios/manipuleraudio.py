@@ -46,10 +46,10 @@ def update_som_atual(som):
 
 
 def update_volume_musica_atual(volume:float):
-    print("Valor para atualizar: " + str(volume))
-    print("Antes: " + str(GLOBAL_MIXER.get_volume()))
+    # print("Valor para atualizar: " + str(volume))
+    # print("Antes: " + str(GLOBAL_MIXER.get_volume()))
     GLOBAL_MIXER.set_volume(volume)
-    print("Atualizado: " + str(GLOBAL_MIXER.get_volume()))
+    # print("Atualizado: " + str(GLOBAL_MIXER.get_volume()))
     
 
 def parar_musica_atual():

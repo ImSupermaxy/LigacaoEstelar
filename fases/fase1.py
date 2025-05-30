@@ -8,6 +8,7 @@ import fases.final_fase as desenha_final
 import copy
 from fases.grafo import nos, arestas, graph, dijkstra, atualiza_dados_fase, calcula_peso_arestas, get_linhas_visitadas
 import assets.audios.manipuleraudio as maudio
+from historia import game_over as go
 
 local_nos = copy.deepcopy(nos)
 local_arestas = copy.deepcopy(arestas)
@@ -156,8 +157,8 @@ def escreve_introducao_final_fase(texto):
 
 
 def primeira_fase_iniciar(resetar=True):
-    print("Linha 249 - fase1.py: ", config.dados["isContinuacao"])
-    if (config.dados["fases"]["atual"] <= 1 or resetar) and not config.SkipHistoria:
+    # print("Linha 249 - fase1.py: ", config.dados["isContinuacao"])
+    if  1 not in config.FASES_CONCLUIDAS and resetar and not config.SkipHistoria:
         escreve_introducao_final_fase(texto_introducao_fase)
         config.TELA.fill(config.BACKGROUND_JOGO)
     
@@ -173,7 +174,7 @@ def primeira_fase_iniciar(resetar=True):
     if resetar:
         atualiza_dados_fase(1, [], 0, False)
         reset()
-    
+
     last_clicked_node = visited_nodes[-1]
     rodando = True
     while rodando:
@@ -183,12 +184,6 @@ def primeira_fase_iniciar(resetar=True):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 main.fechar_jogo()
-
-            if all_nodes_visited():
-                rodando = False
-                text = config.FONTE_GRAFO.render("Todos os nós foram visitados!", True, config.BRANCO)
-                config.TELA.blit(text, (config.LARGURA // 2 - 200, 50))
-                pygame.display.flip()
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 clicked_node = get_node_clicked(event.pos)
@@ -215,6 +210,8 @@ def primeira_fase_iniciar(resetar=True):
                             else:
                                 last_clicked_node = inicial_node
                         if clicked_node == final_node:
+                            if config.total_peso_fases + soma_arestas > config.MAX_PESOS_VERTICES:
+                                go.desenha_game_over()
                             rodando = False
                     else:
                         maudio.play_efeito_sonoro(config.AUDIO_DESELECAO_FASE)
