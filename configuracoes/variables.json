@@ -17,7 +17,7 @@
         "volumeMaster": 100,
         "volumeEfeitos": 100,
         "volumeDialogos": 100,
-        "volumeMusica": 0
+        "volumeMusica": 100
     },
     "fases": {
         "atual": 1,

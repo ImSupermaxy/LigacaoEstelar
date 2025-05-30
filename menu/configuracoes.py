@@ -7,16 +7,19 @@ import assets.audios.manipuleraudio as maudio
 
 opcoes_menu = {
     1: "Volume",
-    2: "Textos",
-    3: "Voltar",
+    # 2: "Textos",
+    # 3: "Voltar",
+    2: "Voltar",
 }
 opcao_atual = 1
 
 opcoes_volume = {
     1: "Volume Geral: ",
     2: "Efeitos Sonoros: ",
-    3: "Diálogos: ",
-    4: "Músicas: "
+    # 3: "Diálogos: ",
+    # 4: "Músicas: "
+    3: "Músicas: ",
+    4: "Voltar"
 }
 opcao_volume_atual = 1
 
@@ -93,9 +96,11 @@ def switch_to_opcao(opcao):
     match opcao:
         case 1:
             alterar_volume()
+        # case 2:
+        #     alterar_textos()
+        # case 3:
+        #     return True
         case 2:
-            alterar_textos()
-        case 3:
             return True
         
     return False
@@ -129,7 +134,7 @@ def alterar_volume():
                         opcao_volume_atual = len(opcoes_volume)
                 elif evento.key == pygame.K_RETURN:
                     maudio.play_efeito_sonoro(config.AUDIO_SELECAO_FASE)
-                    change_volume(posicoes_y)
+                    rodando_volume = change_volume(posicoes_y)
                 elif evento.key == pygame.K_ESCAPE:
                     maudio.play_efeito_sonoro(config.AUDIO_DESELECAO_FASE)
                     opcao_volume_atual = 1
@@ -165,7 +170,7 @@ def change_volume(alturas):
     altura, texto = alturas[opcao_volume_atual - 1], opcoes_volume.get(opcao_volume_atual)
     valor_to_change = get_volume_to_change(opcao_volume_atual)
 
-    rodando = True
+    rodando = valor_to_change != -1
     while rodando:
         exibir_volume_to_change(altura, texto, str(valor_to_change))
         for evento in pygame.event.get():
@@ -187,7 +192,9 @@ def change_volume(alturas):
                 elif evento.key == pygame.K_ESCAPE:
                     maudio.play_efeito_sonoro(config.AUDIO_DESELECAO_FASE)
                     exibir_volume_to_change(altura, "", "")
-                    rodando = False    
+                    rodando = False
+                    
+    return valor_to_change != -1
 
 
 def exibir_volume_to_change(altura, texto, valor_to_exibir):
@@ -210,10 +217,12 @@ def get_volume_to_change(opcao):
             return config.Volume
         case 2:
             return config.Volume_Efeitos
+        # case 3:
+        #     return config.Volume_Dialogos
         case 3:
-            return config.Volume_Dialogos
-        case 4:
             return config.Volume_Musica
+        case 4:
+            return -1
         
     return 0
 
@@ -227,9 +236,9 @@ def mudar_volume(volume_to_change):
             config.Volume = volume_to_change
         case 2:
             config.Volume_Efeitos = volume_to_change
+        # case 3:
+        #     config.Volume_Dialogos = volume_to_change
         case 3:
-            config.Volume_Dialogos = volume_to_change
-        case 4:
             config.Volume_Musica = volume_to_change
         case 0:
             config.Volume = config.Volume
