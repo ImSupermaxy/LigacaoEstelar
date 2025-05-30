@@ -86,7 +86,7 @@ source venv/bin/activate  # ou venv\Scripts\activate no Windows
 3. Instale as dependências:
 
 ```
-pip install pygame==2.6.1
+pip install keyboard==0.13.5
 pip install mutagen==1.47.0
 pip install pygame==2.6.1
 ```
