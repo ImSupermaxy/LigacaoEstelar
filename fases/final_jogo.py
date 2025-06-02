@@ -17,7 +17,8 @@ CREDITOS = {
     "Produção Geral: ": "Matheus Morais, Lucas Dias, Gustavo Milanezi",
     "Testes": "Lucas Dias",
     "Documentação: ": "Lucas Dias",
-    "Agradecimentos: ": "Professoa Andrea Ono Sakai"
+    "Agradecimentos: ": "Professoa Andrea Ono Sakai",
+    "Agradecimentos Especiais: ": "Isabel Ribeiro (Te amo amor)"
 }
 
 
@@ -41,7 +42,7 @@ def desenha_texto():
 
 
 def desenha_creditos():
-    padding_creditos = 680
+    padding_creditos = 860
     altura = config.ALTURA - (len(CREDITOS) * 40)
     largura = config.LARGURA
     for tema, paragrafo in CREDITOS.items():
@@ -53,7 +54,7 @@ def desenha_creditos():
     largura = config.LARGURA
     for tema, paragrafo in CREDITOS.items():
         render = config.FONTE.render(paragrafo, False, config.COR_TEXTO)
-        config.TELA.blit(render, (largura - padding_creditos + (15 * 13) , altura))
+        config.TELA.blit(render, (largura - padding_creditos + (25 * 13) , altura))
         altura = altura + 40
 
     main.pygame.display.update()

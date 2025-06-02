@@ -5,7 +5,7 @@ import main
 TEXTO = [
     "Após algumas centenas de anos a humanidade vive de forma separada, ",
     "existem colônias espalhadas pela galáxia...  hierarquia, classe, poder, dinheiro, tudo isso ainda existe; ",
-    "as pessoas com maior \"status social\" vivem em planetas de luxo, com ar fresco, prias, comida, e água potável, ",
+    "as pessoas com maior \"status social\" vivem em planetas de luxo, com ar fresco, praias, comida, e água potável, ",
     "enquanto outras, vivem em planetas \"menos desenvolvidos\", sem ordem, separados dassa nova sociedade.",
     "O maior problema dessa evolução é o lixo, o lixo-espacial, ele está por todo lado aqui, ",
     "e para se locomover entre um planeta e outro, é necessário fazer uma varredura pela rota decidida.",

@@ -65,13 +65,13 @@ def iniciar_menu():
     
     opcao_menu_atual = 0
     opcao_atual = config.dados["fases"]["atual"]
-    
+        
     i = 1
     fases_concluidas = []
     while i <= len(config.FASES_CONCLUIDAS):
         fases_concluidas.append(config.FASES[config.FASES_CONCLUIDAS[i - 1] - 1])
-        i = i + 1
-    
+        i = i + 1    
+        
     selecao_fases()
 
 
@@ -82,6 +82,9 @@ def switch_to_fase():
 def open_resumo_fase():
     global opcoes_menu
     global opcao_menu_atual
+    global fases_concluidas
+    
+    
     
     config.TELA.fill(config.BACKGROUND_JOGO)
     opcoes_menu = [
@@ -133,6 +136,12 @@ def open_resumo_fase():
 def switch_to_opcao():
     global opcoes_menu
     global opcao_menu_atual
+    
+    i = 1
+    fases_concluidas = []
+    while i <= len(config.FASES_CONCLUIDAS):
+        fases_concluidas.append(config.FASES[config.FASES_CONCLUIDAS[i - 1] - 1])
+        i = i + 1
     
     if opcao_menu_atual > 0:
         match opcoes_menu[opcao_menu_atual - 1]:

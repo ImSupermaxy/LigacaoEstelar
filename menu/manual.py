@@ -67,7 +67,7 @@ def desenha_resumo_jogo():
         "   melhor pontuação possível;",
         "-> Não ultrapasse a quantidade máxima de lixo que seu equipamento",
         "   aguenta",
-        "-> A cada fase o os valores dos pesos diminuirão conforme a sua rota",
+        "-> A cada fase os valores dos pesos diminuirão conforme a sua rota",
         "-> Caso precise rejogue cada fase individualmente no \"menu de fases\""
     ]
     

@@ -257,15 +257,14 @@ def quarta_fase_iniciar(resetar=True):
     # escreve_introducao_final_fase(texto_final_fase)
         
     texto_final_missao = [
-        "Você concluiu mais uma missão",
-        "Seu rendimento hoje foi muito bom ",
-        "seria legal se mais clientes assim ",
-        "fossem os seus com frequência ",
-        "Você se sente melhor ",
-        "Apesar de todo lixo ao seu redor ser significante",
-        "Respire, e siga o seu próximo destino",
-        "Descanse e aproveite as próximas horas",
-        "No congelante silêncio do espaço"
+        "Mais uma missão concluída",
+        "Uma sensação estranha te envade,",
+        "como se fosse um súbito sopro de esperança...",
+        "Talvez nem tudo tenha sido em vão,",
+        "ou talvez, sejam apenas as alucinações do cansaço,",
+        "falando mais alto do que a razão... ",
+        "Neste momento quem sabe,",
+        "o melhor seja descansar mesmo..."
     ]
 
     caminho, soma_arestas_cpu = dijkstra(local_arestas, inicial_node, final_node)

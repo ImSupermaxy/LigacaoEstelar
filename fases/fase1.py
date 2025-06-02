@@ -232,7 +232,7 @@ def primeira_fase_iniciar(resetar=True):
         "fossem removidos de uma praia. ",
         "Você lembra delas? É... acho que não ",
         "Enfim, descanse por hora em sua nave...",
-        "Aproveite seus momentos de descanso"
+        "Aproveite."
     ]
 
     caminho, soma_arestas_cpu = dijkstra(local_arestas, inicial_node, final_node)

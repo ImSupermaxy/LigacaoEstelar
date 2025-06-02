@@ -258,7 +258,7 @@ def segunda_fase_iniciar(resetar=True):
         "Você concluiu mais uma missão",
         "Seu rendimento hoje foi satisfatório ",
         "Seus dias vagando pelo espaço ",
-        "não contribuem tanto a sua experência ",
+        "não tem contribuido tanto com a sua experência, ",
         "não tanto o quanto você gotaria ",
         "Será que um dia esse trabalho vai acabar?",
         "As vezes esse lixo não tem fim",

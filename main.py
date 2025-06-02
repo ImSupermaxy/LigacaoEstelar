@@ -6,6 +6,7 @@ import historia.introducao as introducao
 import assets.audios.manipuleraudio as maudio
 from datetime import datetime, timedelta
 from historia import game_over as go 
+from fases import final_jogo
 
 # Inicializa o pygame
 pygame.init()
@@ -134,6 +135,10 @@ def fechar_jogo():
 # Início
 def main():
     config.TELA.fill(config.BACKGROUND_JOGO)
+    
+    final_jogo.desenha_final_jogo()
+    return
+    
     # if config.IsDevVar:
     #   go.desenha_final_jogo()
     #   return;
