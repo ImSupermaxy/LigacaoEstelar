@@ -136,8 +136,8 @@ def fechar_jogo():
 def main():
     config.TELA.fill(config.BACKGROUND_JOGO)
     
-    final_jogo.desenha_final_jogo()
-    return
+    # final_jogo.desenha_final_jogo()
+    # return
     
     # if config.IsDevVar:
     #   go.desenha_final_jogo()
