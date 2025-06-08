@@ -60,7 +60,7 @@ def obtem_ranking_by_soma_arestas(soma_usuario, soma_cpu):
         (15, 19, "F+"),
         (10, 14, "F"),
         (5, 9, "F-"),
-        (0, 4, "...")
+        (0, 4, "Deplorável")
     ]
 
     for min_val, max_val, rank in rankings:

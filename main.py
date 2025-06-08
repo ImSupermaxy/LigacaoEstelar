@@ -142,7 +142,7 @@ def main():
     # if config.IsDevVar:
     #   go.desenha_final_jogo()
     #   return;
-    
+        
     pygame.display.update()
     
     if not config.skipIntroducao:

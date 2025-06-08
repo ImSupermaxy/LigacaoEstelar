@@ -60,7 +60,7 @@ def reset():
     soma_arestas = 0
    
     
-def update_grafo(vertices_visitados):
+def update_grafo(vertices_visitados, end=False):
     global local_arestas
     if not config.OPEN_FASE_TWO:  
         for i, vertice in enumerate(vertices_visitados):
@@ -74,7 +74,8 @@ def update_grafo(vertices_visitados):
                             (vertice3, peso2) = dict2
                             if vertice3 == vertice:
                                 local_arestas[vertice2][u] = (vertice3, peso - 1)
-        config.OPEN_FASE_TWO = True
+        if end:
+            config.OPEN_FASE_TWO = True
 
 
 def desenhar_grafo():
@@ -197,7 +198,7 @@ def segunda_fase_iniciar(resetar=True):
         if tmpI > 2 and resetar:
             atualiza_dados_fase(tmpI, [], 0, False)
         
-        update_grafo(visited_nodes)
+        update_grafo(visited_nodes, not (tmpI + 1) <= 2)
         # soma_arestas = calcula_peso_arestas(local_arestas, vertices_fases[tmpI - 1], final_node)
         
         tmpI += 1
